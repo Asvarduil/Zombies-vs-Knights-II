@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{FC72F58E-D0F4-F373-DF7A-B427BABC4A21}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_1;UNITY_4_5;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Asvarduil RTS Helpers\Classes\NetworkAddress.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Classes\NetworkBodyState.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Classes\UnitCommand.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\GUI\CommandPresenter.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\GUI\PlayerGUIManager.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\GUI\PlayerUnitPresenter.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\GUI\SettingsPresenter.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\GUI\StaticElementsPresenter.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\CameraClick.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\CameraScroll.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\HealthPresenter.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\HealthSystem.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\HoverCursor.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\MinimapClick.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\ReticulePresenter.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\TeamManager.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\UnitCommands.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\UnitFaction.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Logic\UnitMovement.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Multiplayer\ConnectionManager.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Multiplayer\Matchmaker.cs" />
+     <Compile Include="Assets\Asvarduil RTS Helpers\Multiplayer\NetworkRigidbody.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Audio\AudioManager.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Audio\Maestro.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Base Behaviors\DebuggableBehavior.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Base Behaviors\JsonBlobLoaderBase.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Base Behaviors\ManagerBase.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Base Behaviors\PresenterBase.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Camera\CameraFreezeTrigger.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Camera\CameraTrigger.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Camera\Fader.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Camera\RPGCamera.cs" />
+     <Compile Include="Assets\Framework\Behaviors\Control\ControlManager.cs" />
+     <Compile Include="Assets\Framework\Behaviors\System\PersistentSingularObject.cs" />
+     <Compile Include="Assets\Framework\Behaviors\System\SaveFileAccess.cs" />
+     <Compile Include="Assets\Framework\Classes\Business\IEnumerableExtensions.cs" />
+     <Compile Include="Assets\Framework\Classes\Business\SimpleJson.cs" />
+     <Compile Include="Assets\Framework\Classes\Controls\AsvarduilAccelerometer.cs" />
+     <Compile Include="Assets\Framework\Classes\Controls\AsvarduilControlAxis.cs" />
+     <Compile Include="Assets\Framework\Classes\Controls\CharacterControlDirection.cs" />
+     <Compile Include="Assets\Framework\Classes\Controls\CharacterControlHook.cs" />
+     <Compile Include="Assets\Framework\Classes\Controls\ISuspendable.cs" />
+     <Compile Include="Assets\Framework\Classes\Controls\PedestrianMovement.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilBox.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilButton.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilButtonGrid.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilCheckbox.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilGUIBase.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilGUIInterfaces.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilImage.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilImageButton.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilLabel.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilMessageBox.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilSlider.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilStaticImage.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilStaticLabel.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\AsvarduilTooltip.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\FloatingButton.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\FloatingGUIBase.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\FloatingTexture.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\INamed.cs" />
+     <Compile Include="Assets\Framework\Classes\GUI Elements\TweenableElement.cs" />
+     <Compile Include="Assets\Game Specific Assets\Scripts\Title GUI\FactionPresenter.cs" />
+     <Compile Include="Assets\Game Specific Assets\Scripts\Title GUI\LoadingPresenter.cs" />
+     <Compile Include="Assets\Game Specific Assets\Scripts\Title GUI\MapPresenter.cs" />
+     <Compile Include="Assets\Game Specific Assets\Scripts\Title GUI\TitleController.cs" />
+     <Compile Include="Assets\Game Specific Assets\Scripts\Title GUI\TitlePresenter.cs" />
+     <Compile Include="Assets\Game Specific Assets\Scripts\Title GUI\TutorialPresenter.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
