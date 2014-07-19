@@ -3,7 +3,12 @@ html, body {
 	color: #EEE;
 }
 
+.left-justified {
+	text-align: left !important;
+}
+
 .content-section {
+	height: 65%;
 	background: #FFC;
 	color: #333;
 	text-align: center;
