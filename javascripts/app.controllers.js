@@ -9,7 +9,7 @@ appControllers.controller('HomeController', [
 
 appControllers.controller('BlogController', ['$scope', '$http',
 	function ($scope, $http) {
-		var dataPromise = $http.get('~/content/blog-entries.json');
+		var dataPromise = $http.get('content/blog-entries.json');
 		
 		dataPromise.then(function(result){
 			$scope.entries = result.data;                
