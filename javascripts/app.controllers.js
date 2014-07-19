@@ -1,6 +1,8 @@
 'use strict';
 
-var appControllers = angular.module('app.controllers', []);
+var appControllers = angular.module('app.controllers', [
+	'ui.bootstrap'
+]);
 
 appControllers.controller('HomeController', [
 	function () {
