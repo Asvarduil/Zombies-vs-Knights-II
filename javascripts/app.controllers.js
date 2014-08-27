@@ -13,7 +13,8 @@ appControllers.controller('BlogController', ['$scope', '$http',
 	function ($scope, $http) {
 		var dataPromise = $http({
 			method: 'GET',
-			url: 'content/blog-entries.json'
+			url: 'content/blog-entries.json',
+			responseType: 'text'
 		});
 		
 		dataPromise.then(function(result){
