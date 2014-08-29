@@ -26,7 +26,7 @@ appControllers.controller('BlogController', [
 				}
 			];
 			
-			console.log("Response data: " + JSON.stringify(response.data));
+			console.log("Response data: " + JSON.stringify(response));
 		}
 		
 		// Public functions...
