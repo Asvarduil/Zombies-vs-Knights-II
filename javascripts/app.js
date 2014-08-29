@@ -16,7 +16,7 @@ app.config(['$routeProvider',
 			controller: 'BlogController'
 		});
 		$routeProvider.when('/webplayer', {
-			templateUrl: 'partials/webplayer.html',
+			templateUrl: 'partials/player.html',
 			controller: 'WebplayerController'
 		});
 		
