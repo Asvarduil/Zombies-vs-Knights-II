@@ -16,6 +16,7 @@ appControllers.controller('BlogController', [
 		// Private functions...
 		function successfulContentLoad(response) {
 			$scope.entries = response.data; 
+			console.log("Loaded content successfully.");
 		}
 		
 		function failedContentLoad(response) {
