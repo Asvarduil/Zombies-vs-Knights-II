@@ -1,7 +1,7 @@
 <div class="content-section left-justified">
 	<accordion close-others="true">
 	    <accordion-group heading="{{ entry.title }}" ng-repeat="entry in entries">
-	        <span ng-bind-html="parseEntry(entry.content)"></span>
+	        <div ng-bind-html="parseEntry(entry.content)"></div>
 	    </accordion-group>
 	</accordion>
 </div>
