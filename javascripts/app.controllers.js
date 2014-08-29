@@ -15,7 +15,7 @@ appControllers.controller('BlogController', [
 	function ($scope, $http, $sce, $interval) {
 		function loadContent() {
 			function successfulContentLoad(response) {
-				var entries = response;
+				var entries = response.data;
 				if(entries == null || entries.length == 0) {
 					entries = [
 						{
@@ -25,7 +25,7 @@ appControllers.controller('BlogController', [
 					];
 				}
 				
-				$scope.entries = response.data;
+				$scope.entries = entries;
 				console.log("Loaded content successfully.  Content: " + JSON.stringify(response));
 			}
 		
