@@ -2,5 +2,9 @@
 	{
 		"title":"Week 1 - 19 July 2014 (or, 29 August 2014)",
 		"content":"<h3>Starting Off</h3><br /><p>This is the first week that I'm keeping track of the development of <b>Zombies vs. Knights II</b>.  For the past few weeks, I've been working on a very basic prototype of the game, basically just getting things off of the ground, and improved from the predecessor game (which was horrible, don't play it.)</p><p>I also used this blog entry to work on the webpage.  This is my first independently-written webpage in Angular.js, so I needed some practice.  I also got a means of importing site content from an external file to work, so that I'm not directly writing text into the page.  I could've done things the same way as in the page for The Hero's Journey, but that's boring.</p>"
+	},
+	{
+		"title":"Week 2 - 30 August 2014",
+		"content":"<h3>I'm Ba-ack!</h3><br /><p>I'm working on ZvK2 again some!</p>
 	}
 ]
