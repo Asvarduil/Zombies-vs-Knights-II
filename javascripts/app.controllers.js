@@ -26,7 +26,7 @@ appControllers.controller('BlogController', [
 				}
 				
 				$scope.entries = entries;
-				console.log("Loaded content successfully.  Content: " + JSON.stringify(response.data));
+				console.log("Loaded content successfully.  Content: " + JSON.stringify(response));
 			}
 		
 			function failedContentLoad(response) {
