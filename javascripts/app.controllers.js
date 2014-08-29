@@ -11,8 +11,8 @@ appControllers.controller('HomeController', [
 ]);
 
 appControllers.controller('BlogController', [
-	'$scope', '$http', '$sce',
-	function ($scope, $http, $sce) {
+	'$scope', '$http', '$sce', '$interval',
+	function ($scope, $http, $sce, $interval) {
 		function loadContent() {
 			function successfulContentLoad(response) {
 				$scope.entries = response.data; 
