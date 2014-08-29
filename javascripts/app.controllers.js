@@ -9,8 +9,8 @@ appControllers.controller('HomeController', [
 	}
 ]);
 
-appControllers.controller('BlogController', ['$scope', '$http',
-	function ($scope, $http) {
+appControllers.controller('BlogController', ['$scope', '$http', '$sce',
+	function ($scope, $http, $sce) {
 		var dataPromise = $http({
 			method: 'GET',
 			url: 'content/blog-entries.json',
@@ -18,8 +18,12 @@ appControllers.controller('BlogController', ['$scope', '$http',
 		});
 		
 		dataPromise.then(function(result){
-			$scope.entries = result.data;                
+			$scope.entries = result.data; 
 		});
+		
+		$scope.parseEntry = function(entry) {
+			return $sce.trustAsHtml(entry);
+		}
 	}
 ]);
 
