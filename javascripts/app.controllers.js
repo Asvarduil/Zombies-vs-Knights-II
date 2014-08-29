@@ -10,7 +10,8 @@ appControllers.controller('HomeController', [
 	}
 ]);
 
-appControllers.controller('BlogController', ['$scope', '$http', '$sce',
+appControllers.controller('BlogController', [
+	'$scope', '$http', '$sce',
 	function ($scope, $http, $sce) {
 		var dataPromise = $http({
 			method: 'GET',
