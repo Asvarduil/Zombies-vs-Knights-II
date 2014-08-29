@@ -15,7 +15,17 @@ appControllers.controller('BlogController', [
 	function ($scope, $http, $sce, $interval) {
 		function loadContent() {
 			function successfulContentLoad(response) {
-				$scope.entries = response.data; 
+				var entries = response.data;
+				if(entries == null || entries.length == 0) {
+					entries = [
+						{
+							"title": "No Entries Available Right Now!",
+							"content": "Check back later for the latest ZvK2 news!"
+						}
+					];
+				}
+				
+				$scope.entries = entries;
 				console.log("Loaded content successfully.  Content: " + JSON.stringify(response.data));
 			}
 		
