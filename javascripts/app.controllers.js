@@ -23,7 +23,7 @@ appControllers.controller('BlogController', [
 				{
 					"title": "Content failed to load",
 					"content": "<p>Something went wrong, but never fear!  Reload the page or try again later.</p>"
-					           + "<p>Reponse Blob: " + response + "</p>"
+					           + "<p>Reponse: " + response.status + "</p>"
 				}
 			];
 		}
