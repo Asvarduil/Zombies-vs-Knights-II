@@ -15,7 +15,7 @@ appControllers.controller('BlogController', [
 	function ($scope, $http, $sce, $interval) {
 		function loadContent() {
 			function successfulContentLoad(response) {
-				var entries = response.data;
+				var entries = response;
 				if(entries == null || entries.length == 0) {
 					entries = [
 						{
