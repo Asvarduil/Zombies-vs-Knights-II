@@ -23,9 +23,10 @@ appControllers.controller('BlogController', [
 				{
 					"title": "Content failed to load",
 					"content": "<p>Something went wrong, but never fear!  Reload the page or try again later.</p>"
-					           + "<p>Reponse: " + response.status + "</p>"
 				}
 			];
+			
+			console.log("Response data: " + JSON.stringify(response.data));
 		}
 		
 		// Public functions...
