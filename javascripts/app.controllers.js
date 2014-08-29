@@ -16,8 +16,7 @@ appControllers.controller('BlogController', [
 		function loadContent() {
 			function successfulContentLoad(response) {
 				$scope.entries = response.data; 
-				console.log("Loaded content successfully.");
-				console.log("Response: " + JSON.stringify(response.data));
+				console.log("Loaded content successfully.  Content: " + JSON.stringify(response.data));
 			}
 		
 			function failedContentLoad(response) {
@@ -28,7 +27,7 @@ appControllers.controller('BlogController', [
 					}
 				];
 			
-				console.log("Response data: " + JSON.stringify(response.data));
+				console.log("An error occurred!  Response data: " + JSON.stringify(response));
 			}
 		
 			// On Load...
