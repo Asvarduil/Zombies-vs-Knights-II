@@ -24,7 +24,6 @@ appControllers.controller('BlogController', [
 					"title": "Content failed to load",
 					"content": "Something went wrong, but never fear!  Reload the page or try again later."
 				}
-				}
 			];
 		}
 		
