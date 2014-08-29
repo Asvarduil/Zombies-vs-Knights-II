@@ -41,8 +41,6 @@ appControllers.controller('BlogController', [
 			dataPromise.then(successfulContentLoad, failedContentLoad);
 		}
 		
-		
-		
 		// Public functions...
 		$scope.parseEntry = function(entry) {
 			return $sce.trustAsHtml(entry);
