@@ -37,8 +37,7 @@ appControllers.controller('BlogController', [
 		// On Load...
 		var dataPromise = $http({
 			method: 'GET',
-			url: 'content/blog-entries.json',
-			responseType: 'json'
+			url: 'content/blog-entries.json'
 		});
 		
 		dataPromise.then(successfulContentLoad, failedContentLoad);
