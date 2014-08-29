@@ -1,8 +1,7 @@
 'use strict';
 
 var appControllers = angular.module('app.controllers', [
-	'ui.bootstrap',
-	'ngSanitize'
+	'ui.bootstrap'
 ]);
 
 appControllers.controller('HomeController', [
