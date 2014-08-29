@@ -22,8 +22,8 @@ appControllers.controller('BlogController', [
 			$scope.entries = [
 				{
 					"title": "Content failed to load",
-					"content": "Something went wrong, but never fear!  Reload the page or try again later."
-					           + "Reponse Blob: " + response
+					"content": "<p>Something went wrong, but never fear!  Reload the page or try again later.</p>"
+					           + "<p>Reponse Blob: " + response + "</p>"
 				}
 			];
 		}
