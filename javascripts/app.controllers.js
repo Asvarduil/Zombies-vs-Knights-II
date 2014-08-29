@@ -46,7 +46,8 @@ appControllers.controller('BlogController', [
 			return $sce.trustAsHtml(entry);
 		}
 		
-
+		// On Load...
+		loadContent();
 	}
 ]);
 
