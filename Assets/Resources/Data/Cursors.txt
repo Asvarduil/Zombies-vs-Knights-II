@@ -1,0 +1,44 @@
+﻿{
+    "Cursors":[
+        {
+            "Name":"Default",
+            "Texture":"Visual/GUI/cursor-standard",
+            "Point":{
+                "x": 0,
+                "y": 0
+            }
+        },
+        {
+            "Name":"Move",
+            "Texture":"Visual/GUI/cursor-move",
+            "Point":{
+                "x": 15,
+                "y": 31
+            }
+        },
+        {
+            "Name":"Attack",
+            "Texture":"Visual/GUI/cursor-attack",
+            "Point":{
+                "x": 0,
+                "y": 0
+            }
+        },
+        {
+            "Name":"Defend",
+            "Texture":"Visual/GUI/cursor-defend",
+            "Point":{
+                "x": 15,
+                "y": 31
+            }
+        },
+        {
+            "Name":"Target",
+            "Texture":"Visual/GUI/cursor-standard",
+            "Point":{
+                "x": 15,
+                "y": 15
+            }
+        }
+    ]
+}

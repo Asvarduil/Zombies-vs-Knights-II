@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Game-Specific Assets\Scripts\Behaviors\InitializationScenePass.cs">
+    <Files>
+      <File FileName="Assets\Game-Specific Assets\Scripts\Behaviors\MapLoader.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Data\Cursors.txt" Line="1" Column="1" />
+      <File FileName="Assets\Game-Specific Assets\Scripts\Behaviors\InitializationScenePass.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

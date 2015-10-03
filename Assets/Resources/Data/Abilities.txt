@@ -1,0 +1,28 @@
+{
+    "Abilities":[
+        {
+            "Name":"Test Ability",
+            "Description":"Test ability...",
+            "TargetType":"Self",
+            "IconPath":"",
+            "EffectPath":"",
+            "ResourceCost":1
+        },
+        {
+            "Name":"Recruit Footman",
+            "Description":"Recruits a Footman.  Footmen are basic Knight units.",
+            "TargetType":"FriendlySpawnSphere",
+            "IconPath":"",
+            "EffectPath":"",
+            "ResourceCost":1
+        },
+        {
+            "Name":"Raise Ghoul",
+            "Description":"Raises a Ghoul.  Ghouls are basic Zombie units.",
+            "TargetType":"FriendlySpawnSphere",
+            "IconPath":"",
+            "EffectPath":"",
+            "ResourceCost":1
+        }
+    ]
+}

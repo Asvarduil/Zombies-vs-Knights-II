@@ -1,0 +1,20 @@
+{
+    "Buffs":[
+        {
+            "Name":"Mending",
+            "Description":"This unit is regenerating HP.",
+            "AffectedStat":"HP",
+            "EffectValue":1,
+            "EffectRate":1,
+            "EffectDuration":5
+        },
+        {
+            "Name":"Burning",
+            "Description":"This unit is losing HP.",
+            "AffectedStat":"HP",
+            "EffectValue":1,
+            "EffectRate":1,
+            "EffectDuration":5
+        }
+    ]
+}
