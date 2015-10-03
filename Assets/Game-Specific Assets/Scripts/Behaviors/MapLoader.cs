@@ -96,17 +96,12 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
                 continue;
             }
 
-            if(current.ObjectType == MapObjectType.Unit)
+            UnitModel unitModel = null;
+            if (current.ObjectType == MapObjectType.Unit)
             {
-                UnitActuator unit = newThing.GetComponent<UnitActuator>();
-                if (unit == null)
-                    throw new DataException("In map " + _player.MapName + ", unit " + current.Name + " is not backed by a prefab with a Unit Actuator.");
-
-                UnitModel unitModel = _unitRepository.GetUnitByName(current.Name);
+                unitModel = _unitRepository.GetUnitByName(current.Name);
                 if (unitModel == null)
                     throw new DataException("In map " + _player.MapName + ", unit " + current.Name + " is referred to; it does not exist.");
-
-                unit.RealizeModel(unitModel);
             }
 
             for (int j = 0; j < current.Placements.Count; j++)
@@ -115,6 +110,16 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
                 GameObject newInstance = (GameObject)Instantiate(newThing, placement.Position, Quaternion.Euler(placement.Rotation));
                 newInstance.name = string.Format("{0} {1}", current.Name, j + 1);
                 newInstance.transform.localScale = placement.Scale;
+
+                // If we're dealing with a Unit, find the related model, and realize it.
+                if(current.ObjectType == MapObjectType.Unit)
+                {
+                    UnitActuator unit = newInstance.GetComponent<UnitActuator>();
+                    if (unit == null)
+                        throw new DataException("In map " + _player.MapName + ", unit " + current.Name + " is not backed by a prefab with a Unit Actuator.");
+
+                    unit.RealizeModel(unitModel);
+                }
 
                 AssociateNewThingToParent(newInstance, current.ObjectType);
             }
