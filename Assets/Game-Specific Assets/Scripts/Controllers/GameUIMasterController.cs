@@ -5,6 +5,7 @@
     private PlayerManager _player;
     private UnitSelectionManager _selection;
 
+    private TooltipPresenter _tooltip;
     private UnitCommandPresenter _unitCommand;
     private PlayerFactionPresenter _playerFaction;
     private EndGamePresenter _endGame;
@@ -18,6 +19,7 @@
         _player = PlayerManager.Instance;
         _selection = UnitSelectionManager.Instance;
 
+        _tooltip = GetComponentInChildren<TooltipPresenter>();
         _unitCommand = GetComponentInChildren<UnitCommandPresenter>();
         _playerFaction = GetComponentInChildren<PlayerFactionPresenter>();
         _endGame = GetComponentInChildren<EndGamePresenter>();
@@ -49,6 +51,16 @@
     public void HideUnitCommand()
     {
         _unitCommand.HidePrompt();
+    }
+
+    public void PresentTooltip(string tooltipText)
+    {
+        _tooltip.ShowTooltip(tooltipText);
+    }
+
+    public void HideTooltip()
+    {
+        _tooltip.HideTooltip();
     }
 
     public void SelectTargetForUnit(UnitActuator unit)

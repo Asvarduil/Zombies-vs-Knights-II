@@ -6,23 +6,42 @@
             "TargetType":"Self",
             "IconPath":"",
             "EffectPath":"",
-            "ResourceCost":1
+            "ResourceCost":1,
+            "GameEvents":[]
         },
         {
             "Name":"Recruit Footman",
             "Description":"Recruits a Footman.  Footmen are basic Knight units.",
-            "TargetType":"FriendlySpawnSphere",
+            "TargetType":"None",
             "IconPath":"",
             "EffectPath":"",
-            "ResourceCost":1
+            "ResourceCost":1,
+            "GameEvents":[
+                {
+                    "Event":"SpawnUnitAtSpawnSphere",
+                    "EventArgs":[
+                        "Prefabs/Units/Base Unit",
+                        "Footman"
+                    ]
+                }
+            ]
         },
         {
             "Name":"Raise Ghoul",
             "Description":"Raises a Ghoul.  Ghouls are basic Zombie units.",
-            "TargetType":"FriendlySpawnSphere",
+            "TargetType":"None",
             "IconPath":"",
             "EffectPath":"",
-            "ResourceCost":1
+            "ResourceCost":1,
+            "GameEvents":[
+                {
+                    "Event":"SpawnUnitAtSpawnSphere",
+                    "EventArgs":[
+                        "Prefabs/Units/Base Unit",
+                        "Ghoul"
+                    ]
+                }
+            ]
         }
     ]
 }

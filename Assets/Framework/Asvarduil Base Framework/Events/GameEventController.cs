@@ -35,6 +35,25 @@ public class GameEventController : ManagerBase<GameEventController>
         DebugMessage("Registered event '" + eventName + "'.");
     }
 
+    public void UnregisterEventHook(params string[] eventNames)
+    {
+        for (int i = 0; i < eventNames.Length; i++)
+        {
+            string current = eventNames[i];
+
+            for (int j = 0; j < _eventFunctions.Count; j++)
+            {
+                GameEventHook currentEvent = _eventFunctions[j];
+                if (currentEvent.Name != current)
+                    continue;
+
+                DebugMessage("Unregistering event " + current);
+                _eventFunctions.Remove(currentEvent);
+                break;
+            }
+        }
+    }
+
     // Immediately runs all game events simultaneously; the first and second events run at the same time.
     public void RunGameEventGroup(List<GameEvent> gameEvents)
     {

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using SimpleJSON;
 
 public enum TargetType
 {
+    None,
     Self,
     Cursor,
     FriendlySpawnSphere
@@ -19,6 +21,7 @@ public class Ability : IJsonSavable, INamed, ICloneable
     public string IconPath;
     public string EffectPath;
     public int ResourceCost;
+    public List<GameEvent> GameEvents;
 
     public string EntityName { get { return Name; } }
 
@@ -35,7 +38,8 @@ public class Ability : IJsonSavable, INamed, ICloneable
             TargetType = TargetType,
             IconPath = IconPath,
             EffectPath = EffectPath,
-            ResourceCost = ResourceCost
+            ResourceCost = ResourceCost,
+            GameEvents = GameEvents.DeepCopyList()
         };
 
         return clone;
@@ -51,6 +55,7 @@ public class Ability : IJsonSavable, INamed, ICloneable
         state["IconPath"] = new JSONData(IconPath);
         state["EffectPath"] = new JSONData(EffectPath);
         state["ResourceCost"] = new JSONData(ResourceCost);
+        state["GameEvents"] = GameEvents.FoldList();
 
         return state;
     }
@@ -63,6 +68,7 @@ public class Ability : IJsonSavable, INamed, ICloneable
         IconPath = state["IconPath"];
         EffectPath = state["EffectPath"];
         ResourceCost = state["ResourceCost"].AsInt;
+        GameEvents = state["GameEvents"].AsArray.UnfoldJsonArray<GameEvent>();
     }
 
     #endregion Methods

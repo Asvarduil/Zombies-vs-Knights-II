@@ -14,6 +14,7 @@ public class MatchController : ManagerBase<MatchController>
     private PlayerManager _player;
     private GameUIMasterController _gameUI;
     private UnitSelectionManager _selection;
+    private GameEventController _events;
 
     #endregion Variables / Properties
 
@@ -24,6 +25,7 @@ public class MatchController : ManagerBase<MatchController>
         _player = PlayerManager.Instance;
         _gameUI = GameUIMasterController.Instance;
         _selection = UnitSelectionManager.Instance;
+        _events = GameEventController.Instance;
     }
 
     #endregion Hooks
@@ -34,7 +36,10 @@ public class MatchController : ManagerBase<MatchController>
     {
         Ability ability = _selection.SelectedUnit.Abilities[abilityIndex];
 
-        // TODO: Other stuff.
+        // TODO: Check resources.
+        // TODO: Instantiate effect on the field.
+
+        _events.RunGameEventGroup(ability.GameEvents);
     }
 
     public void CheckForMatchConclusion()

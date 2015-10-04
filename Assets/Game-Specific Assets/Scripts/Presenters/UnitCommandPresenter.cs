@@ -39,6 +39,17 @@ public class UnitCommandPresenter : UGUIPresenterBase
         _match.UseSelectedUnitAbility(abilityIndex);
     }
 
+    public void PresentTooltip(int abilityIndex)
+    {
+        string description = _unit.Abilities[abilityIndex].Description;
+        _controller.PresentTooltip(description);
+    }
+
+    public void HideTooltip()
+    {
+        _controller.HideTooltip();
+    }
+
     public void PresentCommands(UnitActuator unit)
     {
         _unit = unit;

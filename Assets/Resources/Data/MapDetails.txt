@@ -76,6 +76,54 @@
                     ]
                 },
                 {
+                    "Path":"Prefabs/GameObjects/Spawn Sphere (Knights)",
+                    "Name":"Knight Spawn Sphere",
+                    "ObjectType":"GameObject",
+                    "Placements":[
+                        {
+                            "Position":{
+                                "x":-5.5,
+                                "y":0.5,
+                                "z":-1.45
+                            },
+                            "Rotation":{
+                                "x":0,
+                                "y":135,
+                                "z":0
+                            },
+                            "Scale":{
+                                "x":1,
+                                "y":1,
+                                "z":1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "Path":"Prefabs/GameObjects/Spawn Sphere (Zombies)",
+                    "Name":"Zombie Spawn Sphere",
+                    "ObjectType":"GameObject",
+                    "Placements":[
+                        {
+                            "Position":{
+                                "x":5.5,
+                                "y":0.5,
+                                "z":-1.45
+                            },
+                            "Rotation":{
+                                "x":0,
+                                "y":-135,
+                                "z":0
+                            },
+                            "Scale":{
+                                "x":1,
+                                "y":1,
+                                "z":1
+                            }
+                        }
+                    ]
+                },
+                {
                     "Path":"Prefabs/GameObjects/Waypoint Torch",
                     "Name":"Torch",
                     "ObjectType":"GameObject",

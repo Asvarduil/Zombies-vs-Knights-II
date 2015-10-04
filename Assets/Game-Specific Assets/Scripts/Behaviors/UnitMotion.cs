@@ -18,6 +18,7 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
     private ModifiableStat _turnStat;
 
     private Vector3 _currentWaypoint;
+    private GameObject _currentWaypointObject;
 
     private Collider _collider;
     private UnitActuator _unit;
@@ -128,8 +129,11 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
             return;
         }
 
-        GameObject waypoint = _map.FindNearestWaypoint(transform.position);
+        GameObject waypoint = _map.FindNearestWaypoint(transform.position, _currentWaypointObject);
+
         _currentWaypoint = waypoint.transform.position;
+        _currentWaypointObject = waypoint;
+
         DebugMessage("No direct path to " + Target.name + "; moving to " + waypoint.name + " first.");
     }
 
