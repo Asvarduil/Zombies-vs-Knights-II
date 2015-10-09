@@ -16,16 +16,16 @@ public class PlayerFactionPresenter : UGUIPresenterBase
 
     #region Methods
 
-    public void UpdateKeyUnitHP(UnitActuator keyUnit)
+    public void UpdateKeyUnitHP(int HP, int maxHP)
     {
-        ModifiableStat hpStat = keyUnit.Stats.FindItemByName("HP");
-        string newText = string.Format("{0}/{1}", hpStat.Value, hpStat.ValueCap);
+        string newText = string.Format("{0}/{1}", HP, maxHP);
         KeyUnitHPLabel.text = newText;
     }
 
-    public void UpdateResource()
+    public void UpdateResource(int resources, int maxResources)
     {
-        // TODO: Figure out.
+        string newText = string.Format("{0}/{1}", resources, maxResources);
+        ResourceLabel.text = newText;
     }
 
     #endregion Methods

@@ -29,14 +29,6 @@
 
     #region Methods
 
-    public void KeyStructureHPChanged(UnitActuator unit)
-    {
-        if (unit.Faction != _player.Faction)
-            return;
-
-        _playerFaction.UpdateKeyUnitHP(unit);
-    }
-
     public void PromptUnitCommand(UnitActuator unit)
     {
         if (unit.Faction != _player.Faction)
@@ -66,6 +58,16 @@
     public void SelectTargetForUnit(UnitActuator unit)
     {
         _selection.SelectTargetForUnit(unit);
+    }
+
+    public void UpdateKeyStructureHP(int HP, int maxHP)
+    {
+        _playerFaction.UpdateKeyUnitHP(HP, maxHP);
+    }
+
+    public void UpdateResourceCount(int resources, int maxResources)
+    {
+        _playerFaction.UpdateResource(resources, maxResources);
     }
 
     public void ShowMatchOutcome(MatchState state)

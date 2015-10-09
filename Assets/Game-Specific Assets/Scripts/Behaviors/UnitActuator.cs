@@ -12,7 +12,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     #region Constants
 
     private const string ReticuleName = "Reticule";
-    private const float KnockUpForce = 10.8f;
+    private const float KnockUpForce = 5.4f;
 
     #endregion Constants
 
@@ -66,7 +66,6 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     private string _meshPath;
     public GameObject UnitMeshObject;
 
-    private PlayerManager _player;
     private UnitSelectionManager _selection;
     private MatchController _match;
 
@@ -85,7 +84,6 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
 
     public void Start()
     {
-        _player = PlayerManager.Instance;
         _selection = UnitSelectionManager.Instance;
         _match = MatchController.Instance;
 
@@ -236,7 +234,15 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
             UnitMeshObject = (GameObject) Instantiate(unitMesh, transform.position, transform.rotation);
             UnitMeshObject.name = "Mesh";
             UnitMeshObject.transform.parent = gameObject.transform;
+
+            MeshCollider collider = gameObject.AddComponent<MeshCollider>();
+            collider.enabled = true;
+            collider.convex = true;
+            collider.sharedMesh = UnitMeshObject.GetComponent<MeshFilter>().mesh;
         }
+
+        Transform reticuleTransform = transform.Find(ReticuleName);
+        reticuleTransform.localScale = Vector3.one * model.ReticuleScale;
     }
 
     public void ApplyBuff(string buffName)

@@ -2,6 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\Data\MapDetails.txt">
     <Files>
+      <File FileName="Assets\Game-Specific Assets\Scripts\Controllers\MatchController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Data\Units.txt" Line="1" Column="1" />
+      <File FileName="Assets\Game-Specific Assets\Scripts\Presenters\UnitCommandPresenter.cs" Line="1" Column="1" />
       <File FileName="Assets\Framework\Asvarduil Base Framework\Events\GameEvent.cs" Line="1" Column="1" />
       <File FileName="Assets\Resources\Data\MapDetails.txt" Line="1" Column="1" />
       <File FileName="Assets\Game-Specific Assets\Scripts\Behaviors\MapLoader.cs" Line="1" Column="1" />

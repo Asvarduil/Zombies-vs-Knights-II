@@ -14,6 +14,7 @@ public class UnitModel : IJsonSavable, INamed, ICloneable
     public List<string> AbilityNames;
     public string MeshPath;
     public string DeathObjectPath;
+    public float ReticuleScale;
 
     public string EntityName { get { return Name; } }
 
@@ -30,7 +31,8 @@ public class UnitModel : IJsonSavable, INamed, ICloneable
             Faction = Faction,
             Stats = Stats.DeepCopyList(),
             MeshPath = MeshPath,
-            DeathObjectPath = DeathObjectPath
+            DeathObjectPath = DeathObjectPath,
+            ReticuleScale = ReticuleScale
         };
 
         clone.AbilityNames = new List<string>();
@@ -54,6 +56,7 @@ public class UnitModel : IJsonSavable, INamed, ICloneable
         state["AbilityNames"] = AbilityNames.FoldPrimitiveList();
         state["MeshPath"] = new JSONData(MeshPath);
         state["DeathObjectPath"] = new JSONData(DeathObjectPath);
+        state["ReticuleScale"] = new JSONData(ReticuleScale);
 
         return state;
     }
@@ -67,6 +70,7 @@ public class UnitModel : IJsonSavable, INamed, ICloneable
         AbilityNames = state["AbilityNames"].AsArray.UnfoldStringJsonArray();
         MeshPath = state["MeshPath"];
         DeathObjectPath = state["DeathObjectPath"];
+        ReticuleScale = state["ReticuleScale"].AsFloat;
     }
 
     #endregion Methods

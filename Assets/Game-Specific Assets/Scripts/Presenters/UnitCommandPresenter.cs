@@ -33,6 +33,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
 
     public void UseAbility(int abilityIndex)
     {
+        DebugMessage("Presenter - using Unit Ability #" + abilityIndex);
         PlayButtonSound();
 
         // TODO: Use unit's ability.
@@ -41,6 +42,12 @@ public class UnitCommandPresenter : UGUIPresenterBase
 
     public void PresentTooltip(int abilityIndex)
     {
+        if (_unit == null)
+            return;
+
+        if (_unit.Abilities.IsNullOrEmpty())
+            return;
+
         string description = _unit.Abilities[abilityIndex].Description;
         _controller.PresentTooltip(description);
     }

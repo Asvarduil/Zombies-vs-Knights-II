@@ -44,7 +44,8 @@
             "AbilityNames":[
                 "Recruit Footman"
             ]
-            "MeshPath":"Visual/Meshes/kvz - castle"
+            "MeshPath":"Visual/Meshes/Knight Castle",
+            "ReticuleScale":4
         },
         {
             "Name":"Zombie Necropolis",
@@ -90,7 +91,8 @@
             "AbilityNames":[
                 "Raise Ghoul"
             ]
-            "MeshPath":"Visual/Meshes/kvz - grave"
+            "MeshPath":"Visual/Meshes/Knight Castle",
+            "ReticuleScale":4
         },
         {
             "Name":"Footman",
@@ -136,7 +138,8 @@
             "AbilityNames":[
                 "Test Ability"
             ]
-            "MeshPath":""
+            "MeshPath":"Visual/Meshes/Knight Cube (Development)",
+            "ReticuleScale":2
         },
         {
             "Name":"Ghoul",
@@ -182,7 +185,8 @@
             "AbilityNames":[
                 "Test Ability"
             ]
-            "MeshPath":""
+            "MeshPath":"Visual/Meshes/Zombie Cube (Development)",
+            "ReticuleScale":2
         }
     ]
 }

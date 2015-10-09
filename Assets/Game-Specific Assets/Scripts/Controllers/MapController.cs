@@ -105,8 +105,9 @@ public class MapController : ManagerBase<MapController>
         if (openFriendlySpheres.Count == 0
            && model.Faction == _player.Faction)
         {
-            // TODO: Show GUI notification that the player can't do this right now...
-            //_gui.ShowWarningMessage("Not enough places to spawn a unit at...");
+            // TODO: Audio cue that the player can't do this right now...
+            DebugMessage("Cannot spawn unit; there are no open Spawn Spheres...");
+            _gui.PresentTooltip("Not enough places to spawn a unit at...");
             return;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum SelectionMode
 {
@@ -152,6 +153,12 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
             {
                 case SelectionMode.UnitSelect:
                 case SelectionMode.UnitTarget:
+                    if (IsMouseOverUIObject())
+                    {
+                        DebugMessage("Mouse is over a UI element; selecting nothing.");
+                        break;
+                    }
+
                     SelectTarget(target);
 
                     if (SelectedUnit != null)
@@ -199,6 +206,14 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
         SelectionLockout.NoteLastOccurrence();
     }
 
+    public bool IsMouseOverUIObject()
+    {
+        bool result = EventSystem.current.currentSelectedGameObject != null;
+        DebugMessage("Is the mouse over a UI object?  Answer: " + result);
+
+        return result;
+    }
+
     public void SelectTarget(GameObject target)
     {
         if (target.tag == "Terrain")
@@ -229,6 +244,7 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
         UnitActuator hitUnit = target.GetComponent<UnitActuator>();
         if (hitUnit != null)
         {
+            DebugMessage("Setting target to unit " + hitUnit.name);
             unit.SetTarget(hitUnit);
             return;
         }

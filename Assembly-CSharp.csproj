@@ -118,6 +118,7 @@
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\MapDetail.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PositionRotationPair.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PrefabPlacement.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\ResourceStateModel.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\UnitModel.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\EndGamePresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\PlayerFactionPresenter.cs" />

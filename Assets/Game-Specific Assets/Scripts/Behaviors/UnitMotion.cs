@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UnitMotion : DebuggableBehavior, ISuspendable
 {
@@ -18,7 +17,7 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
     private ModifiableStat _turnStat;
 
     private Vector3 _currentWaypoint;
-    private GameObject _currentWaypointObject;
+    private GameObject _currentWaypointObject = null;
 
     private Collider _collider;
     private UnitActuator _unit;
@@ -81,6 +80,12 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
         SetCurrentDestination();
 
         UnitActuator destinationUnit = Target.GetComponent<UnitActuator>();
+        if(destinationUnit == null)
+        {
+            HaltWhenClose = false;
+            return;
+        }
+
         HaltWhenClose = destinationUnit.Faction == _player.Faction;
     }
 
@@ -99,7 +104,6 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
         if (!Physics.Raycast(transform.position, direction, out hit))
             return false;
         
-        Collider hitCollider = hit.collider;
         return hit.collider.gameObject != Target;
     }
 
@@ -130,6 +134,13 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
         }
 
         GameObject waypoint = _map.FindNearestWaypoint(transform.position, _currentWaypointObject);
+        if(waypoint == null)
+        {
+            DebugMessage("No direct path, but no waypoint!  Heading for target anyways...", LogLevel.Warning);
+            _currentWaypoint = Target.transform.position;
+            _currentWaypointObject = Target;
+            return;
+        }
 
         _currentWaypoint = waypoint.transform.position;
         _currentWaypointObject = waypoint;

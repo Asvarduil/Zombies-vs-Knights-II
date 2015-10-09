@@ -9,7 +9,21 @@ public enum ActivityType
 
 public class MatchController : ManagerBase<MatchController>
 {
+    #region Substructures
+
+    [Serializable]
+    private struct KeyUnitHPState
+    {
+        public int HP;
+        public int MaxHP;
+    }
+
+    #endregion Substructure
+
     #region Variables / Properties
+
+    public ResourceStateModel KnightResources;
+    public ResourceStateModel ZombieResources;
 
     private PlayerManager _player;
     private GameUIMasterController _gameUI;
@@ -26,6 +40,18 @@ public class MatchController : ManagerBase<MatchController>
         _gameUI = GameUIMasterController.Instance;
         _selection = UnitSelectionManager.Instance;
         _events = GameEventController.Instance;
+
+        // Initialize the Key Unit UI immediately.
+        var keyUnits = GetKeyUnits();
+        KeyUnitHPState hpState = GetKeyUnitHPForFaction(_player.Faction, keyUnits);
+        _gameUI.UpdateKeyStructureHP(hpState.HP, hpState.MaxHP);
+
+        // Initialize Faction Resources and the Faction Resource UI immediately.
+        KnightResources = new ResourceStateModel(Faction.Knights);
+        ZombieResources = new ResourceStateModel(Faction.Zombies);
+
+        ResourceStateModel resources = GetPlayerResourceState();
+        _gameUI.UpdateResourceCount(resources.Count, resources.Cap);
     }
 
     #endregion Hooks
@@ -39,6 +65,7 @@ public class MatchController : ManagerBase<MatchController>
         // TODO: Check resources.
         // TODO: Instantiate effect on the field.
 
+        DebugMessage("Firing all GameEvents on ability " + ability.Name);
         _events.RunGameEventGroup(ability.GameEvents);
     }
 
@@ -59,6 +86,9 @@ public class MatchController : ManagerBase<MatchController>
         RadiateActivityCommand(ActivityType.Suspend);
         _player.RecordMatchOutcome(state);
         _gameUI.ShowMatchOutcome(state);
+
+        KeyUnitHPState hpState = GetKeyUnitHPForFaction(_player.Faction, keyUnits);
+        _gameUI.UpdateKeyStructureHP(hpState.HP, hpState.MaxHP);
     }
 
     private List<UnitActuator> GetKeyUnits()
@@ -98,6 +128,64 @@ public class MatchController : ManagerBase<MatchController>
         }
 
         return result;
+    }
+
+    private KeyUnitHPState GetKeyUnitHPForFaction(Faction faction, List<UnitActuator> keyUnits)
+    {
+        int hpResult = 0;
+        int maxHpResult = 0;
+        
+        for(int i = 0; i < keyUnits.Count; i++)
+        {
+            UnitActuator current = keyUnits[i];
+            if (current.Faction != faction)
+                continue;
+
+            hpResult += current.HP;
+            maxHpResult += current.MaxHP;
+        }
+
+        return new KeyUnitHPState
+        {
+            HP = hpResult,
+            MaxHP = maxHpResult
+        };
+    }
+
+    public UnitActuator GetFirstOpposingKeyUnit(Faction faction)
+    {
+        UnitActuator result = null;
+
+        var allKeyUnits = GetKeyUnits();
+
+        Faction opposingFaction;
+        switch (faction)
+        {
+            case Faction.Knights:
+                opposingFaction = Faction.Zombies;
+                break;
+
+            case Faction.Zombies:
+                opposingFaction = Faction.Knights;
+                break;
+
+            default:
+                throw new InvalidOperationException("Unexpected faction: " + faction);
+        }
+
+        List<UnitActuator> opposingUnits = GetKeyUnitsForFaction(opposingFaction, allKeyUnits);
+        if (!opposingUnits.IsNullOrEmpty())
+            result = opposingUnits[0];
+
+        return result;
+    }
+
+    private ResourceStateModel GetPlayerResourceState()
+    {
+        if (_player.Faction == Faction.Knights)
+            return KnightResources;
+
+        return ZombieResources;
     }
 
     private void RadiateActivityCommand(ActivityType activity)

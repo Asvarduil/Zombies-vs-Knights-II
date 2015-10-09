@@ -10,7 +10,6 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
     public GameObject DoodadContainer;
     public GameObject TileContainer;
 
-    private bool _repositoriesLoaded = false;
     private PlayerManager _player;
     private UnitRepository _unitRepository;
     private AbilityRepository _abilityRepository;
