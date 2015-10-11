@@ -136,7 +136,6 @@
                 }
             ],
             "AbilityNames":[
-                "Test Ability"
             ]
             "MeshPath":"Visual/Meshes/Knight Cube (Development)",
             "ReticuleScale":2

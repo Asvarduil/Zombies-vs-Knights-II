@@ -76,15 +76,15 @@
                     ]
                 },
                 {
-                    "Path":"Prefabs/GameObjects/Spawn Sphere (Knights)",
-                    "Name":"Knight Spawn Sphere",
+                    "Path":"Prefabs/GameObjects/Knight Spawn Point",
+                    "Name":"Knight Spawn Point",
                     "ObjectType":"GameObject",
                     "Placements":[
                         {
                             "Position":{
-                                "x":-5.5,
-                                "y":0.1,
-                                "z":-1.45
+                                "x":-4.5,
+                                "y":0,
+                                "z":-2.45
                             },
                             "Rotation":{
                                 "x":0,
@@ -93,7 +93,7 @@
                             },
                             "Scale":{
                                 "x":1,
-                                "y":1,
+                                "y":0.5,
                                 "z":1
                             }
                         }
@@ -106,9 +106,9 @@
                     "Placements":[
                         {
                             "Position":{
-                                "x":5.5,
+                                "x":4.5,
                                 "y":0.1,
-                                "z":-1.45
+                                "z":-2.45
                             },
                             "Rotation":{
                                 "x":0,
