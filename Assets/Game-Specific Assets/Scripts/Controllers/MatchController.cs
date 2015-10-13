@@ -27,8 +27,6 @@ public class MatchController : ManagerBase<MatchController>
 
     private PlayerManager _player;
     private GameUIMasterController _gameUI;
-    private UnitSelectionManager _selection;
-    private GameEventController _events;
 
     #endregion Variables / Properties
 
@@ -38,8 +36,6 @@ public class MatchController : ManagerBase<MatchController>
     {
         _player = PlayerManager.Instance;
         _gameUI = GameUIMasterController.Instance;
-        _selection = UnitSelectionManager.Instance;
-        _events = GameEventController.Instance;
 
         // Initialize the Key Unit UI immediately.
         var keyUnits = GetKeyUnits();
@@ -57,17 +53,6 @@ public class MatchController : ManagerBase<MatchController>
     #endregion Hooks
 
     #region Methods
-
-    public void UseSelectedUnitAbility(int abilityIndex)
-    {
-        Ability ability = _selection.SelectedUnit.Abilities[abilityIndex];
-
-        // TODO: Check resources.
-        // TODO: Instantiate effect on the field.
-
-        DebugMessage("Firing all GameEvents on ability " + ability.Name);
-        _events.RunGameEventGroup(ability.GameEvents);
-    }
 
     public void CheckForMatchConclusion()
     {
@@ -182,10 +167,17 @@ public class MatchController : ManagerBase<MatchController>
 
     private ResourceStateModel GetPlayerResourceState()
     {
-        if (_player.Faction == Faction.Knights)
-            return KnightResources;
+        switch(_player.Faction)
+        {
+            case Faction.Knights:
+                return KnightResources;
 
-        return ZombieResources;
+            case Faction.Zombies:
+                return ZombieResources;
+
+            default:
+                throw new InvalidOperationException("Unexpected faction: " + _player.Faction);
+        }
     }
 
     private void RadiateActivityCommand(ActivityType activity)

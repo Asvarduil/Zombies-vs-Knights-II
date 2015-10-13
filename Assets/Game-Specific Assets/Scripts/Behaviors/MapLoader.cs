@@ -11,6 +11,9 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
     public GameObject TileContainer;
 
     private PlayerManager _player;
+
+    private MapController _map;
+
     private UnitRepository _unitRepository;
     private AbilityRepository _abilityRepository;
 
@@ -36,6 +39,8 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         // Don't allow any other map information to be accessed beyond this point.
         Contents = new List<MapDetail> { arenaFeatures };
 
+        _map = MapController.Instance;
+
         _unitRepository = UnitRepository.Instance;
         _abilityRepository = AbilityRepository.Instance;
 
@@ -56,6 +61,7 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         }
 
         DebugMessage("Setting up the Arena...");
+        LoadAbilities(arenaFeatures);
         SetupArena(arenaFeatures);
     }
 
@@ -74,6 +80,20 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         }
 
         return model;
+    }
+
+    private void LoadAbilities(MapDetail model)
+    {
+        List<string> unitAbilities = model.UnitAbilities;
+
+        List<Ability> abilities = new List<Ability>();
+        for(int i = 0; i < unitAbilities.Count; i++)
+        {
+            Ability unitAbility = _abilityRepository.GetAbilityByName(unitAbilities[i]);
+            abilities.Add(unitAbility);
+
+            _map.UnitSpawnAbilities = abilities.DeepCopyList();
+        }
     }
 
     private void SetupArena(MapDetail model)

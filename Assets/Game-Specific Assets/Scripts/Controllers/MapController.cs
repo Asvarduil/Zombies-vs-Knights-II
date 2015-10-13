@@ -13,6 +13,7 @@ public class MapController : ManagerBase<MapController>
 
     #region Variables / Properties
 
+    public List<Ability> UnitSpawnAbilities;
     public List<GameObject> Waypoints;
     public List<SpawnSphere> SpawnSpheres = new List<SpawnSphere>();
 
@@ -78,6 +79,28 @@ public class MapController : ManagerBase<MapController>
     #endregion Game Events
 
     #region Methods
+
+    public List<Ability> GetUnitSpawnAbilities(Faction faction)
+    {
+        List<Ability> abilities = new List<Ability>();
+
+        for(int i = 0; i < UnitSpawnAbilities.Count; i++)
+        {
+            Ability current = UnitSpawnAbilities[i];
+            if (current.UnitAbilityTrigger != UnitAbilityTrigger.None
+               || current.Faction != faction)
+                continue;
+            
+            abilities.Add(current);
+        }
+
+        FormattedDebugMessage(LogLevel.Information,
+            "Found {0} abilities for faction {1}.",
+            abilities.Count,
+            _player.Faction);
+
+        return abilities.DeepCopyList();
+    }
 
     public void RegisterSpawnSphere(SpawnSphere sphere)
     {

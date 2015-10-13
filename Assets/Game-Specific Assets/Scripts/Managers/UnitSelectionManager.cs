@@ -25,8 +25,6 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
     public string FriendlyCursor;
 
     private PlayerManager _player;
-    private GameUIMasterController _uiController;
-
     private CursorRepository _cursorRepository;
 
     private Ray _ray;
@@ -39,8 +37,6 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
     public void Start()
     {
         _player = PlayerManager.Instance;
-        _uiController = GameUIMasterController.Instance;
-
         _cursorRepository = FindObjectOfType<CursorRepository>();
 
         SetCursor(NeutralCursor);
@@ -129,8 +125,6 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
 
     public void ClearSelection()
     {
-        _uiController.HideUnitCommand();
-
         if (SelectedUnit == null)
             return;
 
@@ -160,12 +154,6 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
                     }
 
                     SelectTarget(target);
-
-                    if (SelectedUnit != null)
-                        _uiController.PromptUnitCommand(SelectedUnit);
-                    else
-                        _uiController.HideUnitCommand();
-
                     SetCursor(NeutralCursor);
                     break;
 

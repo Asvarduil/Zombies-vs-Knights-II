@@ -2,6 +2,10 @@
     "MapDetail":[
         {
             "Name":"Test Map",
+            "UnitAbilities":[
+                "Recruit Footman",
+                "Raise Ghoul"
+            ]
             "Placements":[
                 {
                     "Path":"Prefabs/GameObjects/Terrain (Grass)",

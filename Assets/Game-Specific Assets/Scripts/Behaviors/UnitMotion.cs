@@ -6,7 +6,6 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
 
     public bool IsMoving = false;
     public bool IsFindingClearPath = false;
-    public bool HaltWhenClose = false;
     public float PathingError = 0.01f;
     public float CloseEnoughDistance = 2.0f;
     public GameObject Target;
@@ -78,15 +77,6 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
         Target = target;
         IsMoving = true;
         SetCurrentDestination();
-
-        UnitActuator destinationUnit = Target.GetComponent<UnitActuator>();
-        if(destinationUnit == null)
-        {
-            HaltWhenClose = false;
-            return;
-        }
-
-        HaltWhenClose = destinationUnit.Faction == _player.Faction;
     }
 
     private bool IsNearCurrentWaypoint()

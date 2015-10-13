@@ -95,8 +95,6 @@ public class SpawnSphere : DebuggableBehavior
             GameObject newUnitTarget = _match.GetFirstOpposingKeyUnit(actuator.Faction).gameObject;
             motion.SetTarget(newUnitTarget);
         }
-
-        AddOccupyingObject(physicalUnit);
     }
 
     #endregion Methods

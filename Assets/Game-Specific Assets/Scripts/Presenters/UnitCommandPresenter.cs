@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UnitCommandPresenter : UGUIPresenterBase
@@ -6,13 +7,14 @@ public class UnitCommandPresenter : UGUIPresenterBase
     #region Variables / Properties
 
     public Image Background;
-    public Text UnitNameLabel;
     public List<Button> AbilityButtons;
 
-    private UnitActuator _unit;
-    private List<Ability> _unitAbilities;
+    private List<Ability> _unitSpawnAbilities;
 
-    private MatchController _match;
+    private PlayerManager _player;
+
+    private MapController _map;
+    private GameEventController _gameEvent;
     private GameUIMasterController _controller;
 
     #endregion Variables / Properties
@@ -21,10 +23,15 @@ public class UnitCommandPresenter : UGUIPresenterBase
 
     public override void Start()
     {
+        _player = PlayerManager.Instance;
+
         _controller = GameUIMasterController.Instance;
-        _match = MatchController.Instance;
+        _map = MapController.Instance;
+        _gameEvent = GameEventController.Instance;
 
         base.Start();
+
+        PresentCommands();
     }
 
     #endregion Hooks
@@ -33,22 +40,19 @@ public class UnitCommandPresenter : UGUIPresenterBase
 
     public void UseAbility(int abilityIndex)
     {
-        DebugMessage("Presenter - using Unit Ability #" + abilityIndex);
-        PlayButtonSound();
+        FormattedDebugMessage(LogLevel.Information, 
+            "Presenter - using Create Unit Ability #{0} for faction {1}", 
+            abilityIndex, 
+            _player.Faction);
 
-        // TODO: Use unit's ability.
-        _match.UseSelectedUnitAbility(abilityIndex);
+        PlayButtonSound();
+        Ability ability = _unitSpawnAbilities[abilityIndex];
+        _gameEvent.RunGameEventGroup(ability.GameEvents);
     }
 
     public void PresentTooltip(int abilityIndex)
     {
-        if (_unit == null)
-            return;
-
-        if (_unit.Abilities.IsNullOrEmpty())
-            return;
-
-        string description = _unit.Abilities[abilityIndex].Description;
+        string description = _unitSpawnAbilities[abilityIndex].Description;
         _controller.PresentTooltip(description);
     }
 
@@ -57,36 +61,32 @@ public class UnitCommandPresenter : UGUIPresenterBase
         _controller.HideTooltip();
     }
 
-    public void PresentCommands(UnitActuator unit)
+    public void PresentCommands()
     {
-        _unit = unit;
-
-        UnitNameLabel.text = _unit.Name;
-
         PresentGUI(true);
-        _unitAbilities = new List<Ability>();
+
+        List<Ability> factionUnitSpawnAbilities = _map.GetUnitSpawnAbilities(_player.Faction);
+        _unitSpawnAbilities = new List<Ability>();
         for (int i = 0; i < AbilityButtons.Count; i++)
         {
             Button currentButton = AbilityButtons[i];
 
-            if (i > unit.Abilities.Count - 1)
+            if (i > factionUnitSpawnAbilities.Count - 1)
             {
                 ActivateButton(currentButton, false);
                 continue;
             }
 
             ActivateButton(currentButton, true);
-            Ability unitAbility = unit.Abilities[i];
-            _unitAbilities.Add(unitAbility);
+            Ability unitAbility = factionUnitSpawnAbilities[i];
+            _unitSpawnAbilities.Add(unitAbility);
 
-            // TODO: Update the button...
+            // TODO: Update the button icon...
+            if (!string.IsNullOrEmpty(unitAbility.IconPath))
+            {
+                currentButton.image = Resources.Load<Image>(unitAbility.IconPath);
+            }
         }
-    }
-
-    public void HidePrompt()
-    {
-        _unit = null;
-        PresentGUI(false);
     }
 
     #endregion Methods

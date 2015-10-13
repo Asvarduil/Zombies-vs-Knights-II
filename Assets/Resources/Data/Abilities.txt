@@ -1,21 +1,14 @@
 {
     "Abilities":[
         {
-            "Name":"Test Ability",
-            "Description":"Test ability...",
-            "TargetType":"Self",
-            "IconPath":"",
-            "EffectPath":"",
-            "ResourceCost":1,
-            "GameEvents":[]
-        },
-        {
             "Name":"Recruit Footman",
             "Description":"Recruits a Footman.  Footmen are basic Knight units.",
-            "TargetType":"None",
             "IconPath":"",
+            "Faction":"Knights",
+            "UnitAbilityTrigger":"None",
             "EffectPath":"",
             "ResourceCost":1,
+            "LockoutDuration":5,
             "GameEvents":[
                 {
                     "Event":"SpawnUnitAtSpawnSphere",
@@ -29,10 +22,12 @@
         {
             "Name":"Raise Ghoul",
             "Description":"Raises a Ghoul.  Ghouls are basic Zombie units.",
-            "TargetType":"None",
             "IconPath":"",
+            "Faction":"Zombies",
+            "UnitAbilityTrigger":"None",
             "EffectPath":"",
             "ResourceCost":1,
+            "LockoutDuration":5,
             "GameEvents":[
                 {
                     "Event":"SpawnUnitAtSpawnSphere",

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum Faction
 {
+    None,
     Knights,
     Zombies
 }

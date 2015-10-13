@@ -1,56 +1,84 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections;
 
-public abstract class DebuggableBehavior : MonoBehaviour 
+public abstract class DebuggableBehavior : MonoBehaviour
 {
-	#region Enumerations
+    #region Enumerations
 
-	public enum LogLevel
-	{
-		Information,
-		Warning,
-		LogicError,
-	}
+    public enum LogLevel
+    {
+        Information,
+        Warning,
+        LogicError,
+    }
 
-	#endregion Enumerations
+    #endregion Enumerations
 
-	#region Variables / Properties
+    #region Variables / Properties
 
-	public bool DebugMode = false;
-	public bool ShowTimestamps = false;
+    public bool DebugMode = false;
+    public bool ShowTimestamps = false;
 
-	#endregion Variables / Properties
+    #endregion Variables / Properties
 
-	#region Methods
+    #region Methods
 
-	public void DebugMessage(string message, LogLevel level = LogLevel.Information)
-	{
-		if(! DebugMode)
-			return;
+    public void DebugMessage(string message, LogLevel level = LogLevel.Information)
+    {
+        if (!DebugMode)
+            return;
 
-		if(ShowTimestamps)
-			message = DateTime.Now.ToString("HH:mm:ss") + ": " + message;
+        if (ShowTimestamps)
+            message = DateTime.Now.ToString("HH:mm:ss") + ": " + message;
 
-		switch(level)
-		{
-			case LogLevel.Information:
-				Debug.Log(message);
-				break;
+        switch (level)
+        {
+            case LogLevel.Information:
+                Debug.Log(message);
+                break;
 
-			case LogLevel.Warning:
-				Debug.LogWarning(message);
-				break;
+            case LogLevel.Warning:
+                Debug.LogWarning(message);
+                break;
 
-			case LogLevel.LogicError:
-				Debug.LogError(message);
-				break;
+            case LogLevel.LogicError:
+                Debug.LogError(message);
+                break;
 
-			default:
-				throw new Exception("Unexpected log level! " + level.ToString()
-			                        + Environment.NewLine + " message: " + message);
-		}
-	}
+            default:
+                throw new Exception("Unexpected log level! " + level.ToString() + Environment.NewLine + " message: " + message);
+        }
+    }
 
-	#endregion Methods
+    public void FormattedDebugMessage(LogLevel level, string messageFormat, params object[] messageArgs)
+    {
+        if (!DebugMode)
+            return;
+
+        // TODO: Fix this if possible.
+        if (ShowTimestamps)
+            messageFormat = DateTime.Now.ToString("HH:mm:ss") + ": " + messageFormat;
+
+        string message = string.Format(messageFormat, messageArgs);
+
+        switch (level)
+        {
+            case LogLevel.Information:
+                Debug.Log(message);
+                break;
+
+            case LogLevel.Warning:
+                Debug.LogWarning(message);
+                break;
+
+            case LogLevel.LogicError:
+                Debug.LogError(message);
+                break;
+
+            default:
+                throw new Exception("Unexpected log level! " + level.ToString() + Environment.NewLine + " message: " + message);
+        }
+    }
+
+    #endregion Methods
 }
