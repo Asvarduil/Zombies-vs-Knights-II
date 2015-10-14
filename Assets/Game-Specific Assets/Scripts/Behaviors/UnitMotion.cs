@@ -20,7 +20,6 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
 
     private Collider _collider;
     private UnitActuator _unit;
-    private PlayerManager _player;
     private MapController _map;
 
     #endregion Variables / Properties
@@ -29,7 +28,6 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
 
     public void Start()
     {
-        _player = PlayerManager.Instance;
         _map = MapController.Instance;
 
         _collider = GetComponent<Collider>();

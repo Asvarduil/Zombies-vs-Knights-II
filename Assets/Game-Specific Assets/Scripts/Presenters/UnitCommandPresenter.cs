@@ -30,8 +30,6 @@ public class UnitCommandPresenter : UGUIPresenterBase
         _gameEvent = GameEventController.Instance;
 
         base.Start();
-
-        PresentCommands();
     }
 
     #endregion Hooks

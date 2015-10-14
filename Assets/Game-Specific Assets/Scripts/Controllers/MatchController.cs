@@ -37,11 +37,6 @@ public class MatchController : ManagerBase<MatchController>
         _player = PlayerManager.Instance;
         _gameUI = GameUIMasterController.Instance;
 
-        // Initialize the Key Unit UI immediately.
-        var keyUnits = GetKeyUnits();
-        KeyUnitHPState hpState = GetKeyUnitHPForFaction(_player.Faction, keyUnits);
-        _gameUI.UpdateKeyStructureHP(hpState.HP, hpState.MaxHP);
-
         // Initialize Faction Resources and the Faction Resource UI immediately.
         KnightResources = new ResourceStateModel(Faction.Knights);
         ZombieResources = new ResourceStateModel(Faction.Zombies);
@@ -53,6 +48,13 @@ public class MatchController : ManagerBase<MatchController>
     #endregion Hooks
 
     #region Methods
+
+    public void AcquireKeyUnitHPCount()
+    {
+        var keyUnits = GetKeyUnits();
+        KeyUnitHPState hpState = GetKeyUnitHPForFaction(_player.Faction, keyUnits);
+        _gameUI.UpdateKeyStructureHP(hpState.HP, hpState.MaxHP);
+    }
 
     public void CheckForMatchConclusion()
     {

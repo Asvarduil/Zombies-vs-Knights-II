@@ -5,7 +5,21 @@
     private UnitSelectionManager _selection;
 
     private TooltipPresenter _tooltip;
+
     private PlayerFactionPresenter _playerFaction;
+    public PlayerFactionPresenter PlayerFaction
+    {
+        get
+        {
+            if (_playerFaction == null)
+                _playerFaction = FindObjectOfType<PlayerFactionPresenter>();
+
+            return _playerFaction;
+        }
+    }
+
+    private UnitCommandPresenter _unitToolbox;
+
     private EndGamePresenter _endGame;
 
     #endregion Variables / Properties
@@ -17,6 +31,7 @@
         _selection = UnitSelectionManager.Instance;
 
         _tooltip = GetComponentInChildren<TooltipPresenter>();
+        _unitToolbox = GetComponentInChildren<UnitCommandPresenter>();
         _playerFaction = GetComponentInChildren<PlayerFactionPresenter>();
         _endGame = GetComponentInChildren<EndGamePresenter>();
     }
@@ -24,6 +39,11 @@
     #endregion Hooks
 
     #region Methods
+
+    public void PresentUnitCommands()
+    {
+        _unitToolbox.PresentCommands();
+    }
 
     public void PresentTooltip(string tooltipText)
     {
@@ -42,12 +62,12 @@
 
     public void UpdateKeyStructureHP(int HP, int maxHP)
     {
-        _playerFaction.UpdateKeyUnitHP(HP, maxHP);
+        PlayerFaction.UpdateKeyUnitHP(HP, maxHP);
     }
 
     public void UpdateResourceCount(int resources, int maxResources)
     {
-        _playerFaction.UpdateResource(resources, maxResources);
+        PlayerFaction.UpdateResource(resources, maxResources);
     }
 
     public void ShowMatchOutcome(MatchState state)

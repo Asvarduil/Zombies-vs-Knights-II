@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum Faction
@@ -69,6 +70,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
 
     private UnitSelectionManager _selection;
     private MatchController _match;
+    private GameEventController _gameEvent;
 
     private BuffRepository _buffRepository;
     private AbilityRepository _abilityRepository;
@@ -87,6 +89,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     {
         _selection = UnitSelectionManager.Instance;
         _match = MatchController.Instance;
+        _gameEvent = GameEventController.Instance;
 
         _buffRepository = BuffRepository.Instance;
         _abilityRepository = AbilityRepository.Instance;
@@ -304,25 +307,60 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
         _selectionReticule.ChangeAppearance(state);
     }
 
-    public void SetTarget(UnitActuator targetUnit)
+    public void IssueCommand(AbilityCommmandTrigger command, UnitActuator targetUnit = null)
     {
         if (_motion == null)
             return;
 
-        if(targetUnit == null)
+        for(int i = 0; i < Abilities.Count; i++)
         {
-            _motion.Halt();
-            return;
+            Ability current = Abilities[i];
+            if(current.AbilityCommandTrigger != command)
+            {
+                FormattedDebugMessage(LogLevel.Information,
+                    "Unit {0} not executing ability {1} - command {2} does not match that of the ability.",
+                    Name,
+                    current.Name,
+                    current.AbilityCommandTrigger);
+                continue;
+            }
+
+            if(!string.IsNullOrEmpty(current.EffectPath))
+            {
+                GameObject effect = Resources.Load<GameObject>(current.EffectPath);
+                GameObject actualEffect = (GameObject) Instantiate(effect, transform.position, transform.rotation);
+
+                // TODO: Determine how to handle effects that expire on a state change.
+            }
+
+            _gameEvent.RunGameEventGroup(current.GameEvents);
         }
 
-        if (targetUnit.gameObject == gameObject)
+        // Signal UnitMotion to actually move the unit...
+        switch (command)
         {
-            DebugMessage("Self was selected as target; holding position and defending.");
-            _motion.Halt();
-            return;
-        }
+            case AbilityCommmandTrigger.MoveTo:
+                if (targetUnit == null)
+                {
+                    _motion.Halt();
+                    break;
+                }
 
-        _motion.SetTarget(targetUnit.gameObject);
+                DebugMessage("Self was selected as target; holding position and defending.");
+                _motion.SetTarget(targetUnit.gameObject);
+                break;
+
+            case AbilityCommmandTrigger.Defend:
+                _motion.Halt();
+                break;
+
+            case AbilityCommmandTrigger.MatchOver:
+                _motion.Halt();
+                break;
+
+            default:
+                throw new InvalidOperationException("Unexpected command: " + command);
+        }
     }
 
     #endregion Methods

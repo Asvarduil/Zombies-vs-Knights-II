@@ -18,6 +18,17 @@ public class MapController : ManagerBase<MapController>
     public List<SpawnSphere> SpawnSpheres = new List<SpawnSphere>();
 
     private PlayerManager _player;
+    public PlayerManager Player
+    {
+        get
+        {
+            if (_player == null)
+                _player = PlayerManager.Instance;
+
+            return _player;
+        }
+    }
+
     private GameUIMasterController _gui;
     private GameEventController _events;
 
@@ -84,12 +95,30 @@ public class MapController : ManagerBase<MapController>
     {
         List<Ability> abilities = new List<Ability>();
 
+        FormattedDebugMessage(LogLevel.Information,
+            "Looking for {0} abilities, from a pool of {1} available abilities.",
+            faction,
+            UnitSpawnAbilities.Count);
+
         for(int i = 0; i < UnitSpawnAbilities.Count; i++)
         {
             Ability current = UnitSpawnAbilities[i];
-            if (current.UnitAbilityTrigger != UnitAbilityTrigger.None
+            if (current.AbilityCommandTrigger != AbilityCommmandTrigger.UnitSpawn
                || current.Faction != faction)
+            {
+                string reason = string.Empty;
+                if (current.AbilityCommandTrigger != AbilityCommmandTrigger.UnitSpawn)
+                    reason = "the ability is not a Unit Spawn ability.";
+                else if (current.Faction != faction)
+                    reason = "the ability does not belong to faction " + faction;
+
+                FormattedDebugMessage(LogLevel.Information,
+                    "Passing up ability {0}, because {1}",
+                    current.Name,
+                    reason);
+
                 continue;
+            }
             
             abilities.Add(current);
         }
@@ -97,7 +126,7 @@ public class MapController : ManagerBase<MapController>
         FormattedDebugMessage(LogLevel.Information,
             "Found {0} abilities for faction {1}.",
             abilities.Count,
-            _player.Faction);
+            faction);
 
         return abilities.DeepCopyList();
     }

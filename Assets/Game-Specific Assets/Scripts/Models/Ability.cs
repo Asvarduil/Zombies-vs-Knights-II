@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using SimpleJSON;
 
-public enum UnitAbilityTrigger
+public enum AbilityCommmandTrigger
 {
-    None,
-    MoveToFriendly,
-    MoveToEnemy,
-    Defend
+    UnitSpawn,
+    MoveTo,
+    Defend,
+    MatchOver
 }
 
 [Serializable]
@@ -19,10 +19,10 @@ public class Ability : IJsonSavable, INamed, ICloneable
     public string Description;
     public string IconPath;
     public Faction Faction;
-    public UnitAbilityTrigger UnitAbilityTrigger;
+    public AbilityCommmandTrigger AbilityCommandTrigger;
     public string EffectPath;
     public int ResourceCost;
-    public float LockoutDuration;
+    public float LockoutDuration; // TODO: Setup lockout...
     public List<GameEvent> GameEvents;
 
     public string EntityName { get { return Name; } }
@@ -39,7 +39,7 @@ public class Ability : IJsonSavable, INamed, ICloneable
             Description = Description,
             IconPath = IconPath,
             Faction = Faction,
-            UnitAbilityTrigger = UnitAbilityTrigger,
+            AbilityCommandTrigger = AbilityCommandTrigger,
             EffectPath = EffectPath,
             ResourceCost = ResourceCost,
             LockoutDuration = LockoutDuration,
@@ -56,7 +56,7 @@ public class Ability : IJsonSavable, INamed, ICloneable
         state["Name"] = new JSONData(Name);
         state["Description"] = new JSONData(Description);
         state["Faction"] = new JSONData(Faction.ToString());
-        state["UnitAbilityTrigger"] = new JSONData(UnitAbilityTrigger.ToString());
+        state["AbilityCommandTrigger"] = new JSONData(AbilityCommandTrigger.ToString());
         state["IconPath"] = new JSONData(IconPath);
         state["EffectPath"] = new JSONData(EffectPath);
         state["ResourceCost"] = new JSONData(ResourceCost);
@@ -71,7 +71,7 @@ public class Ability : IJsonSavable, INamed, ICloneable
         Name = state["Name"];
         Description = state["Description"];
         Faction = state["Faction"].ToEnum<Faction>();
-        UnitAbilityTrigger = state["UnitAbilityTrigger"].ToEnum<UnitAbilityTrigger>();
+        AbilityCommandTrigger = state["AbilityCommandTrigger"].ToEnum<AbilityCommmandTrigger>();
         IconPath = state["IconPath"];
         EffectPath = state["EffectPath"];
         ResourceCost = state["ResourceCost"].AsInt;

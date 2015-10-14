@@ -13,6 +13,8 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
     private PlayerManager _player;
 
     private MapController _map;
+    private MatchController _match;
+    private GameUIMasterController _ui;
 
     private UnitRepository _unitRepository;
     private AbilityRepository _abilityRepository;
@@ -39,7 +41,9 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         // Don't allow any other map information to be accessed beyond this point.
         Contents = new List<MapDetail> { arenaFeatures };
 
+        _ui = GameUIMasterController.Instance;
         _map = MapController.Instance;
+        _match = MatchController.Instance;
 
         _unitRepository = UnitRepository.Instance;
         _abilityRepository = AbilityRepository.Instance;
@@ -63,6 +67,9 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         DebugMessage("Setting up the Arena...");
         LoadAbilities(arenaFeatures);
         SetupArena(arenaFeatures);
+
+        _ui.PresentUnitCommands();
+        _match.AcquireKeyUnitHPCount();
     }
 
     private MapDetail FindMapDetailForCurrentMap()

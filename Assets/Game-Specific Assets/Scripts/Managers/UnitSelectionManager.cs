@@ -128,7 +128,7 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
         if (SelectedUnit == null)
             return;
 
-        SelectedUnit.SetTarget(null);
+        SelectedUnit.IssueCommand(AbilityCommmandTrigger.MatchOver);
         SelectedUnit = null;
     }
 
@@ -230,12 +230,21 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
         }
 
         UnitActuator hitUnit = target.GetComponent<UnitActuator>();
-        if (hitUnit != null)
-        {
-            DebugMessage("Setting target to unit " + hitUnit.name);
-            unit.SetTarget(hitUnit);
+        if (hitUnit == null)
             return;
-        }
+
+        AbilityCommmandTrigger command = unit == hitUnit
+            ? AbilityCommmandTrigger.Defend
+            : AbilityCommmandTrigger.MoveTo;
+
+        FormattedDebugMessage(LogLevel.Information,
+            "Unit {0} has received order {1}",
+            unit.Name,
+            command);
+
+        unit.IssueCommand(command, hitUnit);
+        
+        return;
     }
 
     public void DeselectCurrent()
