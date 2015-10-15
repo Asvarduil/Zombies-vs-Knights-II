@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Faction
-{
-    None,
-    Knights,
-    Zombies
-}
-
 public class UnitActuator : DebuggableBehavior, IHealthStat
 {
     #region Constants
@@ -68,6 +61,8 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     private string _meshPath;
     public GameObject UnitMeshObject;
 
+    public AbilityCommmandTrigger LastCommand = AbilityCommmandTrigger.UnitSpawn;
+
     private UnitSelectionManager _selection;
     private MatchController _match;
     private GameEventController _gameEvent;
@@ -102,6 +97,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     public void Update()
     {
         ProcessBuffs();
+        ExecuteAbilities();
     }
 
     public void OnMouseEnter()
@@ -249,6 +245,138 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
         reticuleTransform.localScale = Vector3.one * model.ReticuleScale;
     }
 
+    public void SelectUnit(Faction playerFaction)
+    {
+        SelectionState state = Faction == playerFaction
+            ? SelectionState.Friendly
+            : SelectionState.Enemy;
+
+        DebugMessage(gameObject.name + " is selected as a(n) " + state);
+        _selectionReticule.ChangeAppearance(state);
+    }
+
+    public void DeselectUnit()
+    {
+        _selectionReticule.ChangeAppearance(SelectionState.Hidden);
+    }
+
+    public void IssueCommand(AbilityCommmandTrigger command, UnitActuator targetUnit = null)
+    {
+        if (_motion == null)
+            return;
+
+        LastCommand = command;
+
+        for (int i = 0; i < Abilities.Count; i++)
+        {
+            Ability current = Abilities[i];
+
+            // Reset any one-shot abilities on the unit...
+            current.HasBeenUsed = false;
+
+            // Only one-shot abilities fire immediately.
+            if (current.TriggerCondition != AbilityTriggerCondition.OneShot)
+                continue;
+
+            ExecuteAbility(current);
+        }
+
+        // Signal UnitMotion to actually move the unit...
+        switch (command)
+        {
+            case AbilityCommmandTrigger.MoveTo:
+                if (targetUnit == null)
+                {
+                    _motion.Halt();
+                    break;
+                }
+
+                DebugMessage("Self was selected as target; holding position and defending.");
+                _motion.SetTarget(targetUnit.gameObject);
+                break;
+
+            case AbilityCommmandTrigger.Defend:
+                _motion.Halt();
+                break;
+
+            case AbilityCommmandTrigger.MatchOver:
+                _motion.Halt();
+                break;
+
+            default:
+                throw new InvalidOperationException("Unexpected command: " + command);
+        }
+    }
+
+    public void ExecuteAbilities()
+    {
+        for (int i = 0; i < Abilities.Count; i++)
+        {
+            Ability ability = Abilities[i];
+            ExecuteAbility(ability);
+        }
+    }
+
+    private void ExecuteAbility(Ability ability)
+    {
+        // Only use abilities relevant to the command given.
+        if (ability.CommandTrigger != LastCommand)
+        {
+            FormattedDebugMessage(LogLevel.Information,
+                "Unit {0} not executing ability {1} - command {2} does not match that of the ability.",
+                Name,
+                ability.Name,
+                ability.CommandTrigger);
+            return;
+        }
+
+        switch (ability.TriggerCondition)
+        {
+            case AbilityTriggerCondition.OneShot:
+                if (ability.HasBeenUsed)
+                    return;
+
+                ability.HasBeenUsed = true;
+                ManifestAbility(ability);
+                break;
+
+            case AbilityTriggerCondition.Periodic:
+                if (!ability.Lockout.CanAttempt())
+                    return;
+
+                ManifestAbility(ability);
+                ability.Lockout.NoteLastOccurrence();
+                break;
+
+            case AbilityTriggerCondition.Toggle:
+                if (ability.CommandTrigger != LastCommand)
+                    return;
+
+                if (!ability.Lockout.CanAttempt())
+                    return;
+
+                ManifestAbility(ability);
+                ability.Lockout.NoteLastOccurrence();
+                break;
+
+            default:
+                throw new InvalidOperationException("Unexpected Ability Trigger Condition: " + ability.TriggerCondition);
+        }
+    }
+
+    private void ManifestAbility(Ability ability)
+    {
+        if (!string.IsNullOrEmpty(ability.EffectPath))
+        {
+            GameObject effect = Resources.Load<GameObject>(ability.EffectPath);
+
+            // Ability effects are cleaned up when orders change, if Trigger is a 'Toggle'.
+            GameObject actualEffect = (GameObject)Instantiate(effect, transform.position, transform.rotation);
+        }
+
+        _gameEvent.RunGameEventGroup(ability.GameEvents);
+    }
+
     public void ApplyBuff(string buffName)
     {
         Buff newBuff = _buffRepository.GetBuffByName(buffName);
@@ -290,77 +418,6 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
         ModifiableStat stat = Stats.FindItemByName(buff.AffectedStat);
         // TODO: When I figure out how to do this in a non-glitchy way.
         //stat.AddTemporaryBonus(buff.EffectValue);
-    }
-
-    public void DeselectUnit()
-    {
-        _selectionReticule.ChangeAppearance(SelectionState.Hidden);
-    }
-
-    public void SelectUnit(Faction playerFaction)
-    {
-        SelectionState state = Faction == playerFaction
-            ? SelectionState.Friendly
-            : SelectionState.Enemy;
-
-        DebugMessage(gameObject.name + " is selected as a(n) " + state);
-        _selectionReticule.ChangeAppearance(state);
-    }
-
-    public void IssueCommand(AbilityCommmandTrigger command, UnitActuator targetUnit = null)
-    {
-        if (_motion == null)
-            return;
-
-        for(int i = 0; i < Abilities.Count; i++)
-        {
-            Ability current = Abilities[i];
-            if(current.AbilityCommandTrigger != command)
-            {
-                FormattedDebugMessage(LogLevel.Information,
-                    "Unit {0} not executing ability {1} - command {2} does not match that of the ability.",
-                    Name,
-                    current.Name,
-                    current.AbilityCommandTrigger);
-                continue;
-            }
-
-            if(!string.IsNullOrEmpty(current.EffectPath))
-            {
-                GameObject effect = Resources.Load<GameObject>(current.EffectPath);
-                GameObject actualEffect = (GameObject) Instantiate(effect, transform.position, transform.rotation);
-
-                // TODO: Determine how to handle effects that expire on a state change.
-            }
-
-            _gameEvent.RunGameEventGroup(current.GameEvents);
-        }
-
-        // Signal UnitMotion to actually move the unit...
-        switch (command)
-        {
-            case AbilityCommmandTrigger.MoveTo:
-                if (targetUnit == null)
-                {
-                    _motion.Halt();
-                    break;
-                }
-
-                DebugMessage("Self was selected as target; holding position and defending.");
-                _motion.SetTarget(targetUnit.gameObject);
-                break;
-
-            case AbilityCommmandTrigger.Defend:
-                _motion.Halt();
-                break;
-
-            case AbilityCommmandTrigger.MatchOver:
-                _motion.Halt();
-                break;
-
-            default:
-                throw new InvalidOperationException("Unexpected command: " + command);
-        }
     }
 
     #endregion Methods

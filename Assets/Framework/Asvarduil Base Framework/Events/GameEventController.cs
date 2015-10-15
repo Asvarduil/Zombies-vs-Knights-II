@@ -17,9 +17,43 @@ public class GameEventController : ManagerBase<GameEventController>
     public void Awake()
     {
         _eventFunctions = new List<GameEventHook>();
+
+        RegisterEvents();
     }
 
     #endregion Hooks
+
+    #region Events
+
+    public void RegisterEvents()
+    {
+        RegisterEventHook("DebugMessage", DebugMessageEvent);
+    }
+
+    /// <summary>
+    /// Allows the Game Event Controller to interpret an instruction to print a message to the console.
+    /// </summary>
+    /// <param name="args">A list of up to two strings.  The first arg is a message to print; the second is an optional LogLevel.</param>
+    /// <returns>IEnumerator, allowing this instruction to run concurrently with others, or in sequence.</returns>
+    public IEnumerator DebugMessageEvent(List<string> args)
+    {
+        if (args.IsNullOrEmpty())
+            throw new ArgumentException("DebugMessage requires at least one argument, a message.");
+
+        string message = args[0];
+        LogLevel logLevel = LogLevel.Information;
+
+        if(args.Count == 2)
+        {
+            logLevel = (LogLevel) Enum.Parse(typeof(LogLevel), args[1]);
+        }
+
+        DebugMessage(message, logLevel);
+
+        yield return 0;
+    }
+
+    #endregion Events
 
     #region Methods
 

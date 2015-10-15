@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using SimpleJSON;
-
-public enum AbilityCommmandTrigger
-{
-    UnitSpawn,
-    MoveTo,
-    Defend,
-    MatchOver
-}
 
 [Serializable]
 public class Ability : IJsonSavable, INamed, ICloneable
@@ -19,13 +12,17 @@ public class Ability : IJsonSavable, INamed, ICloneable
     public string Description;
     public string IconPath;
     public Faction Faction;
-    public AbilityCommmandTrigger AbilityCommandTrigger;
+    public AbilityCommmandTrigger CommandTrigger;
+    public AbilityTriggerCondition TriggerCondition;
     public string EffectPath;
     public int ResourceCost;
-    public float LockoutDuration; // TODO: Setup lockout...
+    //public float LockoutDuration;
+    public Lockout Lockout = new Lockout();
     public List<GameEvent> GameEvents;
 
     public string EntityName { get { return Name; } }
+
+    public bool HasBeenUsed { get; set; }
 
     #endregion Variables / Properties
 
@@ -39,10 +36,11 @@ public class Ability : IJsonSavable, INamed, ICloneable
             Description = Description,
             IconPath = IconPath,
             Faction = Faction,
-            AbilityCommandTrigger = AbilityCommandTrigger,
+            CommandTrigger = CommandTrigger,
+            TriggerCondition = TriggerCondition,
             EffectPath = EffectPath,
             ResourceCost = ResourceCost,
-            LockoutDuration = LockoutDuration,
+            Lockout = Lockout.Clone() as Lockout,
             GameEvents = GameEvents.DeepCopyList()
         };
 
@@ -56,11 +54,12 @@ public class Ability : IJsonSavable, INamed, ICloneable
         state["Name"] = new JSONData(Name);
         state["Description"] = new JSONData(Description);
         state["Faction"] = new JSONData(Faction.ToString());
-        state["AbilityCommandTrigger"] = new JSONData(AbilityCommandTrigger.ToString());
+        state["AbilityCommandTrigger"] = new JSONData(CommandTrigger.ToString());
+        state["AbilityTriggerCondition"] = new JSONData(TriggerCondition.ToString());
         state["IconPath"] = new JSONData(IconPath);
         state["EffectPath"] = new JSONData(EffectPath);
         state["ResourceCost"] = new JSONData(ResourceCost);
-        state["LockoutDuration"] = new JSONData(LockoutDuration);
+        state["LockoutDuration"] = new JSONData(Lockout.LockoutRate);
         state["GameEvents"] = GameEvents.FoldList();
 
         return state;
@@ -71,11 +70,16 @@ public class Ability : IJsonSavable, INamed, ICloneable
         Name = state["Name"];
         Description = state["Description"];
         Faction = state["Faction"].ToEnum<Faction>();
-        AbilityCommandTrigger = state["AbilityCommandTrigger"].ToEnum<AbilityCommmandTrigger>();
+        CommandTrigger = state["AbilityCommandTrigger"].ToEnum<AbilityCommmandTrigger>();
+        TriggerCondition = state["AbilityTriggerCondition"].ToEnum<AbilityTriggerCondition>();
         IconPath = state["IconPath"];
         EffectPath = state["EffectPath"];
         ResourceCost = state["ResourceCost"].AsInt;
-        LockoutDuration = state["LockoutDuration"].AsFloat;
+        Lockout = new Lockout
+        {
+            LastAttempt = Time.time,
+            LockoutRate = state["LockoutDuration"].AsFloat
+        };
         GameEvents = state["GameEvents"].AsArray.UnfoldJsonArray<GameEvent>();
     }
 

@@ -6,6 +6,7 @@
             "IconPath":"",
             "Faction":"Knights",
             "AbilityCommandTrigger":"UnitSpawn",
+            "AbilityTriggerCondition":"OneShot",
             "EffectPath":"",
             "ResourceCost":1,
             "LockoutDuration":5,
@@ -25,6 +26,7 @@
             "IconPath":"",
             "Faction":"Zombies",
             "AbilityCommandTrigger":"UnitSpawn",
+            "AbilityTriggerCondition":"OneShot",
             "EffectPath":"",
             "ResourceCost":1,
             "LockoutDuration":5,
@@ -34,6 +36,44 @@
                     "EventArgs":[
                         "Prefabs/Units/Base Unit",
                         "Ghoul"
+                    ]
+                }
+            ]
+        },
+        {
+            "Name":"Test Oneshot Ability",
+            "Description":"Fires on Defend Command",
+            "IconPath":"",
+            "Faction":"Knights",
+            "AbilityCommandTrigger":"Defend",
+            "AbilityTriggerCondition":"OneShot",
+            "EffectPath":"",
+            "ResourceCost":0,
+            "LockoutDuration":0,
+            "GameEvents":[
+                {
+                    "Event":"DebugMessage",
+                    "EventArgs":[
+                        "Test OneShot Ability has fired!"
+                    ]
+                }
+            ]
+        },
+        {
+            "Name":"Test Periodic Ability",
+            "Description":"Fires as long as the unit Defends every 3 seconds.",
+            "IconPath":"",
+            "Faction":"Knights",
+            "AbilityCommandTrigger":"Defend",
+            "AbilityTriggerCondition":"Periodic",
+            "EffectPath":"",
+            "ResourceCost":0,
+            "LockoutDuration":3,
+            "GameEvents":[
+                {
+                    "Event":"DebugMessage",
+                    "EventArgs":[
+                        "Test Periodic Ability has fired!"
                     ]
                 }
             ]

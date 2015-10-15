@@ -136,6 +136,7 @@
                 }
             ],
             "AbilityNames":[
+                "Test Periodic Ability"
             ]
             "MeshPath":"Visual/Meshes/Knight Cube (Development)",
             "ReticuleScale":2
@@ -182,7 +183,7 @@
                 }
             ],
             "AbilityNames":[
-                "Test Ability"
+                "Test Periodic Ability"
             ]
             "MeshPath":"Visual/Meshes/Zombie Cube (Development)",
             "ReticuleScale":2

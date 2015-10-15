@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class Lockout
+public class Lockout : ICloneable
 {
     #region Variables / Properties
 
@@ -24,4 +24,19 @@ public class Lockout
     }
 
     #endregion Hooks
+
+    #region Methods
+
+    public object Clone()
+    {
+        Lockout clone = new Lockout
+        {
+            LockoutRate = LockoutRate,
+            LastAttempt = LastAttempt
+        };
+
+        return clone;
+    }
+
+    #endregion Methods
 }
