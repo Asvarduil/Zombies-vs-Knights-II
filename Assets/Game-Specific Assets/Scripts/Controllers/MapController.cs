@@ -103,12 +103,12 @@ public class MapController : ManagerBase<MapController>
         for(int i = 0; i < UnitSpawnAbilities.Count; i++)
         {
             Ability current = UnitSpawnAbilities[i];
-            if (current.CommandTrigger != AbilityCommmandTrigger.UnitSpawn
+            if (current.CommandTrigger != AbilityCommmandTrigger.PlayerActivated
                || current.Faction != faction)
             {
                 string reason = string.Empty;
-                if (current.CommandTrigger != AbilityCommmandTrigger.UnitSpawn)
-                    reason = "the ability is not a Unit Spawn ability.";
+                if (current.CommandTrigger != AbilityCommmandTrigger.PlayerActivated)
+                    reason = "the ability is not a Player-Activated ability.";
                 else if (current.Faction != faction)
                     reason = "the ability does not belong to faction " + faction;
 

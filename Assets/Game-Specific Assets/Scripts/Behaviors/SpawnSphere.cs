@@ -89,12 +89,9 @@ public class SpawnSphere : DebuggableBehavior
         actuator.RealizeModel(model);
 
         // Set the opposing Key Unit as the unit's default target.
-        UnitMotion motion = physicalUnit.GetComponent<UnitMotion>();
-        if (motion != null)
-        {
-            GameObject newUnitTarget = _match.GetFirstOpposingKeyUnit(actuator.Faction).gameObject;
-            motion.SetTarget(newUnitTarget);
-        }
+        DebugMessage("Issuing 'UnitSpawn' command to new unit...");
+        UnitActuator newUnitTarget = _match.GetFirstOpposingKeyUnit(actuator.Faction);
+        actuator.IssueCommand(AbilityCommmandTrigger.UnitSpawn, newUnitTarget.gameObject);
     }
 
     #endregion Methods

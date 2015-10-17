@@ -229,11 +229,15 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
             return;
         }
 
-        UnitActuator hitUnit = target.GetComponent<UnitActuator>();
-        if (hitUnit == null)
+        if (target.tag != "Targetable")
+        {
+            FormattedDebugMessage(LogLevel.Warning,
+                "Game Object {0} cannot be targeted with a MoveTo or Defend command.",
+                target.name);
             return;
+        }
 
-        AbilityCommmandTrigger command = unit == hitUnit
+        AbilityCommmandTrigger command = unit.gameObject == target
             ? AbilityCommmandTrigger.Defend
             : AbilityCommmandTrigger.MoveTo;
 
@@ -242,7 +246,7 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
             unit.Name,
             command);
 
-        unit.IssueCommand(command, hitUnit);
+        unit.IssueCommand(command, target);
         
         return;
     }

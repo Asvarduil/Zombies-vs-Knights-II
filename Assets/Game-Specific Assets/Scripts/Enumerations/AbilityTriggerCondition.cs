@@ -2,6 +2,5 @@
 {
     UnitSpawn,
     OneShot,
-    Periodic,
-    Toggle
+    Periodic
 }

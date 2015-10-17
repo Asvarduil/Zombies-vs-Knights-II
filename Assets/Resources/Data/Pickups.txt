@@ -1,0 +1,18 @@
+{
+    "Pickups":[
+        {
+            "Name":"Gold Pickup",
+            "ResourceYield":10,
+            "MeshPath":"",
+            "GameEvents":[
+            ]
+        },
+        {
+            "Name":"Treasure Chest",
+            "ResourceYield":25,
+            "MeshPath":"",
+            "GameEvents":[
+            ]
+        }
+    ]
+}

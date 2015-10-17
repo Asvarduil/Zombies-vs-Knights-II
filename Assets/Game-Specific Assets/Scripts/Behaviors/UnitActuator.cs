@@ -7,7 +7,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     #region Constants
 
     private const string ReticuleName = "Reticule";
-    private const float KnockUpForce = 5.4f;
+    private const float KnockUpForce = 4.3f;
 
     #endregion Constants
 
@@ -71,6 +71,16 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     private AbilityRepository _abilityRepository;
 
     private UnitMotion _motion;
+    private UnitMotion Motion
+    {
+        get
+        {
+            if (_motion == null)
+                _motion = GetComponent<UnitMotion>();
+
+            return _motion;
+        }
+    }
 
     // TODO: Add code for telling a unit mesh to change its tint based on selection/deselection.
     private Rigidbody _rigidbody;
@@ -120,7 +130,10 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
         // If the unit is friendly do nothing.
         if (unit.Faction == Faction)
         {
-            DebugMessage("Unit " + unit.Name + " is friendly to " + Name + "; no collision-combat occurred.");
+            FormattedDebugMessage(LogLevel.Information,
+                "Unit {0} is friendly to {1}; no collision-combat occurred.",
+                unit.Name,
+                Name);
             return;
         }
 
@@ -260,46 +273,41 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
         _selectionReticule.ChangeAppearance(SelectionState.Hidden);
     }
 
-    public void IssueCommand(AbilityCommmandTrigger command, UnitActuator targetUnit = null)
+    public void IssueCommand(AbilityCommmandTrigger command, GameObject target = null)
     {
-        if (_motion == null)
+        if (Motion == null)
+        {
+            DebugMessage("No UnitMotion component detected; making no move.");
             return;
+        }
 
         LastCommand = command;
 
-        for (int i = 0; i < Abilities.Count; i++)
-        {
-            Ability current = Abilities[i];
-
-            // Reset any one-shot abilities on the unit...
-            current.HasBeenUsed = false;
-
-            // Only one-shot abilities fire immediately.
-            if (current.TriggerCondition != AbilityTriggerCondition.OneShot)
-                continue;
-
-            ExecuteAbility(current);
-        }
-
-        // Signal UnitMotion to actually move the unit...
         switch (command)
         {
+            case AbilityCommmandTrigger.UnitSpawn:
             case AbilityCommmandTrigger.MoveTo:
-                if (targetUnit == null)
+                if (target == null)
                 {
+                    DebugMessage("No target unit; holding position.");
                     _motion.Halt();
                     break;
                 }
 
-                DebugMessage("Self was selected as target; holding position and defending.");
-                _motion.SetTarget(targetUnit.gameObject);
+                FormattedDebugMessage(LogLevel.Information,
+                    "Moving to target {0}...",
+                    target.name);
+
+                _motion.SetTarget(target);
                 break;
 
             case AbilityCommmandTrigger.Defend:
+                DebugMessage("Self was selected as target; holding position and defending.");
                 _motion.Halt();
                 break;
 
             case AbilityCommmandTrigger.MatchOver:
+                DebugMessage("Match is now over; halting.");
                 _motion.Halt();
                 break;
 
@@ -321,17 +329,11 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     {
         // Only use abilities relevant to the command given.
         if (ability.CommandTrigger != LastCommand)
-        {
-            FormattedDebugMessage(LogLevel.Information,
-                "Unit {0} not executing ability {1} - command {2} does not match that of the ability.",
-                Name,
-                ability.Name,
-                ability.CommandTrigger);
             return;
-        }
 
         switch (ability.TriggerCondition)
         {
+            case AbilityTriggerCondition.UnitSpawn:
             case AbilityTriggerCondition.OneShot:
                 if (ability.HasBeenUsed)
                     return;
@@ -348,17 +350,6 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
                 ability.Lockout.NoteLastOccurrence();
                 break;
 
-            case AbilityTriggerCondition.Toggle:
-                if (ability.CommandTrigger != LastCommand)
-                    return;
-
-                if (!ability.Lockout.CanAttempt())
-                    return;
-
-                ManifestAbility(ability);
-                ability.Lockout.NoteLastOccurrence();
-                break;
-
             default:
                 throw new InvalidOperationException("Unexpected Ability Trigger Condition: " + ability.TriggerCondition);
         }
@@ -366,6 +357,10 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
 
     private void ManifestAbility(Ability ability)
     {
+        FormattedDebugMessage(LogLevel.Information,
+            "Executing ability {0}",
+            ability.Name);
+
         if (!string.IsNullOrEmpty(ability.EffectPath))
         {
             GameObject effect = Resources.Load<GameObject>(ability.EffectPath);

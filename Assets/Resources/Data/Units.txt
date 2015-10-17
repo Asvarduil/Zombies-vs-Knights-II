@@ -21,7 +21,7 @@
                 },
                 {
                     "Name":"Knockback",
-                    "Value":15,
+                    "Value":30,
                     "ValueCap":4,
                     "FixedModifier":0,
                     "ScalingModifier":1
@@ -68,7 +68,7 @@
                 },
                 {
                     "Name":"Knockback",
-                    "Value":15,
+                    "Value":30,
                     "ValueCap":4,
                     "FixedModifier":0,
                     "ScalingModifier":1
@@ -115,8 +115,8 @@
                 },
                 {
                     "Name":"Knockback",
-                    "Value":2,
-                    "ValueCap":4,
+                    "Value":10,
+                    "ValueCap":20,
                     "FixedModifier":0,
                     "ScalingModifier":1
                 },
@@ -162,8 +162,8 @@
                 },
                 {
                     "Name":"Knockback",
-                    "Value":2,
-                    "ValueCap":4,
+                    "Value":10,
+                    "ValueCap":20,
                     "FixedModifier":0,
                     "ScalingModifier":1
                 },
