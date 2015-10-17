@@ -2,13 +2,13 @@
     "Abilities":[
         {
             "Name":"Recruit Footman",
-            "Description":"Recruits a Footman.  Footmen are basic Knight units.",
+            "Description":"<color='yellow'>Cost: 10 Gold</color> Footmen are basic Knight units.",
             "IconPath":"",
             "Faction":"Knights",
             "AbilityCommandTrigger":"PlayerActivated",
             "AbilityTriggerCondition":"OneShot",
             "EffectPath":"",
-            "ResourceCost":1,
+            "ResourceCost":10,
             "LockoutDuration":5,
             "GameEvents":[
                 {
@@ -22,13 +22,13 @@
         },
         {
             "Name":"Raise Ghoul",
-            "Description":"Raises a Ghoul.  Ghouls are basic Zombie units.",
+            "Description":"<color='yellow'>Cost: 10 Ectoplasm</color> Ghouls are basic Zombie units.",
             "IconPath":"",
             "Faction":"Zombies",
             "AbilityCommandTrigger":"PlayerActivated",
             "AbilityTriggerCondition":"OneShot",
             "EffectPath":"",
-            "ResourceCost":1,
+            "ResourceCost":10,
             "LockoutDuration":5,
             "GameEvents":[
                 {

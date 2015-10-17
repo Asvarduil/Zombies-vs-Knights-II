@@ -4,7 +4,7 @@ public class ResourcePickupActuator : DebuggableBehavior
 {
     #region Variables / Properties
 
-    public int ResourceYield = 10;
+    public int ResourceYield = 0;
 
     private MatchController _match;
 
@@ -24,8 +24,7 @@ public class ResourcePickupActuator : DebuggableBehavior
             return;
 
         Faction awardedFaction = actuator.Faction;
-        // TODO: Implement!
-        //_match.AwardResources(awardedFaction, ResourceYield);
+        _match.AwardResourcesToFaction(awardedFaction, ResourceYield);
     }
 
     #endregion Hooks

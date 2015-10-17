@@ -14,6 +14,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
     private PlayerManager _player;
 
     private MapController _map;
+    private MatchController _match;
     private GameEventController _gameEvent;
     private GameUIMasterController _controller;
 
@@ -27,6 +28,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
 
         _controller = GameUIMasterController.Instance;
         _map = MapController.Instance;
+        _match = MatchController.Instance;
         _gameEvent = GameEventController.Instance;
 
         base.Start();
@@ -38,13 +40,21 @@ public class UnitCommandPresenter : UGUIPresenterBase
 
     public void UseAbility(int abilityIndex)
     {
+        PlayButtonSound();
+        Ability ability = _unitSpawnAbilities[abilityIndex];
+
+        if (! _match.IsPurchaseSuccessful(_player.Faction, ability))
+        {
+            DebugMessage("Cannot afford unit...");
+            _controller.PresentTooltip("Cannot afford unit...");
+            return;
+        }
+
         FormattedDebugMessage(LogLevel.Information, 
             "Presenter - using Create Unit Ability #{0} for faction {1}", 
             abilityIndex, 
             _player.Faction);
 
-        PlayButtonSound();
-        Ability ability = _unitSpawnAbilities[abilityIndex];
         _gameEvent.RunGameEventGroup(ability.GameEvents);
     }
 

@@ -7,7 +7,7 @@ public enum ActivityType
     Resume
 }
 
-public class MatchController : ManagerBase<MatchController>
+public class MatchController : ManagerBase<MatchController>, ISuspendable
 {
     #region Substructures
 
@@ -22,6 +22,7 @@ public class MatchController : ManagerBase<MatchController>
 
     #region Variables / Properties
 
+    public bool AutoGenerateResources = true;
     public ResourceStateModel KnightResources;
     public ResourceStateModel ZombieResources;
 
@@ -45,9 +46,25 @@ public class MatchController : ManagerBase<MatchController>
         _gameUI.UpdateResourceCount(resources.Count, resources.Cap);
     }
 
+    public void Update()
+    {
+        CheckAutoResourceGeneration(KnightResources);
+        CheckAutoResourceGeneration(ZombieResources);
+    }
+
     #endregion Hooks
 
     #region Methods
+
+    public void Suspend()
+    {
+        AutoGenerateResources = false;
+    }
+
+    public void Resume()
+    {
+        AutoGenerateResources = true;
+    }
 
     public void AcquireKeyUnitHPCount()
     {
@@ -167,9 +184,27 @@ public class MatchController : ManagerBase<MatchController>
         return result;
     }
 
+    public bool IsPurchaseSuccessful(Faction faction, Ability ability)
+    {
+        ResourceStateModel resource = GetResourceState(faction);
+        bool result = resource.CanAfford(ability.ResourceCost);
+        if(result)
+        {
+            resource.Spend(ability.ResourceCost);
+            UpdateResourcesOnGUI(resource);
+        }
+
+        return result;
+    }
+
     private ResourceStateModel GetPlayerResourceState()
     {
-        switch(_player.Faction)
+        return GetResourceState(_player.Faction);
+    }
+
+    private ResourceStateModel GetResourceState(Faction faction)
+    {
+        switch (faction)
         {
             case Faction.Knights:
                 return KnightResources;
@@ -180,6 +215,33 @@ public class MatchController : ManagerBase<MatchController>
             default:
                 throw new InvalidOperationException("Unexpected faction: " + _player.Faction);
         }
+    }
+
+    public void AwardResourcesToFaction(Faction faction, int award)
+    {
+        ResourceStateModel resources = GetResourceState(faction);
+
+        resources.Gain(award);
+        UpdateResourcesOnGUI(resources);
+    }
+
+    private void UpdateResourcesOnGUI(ResourceStateModel resources)
+    {
+        if (resources.Faction != _player.Faction)
+            return;
+
+        _gameUI.UpdateResourceCount(resources.Count, resources.Cap);
+    }
+
+    private void CheckAutoResourceGeneration(ResourceStateModel factionResource)
+    {
+        if (!factionResource.AutoGenerateLockout.CanAttempt())
+            return;
+
+        factionResource.Gain(factionResource.AutoGenerateAmount);
+        factionResource.AutoGenerateLockout.NoteLastOccurrence();
+
+        UpdateResourcesOnGUI(factionResource);
     }
 
     private void RadiateActivityCommand(ActivityType activity)
