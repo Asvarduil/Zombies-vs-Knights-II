@@ -25,6 +25,17 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
     public string FriendlyCursor;
 
     private PlayerManager _player;
+    private PlayerManager Player
+    {
+        get
+        {
+            if (_player == null)
+                _player = PlayerManager.Instance;
+
+            return _player;
+        }
+    }
+
     private CursorRepository _cursorRepository;
 
     private Ray _ray;
@@ -83,7 +94,7 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
             case SelectionMode.UnitTarget:
                 // If an opposing unit is selected, the only valid option is a default cursor.
                 // The player cannot control opposing units.
-                bool isSelectedUnitOpposingPlayer = SelectedUnit.Faction != _player.Faction;
+                bool isSelectedUnitOpposingPlayer = SelectedUnit.Faction != Player.Faction;
                 if (isSelectedUnitOpposingPlayer)
                 {
                     cursorModelName = NeutralCursor;
@@ -154,7 +165,17 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
                     }
 
                     SelectTarget(target);
-                    SetCursor(NeutralCursor);
+
+                    string cursor = NeutralCursor;
+                    UnitActuator actuator = target.GetComponent<UnitActuator>();
+                    if (actuator != null)
+                    {
+                        cursor = actuator.Faction == Player.Faction
+                            ? DefendCursor
+                            : NeutralCursor;
+                    }
+
+                    SetCursor(cursor);
                     break;
 
                 default:

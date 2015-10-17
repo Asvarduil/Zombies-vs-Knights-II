@@ -12,8 +12,29 @@ public class UnitCommandPresenter : UGUIPresenterBase
     private List<Ability> _unitSpawnAbilities;
 
     private PlayerManager _player;
+    private PlayerManager Player
+    {
+        get
+        {
+            if (_player == null)
+                _player = PlayerManager.Instance;
+
+            return _player;
+        }
+    }
 
     private MapController _map;
+    private MapController Map
+    {
+        get
+        {
+            if (_map == null)
+                _map = MapController.Instance;
+
+            return _map;
+        }
+    }
+
     private MatchController _match;
     private GameEventController _gameEvent;
     private GameUIMasterController _controller;
@@ -73,7 +94,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
     {
         PresentGUI(true);
 
-        List<Ability> factionUnitSpawnAbilities = _map.GetUnitSpawnAbilities(_player.Faction);
+        List<Ability> factionUnitSpawnAbilities = Map.GetUnitSpawnAbilities(Player.Faction);
         _unitSpawnAbilities = new List<Ability>();
         for (int i = 0; i < AbilityButtons.Count; i++)
         {
