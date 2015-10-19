@@ -37,7 +37,18 @@ public class UnitCommandPresenter : UGUIPresenterBase
 
     private MatchController _match;
     private GameEventController _gameEvent;
+
     private GameUIMasterController _controller;
+    private GameUIMasterController Controller
+    {
+        get
+        {
+            if (_controller == null)
+                _controller = GameUIMasterController.Instance;
+
+            return _controller;
+        }
+    }
 
     #endregion Variables / Properties
 
@@ -67,7 +78,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
         if (! _match.IsPurchaseSuccessful(_player.Faction, ability))
         {
             DebugMessage("Cannot afford unit...");
-            _controller.PresentTooltip("Cannot afford unit...");
+            Controller.PresentTooltip("Cannot afford unit...");
             return;
         }
 
@@ -82,12 +93,12 @@ public class UnitCommandPresenter : UGUIPresenterBase
     public void PresentTooltip(int abilityIndex)
     {
         string description = _unitSpawnAbilities[abilityIndex].Description;
-        _controller.PresentTooltip(description);
+        Controller.PresentTooltip(description);
     }
 
     public void HideTooltip()
     {
-        _controller.HideTooltip();
+        Controller.HideTooltip();
     }
 
     public void PresentCommands()

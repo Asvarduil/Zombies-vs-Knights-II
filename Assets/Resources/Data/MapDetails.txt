@@ -128,6 +128,30 @@
                     ]
                 },
                 {
+                    "Path":"Prefabs/GameObjects/Resource Generator - Farm",
+                    "Name":"Farm",
+                    "ObjectType":"GameObject",
+                    "Placements":[
+                        {
+                            "Position":{
+                                "x": 0,
+                                "y": 0,
+                                "z": 2
+                            },
+                            "Rotation":{
+                                "x": 0,
+                                "y": 180,
+                                "z": 0
+                            },
+                            "Scale":{
+                                "x": 1,
+                                "y": 1,
+                                "z": 1
+                            }
+                        }
+                    ]
+                },
+                {
                     "Path":"Prefabs/GameObjects/Waypoint Torch",
                     "Name":"Torch",
                     "ObjectType":"GameObject",

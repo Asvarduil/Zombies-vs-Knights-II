@@ -98,6 +98,7 @@
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\InitializationScenePass.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\MapLoader.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\ResourcePickupActuator.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\ResourceSpawnSphere.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\SelectionReticule.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\SpawnSphere.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\TerrainCursor.cs" />

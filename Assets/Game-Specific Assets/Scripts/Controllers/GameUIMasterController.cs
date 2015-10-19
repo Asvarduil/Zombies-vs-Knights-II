@@ -19,6 +19,16 @@
     }
 
     private UnitCommandPresenter _unitToolbox;
+    private UnitCommandPresenter UnitToolbox
+    {
+        get
+        {
+            if (_unitToolbox == null)
+                _unitToolbox = FindObjectOfType<UnitCommandPresenter>();
+
+            return _unitToolbox;
+        }
+    }
 
     private EndGamePresenter _endGame;
 
@@ -42,7 +52,7 @@
 
     public void PresentUnitCommands()
     {
-        _unitToolbox.PresentCommands();
+        UnitToolbox.PresentCommands();
     }
 
     public void PresentTooltip(string tooltipText)

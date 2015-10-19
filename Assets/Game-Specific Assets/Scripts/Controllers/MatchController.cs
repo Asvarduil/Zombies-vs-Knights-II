@@ -27,7 +27,28 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
     public ResourceStateModel ZombieResources;
 
     private PlayerManager _player;
+    private PlayerManager Player
+    {
+        get
+        {
+            if (_player == null)
+                _player = PlayerManager.Instance;
+
+            return _player;
+        }
+    }
+
     private GameUIMasterController _gameUI;
+    private GameUIMasterController GameUI
+    {
+        get
+        {
+            if (_gameUI == null)
+                _gameUI = GameUIMasterController.Instance;
+
+            return _gameUI;
+        }
+    }
 
     #endregion Variables / Properties
 
@@ -35,15 +56,12 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
 
     public void Start()
     {
-        _player = PlayerManager.Instance;
-        _gameUI = GameUIMasterController.Instance;
-
         // Initialize Faction Resources and the Faction Resource UI immediately.
         KnightResources = new ResourceStateModel(Faction.Knights);
         ZombieResources = new ResourceStateModel(Faction.Zombies);
 
         ResourceStateModel resources = GetPlayerResourceState();
-        _gameUI.UpdateResourceCount(resources.Count, resources.Cap);
+        GameUI.UpdateResourceCount(resources.Count, resources.Cap);
     }
 
     public void Update()
@@ -69,16 +87,16 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
     public void AcquireKeyUnitHPCount()
     {
         var keyUnits = GetKeyUnits();
-        KeyUnitHPState hpState = GetKeyUnitHPForFaction(_player.Faction, keyUnits);
-        _gameUI.UpdateKeyStructureHP(hpState.HP, hpState.MaxHP);
+        KeyUnitHPState hpState = GetKeyUnitHPForFaction(Player.Faction, keyUnits);
+        GameUI.UpdateKeyStructureHP(hpState.HP, hpState.MaxHP);
     }
 
     public void CheckForMatchConclusion()
     {
         var keyUnits = GetKeyUnits();
 
-        bool playerWins = GetKeyUnitsForFaction(_player.Faction, keyUnits).Count > 0;
-        bool playerLost = GetKeyUnitsForFaction(_player.Faction, keyUnits).Count == 0;
+        bool playerWins = GetKeyUnitsForFaction(Player.Faction, keyUnits).Count > 0;
+        bool playerLost = GetKeyUnitsForFaction(Player.Faction, keyUnits).Count == 0;
 
         // Determine match state...
         MatchState state = MatchState.OnGoing;
@@ -88,11 +106,11 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
             state = MatchState.Lost;
 
         RadiateActivityCommand(ActivityType.Suspend);
-        _player.RecordMatchOutcome(state);
-        _gameUI.ShowMatchOutcome(state);
+        Player.RecordMatchOutcome(state);
+        GameUI.ShowMatchOutcome(state);
 
-        KeyUnitHPState hpState = GetKeyUnitHPForFaction(_player.Faction, keyUnits);
-        _gameUI.UpdateKeyStructureHP(hpState.HP, hpState.MaxHP);
+        KeyUnitHPState hpState = GetKeyUnitHPForFaction(Player.Faction, keyUnits);
+        GameUI.UpdateKeyStructureHP(hpState.HP, hpState.MaxHP);
     }
 
     private List<UnitActuator> GetKeyUnits()
@@ -199,7 +217,7 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
 
     private ResourceStateModel GetPlayerResourceState()
     {
-        return GetResourceState(_player.Faction);
+        return GetResourceState(Player.Faction);
     }
 
     private ResourceStateModel GetResourceState(Faction faction)
@@ -213,7 +231,7 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
                 return ZombieResources;
 
             default:
-                throw new InvalidOperationException("Unexpected faction: " + _player.Faction);
+                throw new InvalidOperationException("Unexpected faction: " + Player.Faction);
         }
     }
 
@@ -227,10 +245,10 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
 
     private void UpdateResourcesOnGUI(ResourceStateModel resources)
     {
-        if (resources.Faction != _player.Faction)
+        if (resources.Faction != Player.Faction)
             return;
 
-        _gameUI.UpdateResourceCount(resources.Count, resources.Cap);
+        GameUI.UpdateResourceCount(resources.Count, resources.Cap);
     }
 
     private void CheckAutoResourceGeneration(ResourceStateModel factionResource)
