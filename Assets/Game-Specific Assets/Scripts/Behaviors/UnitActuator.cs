@@ -112,7 +112,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
 
     public void OnMouseEnter()
     {
-        _selection.UpdateCursor(this);
+        _selection.UpdateCursor(gameObject);
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -130,7 +130,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
         // If the unit is friendly do nothing.
         if (unit.Faction == Faction)
         {
-            FormattedDebugMessage(LogLevel.Information,
+            FormattedDebugMessage(LogLevel.Info,
                 "Unit {0} is friendly to {1}; no collision-combat occurred.",
                 unit.Name,
                 Name);
@@ -281,6 +281,11 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
             return;
         }
 
+        FormattedDebugMessage(LogLevel.Info,
+            "Unit {0} has received order {1}",
+            Name,
+            command);
+
         LastCommand = command;
 
         switch (command)
@@ -289,25 +294,18 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
             case AbilityCommmandTrigger.MoveTo:
                 if (target == null)
                 {
-                    DebugMessage("No target unit; holding position.");
                     _motion.Halt();
                     break;
                 }
-
-                FormattedDebugMessage(LogLevel.Information,
-                    "Moving to target {0}...",
-                    target.name);
-
+                
                 _motion.SetTarget(target);
                 break;
 
             case AbilityCommmandTrigger.Defend:
-                DebugMessage("Self was selected as target; holding position and defending.");
                 _motion.Halt();
                 break;
 
             case AbilityCommmandTrigger.MatchOver:
-                DebugMessage("Match is now over; halting.");
                 _motion.Halt();
                 break;
 
@@ -357,7 +355,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
 
     private void ManifestAbility(Ability ability)
     {
-        FormattedDebugMessage(LogLevel.Information,
+        FormattedDebugMessage(LogLevel.Info,
             "Executing ability {0}",
             ability.Name);
 

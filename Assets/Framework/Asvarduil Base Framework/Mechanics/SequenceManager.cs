@@ -29,7 +29,7 @@ public class SequenceManager : ManagerBase<SequenceManager>
 		if(state == default(SequenceState))
 		{
 			string message = string.Format("Sequence Manager has no thread named {0}.", name);
-			DebugMessage(message, DebuggableBehavior.LogLevel.LogicError);
+			DebugMessage(message, DebuggableBehavior.LogLevel.Error);
 		}
 
 		return state;
@@ -41,7 +41,7 @@ public class SequenceManager : ManagerBase<SequenceManager>
 		if(state == default(QuestState))
 		{
 			string message = string.Format("Sequence Manager has no quest tied to thread {0}.", name);
-			DebugMessage(message, DebuggableBehavior.LogLevel.LogicError);
+			DebugMessage(message, DebuggableBehavior.LogLevel.Error);
 		}
 		
 		return state;
@@ -53,7 +53,7 @@ public class SequenceManager : ManagerBase<SequenceManager>
 		if(state == default(SequenceState))
 		{
 			string message = string.Format("Sequence Manager has no thread named {0}.  Creating and initializing it.", name);
-			DebugMessage(message, DebuggableBehavior.LogLevel.Warning);
+			DebugMessage(message, DebuggableBehavior.LogLevel.Warn);
 			state = new SequenceState{ Name = name, Counter = 0 };
 		}
 
@@ -68,7 +68,7 @@ public class SequenceManager : ManagerBase<SequenceManager>
 		if(state == default(QuestState))
 		{
 			string message = string.Format("Sequence Manager has no quest for thread {0}.  Creating and initializing it.", name);
-			DebugMessage(message, LogLevel.Warning);
+			DebugMessage(message, LogLevel.Warn);
 			state = new QuestState();
 		}
 

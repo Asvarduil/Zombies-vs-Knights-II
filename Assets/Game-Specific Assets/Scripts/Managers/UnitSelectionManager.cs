@@ -74,14 +74,14 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
 
         if (model.Texture == null)
         {
-            DebugMessage("No texture is associated to Cursor model " + model.Name, LogLevel.LogicError);
+            DebugMessage("No texture is associated to Cursor model " + model.Name, LogLevel.Error);
             return;
         }
 
         Cursor.SetCursor(model.Texture, model.Point, CursorMode.Auto);
     }
 
-    public void UpdateCursor(UnitActuator unit)
+    public void UpdateCursor(GameObject gameObject)
     {
         string cursorModelName = NeutralCursor;
 
@@ -92,6 +92,13 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
                 break;
 
             case SelectionMode.UnitTarget:
+                // Is the target game object even targetable?  If not, go no further.
+                if (gameObject.tag != "Targetable")
+                {
+                    DebugMessage("Object " + gameObject.name + " is not tagged as targetable.");
+                    break;
+                }
+
                 // If an opposing unit is selected, the only valid option is a default cursor.
                 // The player cannot control opposing units.
                 bool isSelectedUnitOpposingPlayer = SelectedUnit.Faction != Player.Faction;
@@ -101,12 +108,23 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
                     break;
                 }
 
+                // If the targeted object is a resource, and the selected unit is friendly, then
+                // a MoveTo command will be issued.  Otherwise, keep the cursor default.
+                ResourcePickupActuator resource = gameObject.GetComponent<ResourcePickupActuator>();
+                if (resource != null
+                    && SelectedUnit.Faction == Player.Faction)
+                {
+                    cursorModelName = FriendlyCursor;
+                    break;
+                }
+
                 // If for some reason the unit is a null reference, go with a default cursor.
                 // Log a warning, though...
+                UnitActuator unit = gameObject.GetComponent<UnitActuator>();
                 if(unit == null)
                 {
                     cursorModelName = NeutralCursor;
-                    DebugMessage("Attempted to change cursor for a null unit.", LogLevel.Warning);
+                    DebugMessage("Attempted to change cursor for a null unit.", LogLevel.Warn);
                     break;
                 }
 
@@ -252,7 +270,7 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
 
         if (target.tag != "Targetable")
         {
-            FormattedDebugMessage(LogLevel.Warning,
+            FormattedDebugMessage(LogLevel.Warn,
                 "Game Object {0} cannot be targeted with a MoveTo or Defend command.",
                 target.name);
             return;
@@ -261,11 +279,6 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
         AbilityCommmandTrigger command = unit.gameObject == target
             ? AbilityCommmandTrigger.Defend
             : AbilityCommmandTrigger.MoveTo;
-
-        FormattedDebugMessage(LogLevel.Information,
-            "Unit {0} has received order {1}",
-            unit.Name,
-            command);
 
         unit.IssueCommand(command, target);
         

@@ -95,7 +95,7 @@ public class MapController : ManagerBase<MapController>
     {
         List<Ability> abilities = new List<Ability>();
 
-        FormattedDebugMessage(LogLevel.Information,
+        FormattedDebugMessage(LogLevel.Info,
             "Looking for {0} abilities, from a pool of {1} available abilities.",
             faction,
             UnitSpawnAbilities.Count);
@@ -112,7 +112,7 @@ public class MapController : ManagerBase<MapController>
                 else if (current.Faction != faction)
                     reason = "the ability does not belong to faction " + faction;
 
-                FormattedDebugMessage(LogLevel.Information,
+                FormattedDebugMessage(LogLevel.Info,
                     "Passing up ability {0}, because {1}",
                     current.Name,
                     reason);
@@ -123,7 +123,7 @@ public class MapController : ManagerBase<MapController>
             abilities.Add(current);
         }
 
-        FormattedDebugMessage(LogLevel.Information,
+        FormattedDebugMessage(LogLevel.Info,
             "Found {0} abilities for faction {1}.",
             abilities.Count,
             faction);

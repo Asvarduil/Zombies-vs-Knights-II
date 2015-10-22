@@ -41,7 +41,7 @@ public class GameEventController : ManagerBase<GameEventController>
             throw new ArgumentException("DebugMessage requires at least one argument, a message.");
 
         string message = args[0];
-        LogLevel logLevel = LogLevel.Information;
+        LogLevel logLevel = LogLevel.Info;
 
         if(args.Count == 2)
         {

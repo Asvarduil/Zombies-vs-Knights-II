@@ -52,6 +52,7 @@ public class ResourceSpawnSphere : DebuggableBehavior
         PickupModel model = Pickup.GetPickupByName(ResourceModelName);
 
         _lastSpawnedPickup = SpawnPickupFromModel(pickup, model);
+        SpawnLockout.NoteLastOccurrence();
     }
 
     public GameObject SpawnPickupFromModel(GameObject unit, PickupModel model)
@@ -70,7 +71,10 @@ public class ResourceSpawnSphere : DebuggableBehavior
         if (actuator == null)
             throw new InvalidOperationException("There is no unit actuator for pickup " + generatedPickup.name);
 
-        DebugMessage("Realizing model on pickup " + generatedPickup.name);
+        FormattedDebugMessage(LogLevel.Info,
+            "Realizing model on pickup {0}", 
+            generatedPickup.name);
+
         actuator.RealizeModel(model);
 
         return generatedPickup;

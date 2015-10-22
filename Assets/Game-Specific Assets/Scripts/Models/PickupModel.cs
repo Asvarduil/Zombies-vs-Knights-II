@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using SimpleJSON;
 
 [Serializable]
@@ -9,6 +10,7 @@ public class PickupModel : INamed, ICloneable, IJsonSavable
 
     public string Name;
     public int ResourceYield;
+    public Vector3 RotationRate;
     public string MeshPath;
     public List<GameEvent> GameEvents;
 
@@ -23,6 +25,7 @@ public class PickupModel : INamed, ICloneable, IJsonSavable
         PickupModel clone = new PickupModel
         {
             Name = Name,
+            RotationRate = RotationRate,
             ResourceYield = ResourceYield,
             MeshPath = MeshPath,
             GameEvents = GameEvents.DeepCopyList()
@@ -43,6 +46,7 @@ public class PickupModel : INamed, ICloneable, IJsonSavable
     public void ImportState(JSONClass node)
     {
         Name = node["Name"];
+        RotationRate = node["RotationRate"].ImportVector3();
         ResourceYield = node["ResourceYield"].AsInt;
         MeshPath = node["MeshPath"];
         GameEvents = node["GameEvents"].AsArray.UnfoldJsonArray<GameEvent>();

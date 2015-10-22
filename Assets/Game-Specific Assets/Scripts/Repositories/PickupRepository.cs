@@ -32,9 +32,13 @@
     {
         PickupModel result = Contents.FindItemByName(pickupName);
         if (result == default(PickupModel))
-            return null;
+            result = null;
 
-        DebugMessage("For pickup name " + pickupName + " " + (result == null ? "found" : "didn't find") + " an entry in the repository.");
+        FormattedDebugMessage(LogLevel.Warn,
+            "For pickup name {0} found {1} entry in the repository.",
+            pickupName,
+            (result == null ? "no" : "an"));
+
         return result;
     }
 

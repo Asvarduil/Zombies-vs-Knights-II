@@ -124,7 +124,7 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
         GameObject waypoint = _map.FindNearestWaypoint(transform.position, _currentWaypointObject);
         if(waypoint == null)
         {
-            DebugMessage("No direct path, but no waypoint!  Heading for target anyways...", LogLevel.Warning);
+            DebugMessage("No direct path, but no waypoint!  Heading for target anyways...", LogLevel.Warn);
             _currentWaypoint = Target.transform.position;
             _currentWaypointObject = Target;
             return;

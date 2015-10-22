@@ -1,14 +1,24 @@
 {
     "Pickups":[
         {
-            "Name":"Gold Pickup",
+            "Name":"Gold Coin",
+            "RotationRate":{
+                "x": 0,
+                "y": 45,
+                "z": 0
+            },
             "ResourceYield":10,
-            "MeshPath":"",
+            "MeshPath":"Visual/Meshes/Pickup - Coin",
             "GameEvents":[
             ]
         },
         {
             "Name":"Treasure Chest",
+            "RotationRate":{
+                "x": 0,
+                "y": 45,
+                "z": 0
+            },
             "ResourceYield":25,
             "MeshPath":"",
             "GameEvents":[

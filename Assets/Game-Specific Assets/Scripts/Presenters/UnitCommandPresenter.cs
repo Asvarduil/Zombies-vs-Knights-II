@@ -82,7 +82,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
             return;
         }
 
-        FormattedDebugMessage(LogLevel.Information, 
+        FormattedDebugMessage(LogLevel.Info, 
             "Presenter - using Create Unit Ability #{0} for faction {1}", 
             abilityIndex, 
             _player.Faction);

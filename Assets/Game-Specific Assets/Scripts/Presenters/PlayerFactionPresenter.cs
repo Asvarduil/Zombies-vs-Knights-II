@@ -67,7 +67,7 @@ public class PlayerFactionPresenter : UGUIPresenterBase
             color = MidColor;
         
 
-        FormattedDebugMessage(LogLevel.Information,
+        FormattedDebugMessage(LogLevel.Info,
             "For percentage {0} chose color {1}",
             percentage,
             color);

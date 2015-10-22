@@ -85,7 +85,7 @@ public abstract class JsonBlobLoaderBase<T> : DebuggableBehavior
         ReadBlobFromSource();
         Contents = _mapper.MapJsonToList(_mappedJson);
 
-        FormattedDebugMessage(LogLevel.Information,
+        FormattedDebugMessage(LogLevel.Info,
             "Contents have loaded!  Count: {0}",
             Contents.Count);
 

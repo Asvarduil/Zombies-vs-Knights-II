@@ -7,9 +7,9 @@ public abstract class DebuggableBehavior : MonoBehaviour
 
     public enum LogLevel
     {
-        Information,
-        Warning,
-        LogicError,
+        Info,
+        Warn,
+        Error,
     }
 
     #endregion Enumerations
@@ -23,7 +23,7 @@ public abstract class DebuggableBehavior : MonoBehaviour
 
     #region Methods
 
-    public void DebugMessage(string message, LogLevel level = LogLevel.Information)
+    public void DebugMessage(string message, LogLevel level = LogLevel.Info)
     {
         if (!DebugMode)
             return;
@@ -33,15 +33,15 @@ public abstract class DebuggableBehavior : MonoBehaviour
 
         switch (level)
         {
-            case LogLevel.Information:
+            case LogLevel.Info:
                 Debug.Log(message);
                 break;
 
-            case LogLevel.Warning:
+            case LogLevel.Warn:
                 Debug.LogWarning(message);
                 break;
 
-            case LogLevel.LogicError:
+            case LogLevel.Error:
                 Debug.LogError(message);
                 break;
 
@@ -63,15 +63,15 @@ public abstract class DebuggableBehavior : MonoBehaviour
 
         switch (level)
         {
-            case LogLevel.Information:
+            case LogLevel.Info:
                 Debug.Log(message);
                 break;
 
-            case LogLevel.Warning:
+            case LogLevel.Warn:
                 Debug.LogWarning(message);
                 break;
 
-            case LogLevel.LogicError:
+            case LogLevel.Error:
                 Debug.LogError(message);
                 break;
 

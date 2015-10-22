@@ -48,7 +48,7 @@ public class SoundEvents : DebuggableBehavior
 		}
 		else
 		{
-			DebugMessage("No effect name was sent!", LogLevel.LogicError);
+			DebugMessage("No effect name was sent!", LogLevel.Error);
 			return;
 		}
 
