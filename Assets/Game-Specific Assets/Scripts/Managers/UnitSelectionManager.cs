@@ -99,6 +99,13 @@ public class UnitSelectionManager : ManagerBase<UnitSelectionManager>
                     break;
                 }
 
+                // If no unit is actually selected, revert to Unit Select mode, something is off.
+                if (SelectedUnit == null)
+                {
+                    SelectionMode = SelectionMode.UnitSelect;
+                    break;
+                }
+
                 // If an opposing unit is selected, the only valid option is a default cursor.
                 // The player cannot control opposing units.
                 bool isSelectedUnitOpposingPlayer = SelectedUnit.Faction != Player.Faction;

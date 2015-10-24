@@ -22,7 +22,7 @@
                 {
                     "Name":"Knockback",
                     "Value":30,
-                    "ValueCap":4,
+                    "ValueCap":30,
                     "FixedModifier":0,
                     "ScalingModifier":1
                 },
@@ -69,7 +69,7 @@
                 {
                     "Name":"Knockback",
                     "Value":30,
-                    "ValueCap":4,
+                    "ValueCap":30,
                     "FixedModifier":0,
                     "ScalingModifier":1
                 },

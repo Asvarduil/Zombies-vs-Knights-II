@@ -77,6 +77,7 @@ public class ResourcePickupActuator : DebuggableBehavior
 
         Faction awardedFaction = actuator.Faction;
         Match.AwardResourcesToFaction(awardedFaction, ResourceYield);
+        actuator.IssueCommand(AbilityCommmandTrigger.Defend);
 
         Destroy(gameObject);
     }

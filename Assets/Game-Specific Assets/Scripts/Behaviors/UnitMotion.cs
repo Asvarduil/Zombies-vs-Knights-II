@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class UnitMotion : DebuggableBehavior, ISuspendable
 {
@@ -88,7 +89,25 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
     private bool HasPathToTarget()
     {
         RaycastHit hit;
-        Vector3 direction = transform.position - Target.transform.position;
+
+        Vector3 direction;
+        try
+        {
+            direction = transform.position - Target.transform.position;
+        }
+        catch (MissingReferenceException)
+        {
+            FormattedDebugMessage(
+                LogLevel.Warn,
+                "Unit {0}'s target no longer exists; halting instead.",
+                name
+            );
+
+            Target = null;
+            Halt();
+            return false;
+        }
+
         if (!Physics.Raycast(transform.position, direction, out hit))
             return false;
         
@@ -117,14 +136,12 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
         IsFindingClearPath = HasPathToTarget();
         if (!IsFindingClearPath)
         {
-            DebugMessage("Has direct path to target unit.");
             return;
         }
 
         GameObject waypoint = _map.FindNearestWaypoint(transform.position, _currentWaypointObject);
         if(waypoint == null)
         {
-            DebugMessage("No direct path, but no waypoint!  Heading for target anyways...", LogLevel.Warn);
             _currentWaypoint = Target.transform.position;
             _currentWaypointObject = Target;
             return;
@@ -132,8 +149,6 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
 
         _currentWaypoint = waypoint.transform.position;
         _currentWaypointObject = waypoint;
-
-        DebugMessage("No direct path to " + Target.name + "; moving to " + waypoint.name + " first.");
     }
 
     private Vector3 EvaluateCurrentDestination()
@@ -149,7 +164,28 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
             return _currentWaypoint;
         }
 
-        return Target.transform.position;
+        if (Target == null)
+        {
+            Halt();
+            return transform.position;
+        }
+
+        try
+        {
+            Vector3 destination = Target.transform.position;
+            return destination;
+        }
+        catch (MissingReferenceException)
+        {
+            FormattedDebugMessage(
+                LogLevel.Warn,
+                "Unit {0}'s target no longer exists; halting, and setting current position as destination to move to.",
+                name
+            );
+
+            Halt();
+            return transform.position;
+        }
     }
 
     private void RotateTowards(Vector3 point)

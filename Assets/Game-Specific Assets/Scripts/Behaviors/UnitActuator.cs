@@ -7,7 +7,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     #region Constants
 
     private const string ReticuleName = "Reticule";
-    private const float KnockUpForce = 4.3f;
+    private const float KnockUpForce = 12.8f;
 
     #endregion Constants
 
@@ -184,8 +184,11 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
             Instantiate(DeathObject, transform.position, transform.rotation);
         }
 
-        DebugMessage("Checking if this unit's defeat should end the match...");
-        _match.CheckForMatchConclusion();
+        if (IsKeyUnit)
+        {
+            DebugMessage("Checking if this unit's defeat should end the match...");
+            _match.CheckForMatchConclusion();
+        }
 
         DebugMessage("Disabling game object...");
         gameObject.SetActive(false);
