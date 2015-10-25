@@ -104,6 +104,7 @@
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\TerrainCursor.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\UnitActuator.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\UnitMotion.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\CampaignUIMasterController.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\GameUIMasterController.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MapController.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MatchController.cs" />
@@ -115,12 +116,15 @@
      <Compile Include="Assets\Game-Specific Assets\Scripts\Managers\UnitSelectionManager.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\AbilityMap.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\BuffMap.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\CampaignMap.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\CursorMap.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\MapDetailMap.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\PickupMap.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\UnitMap.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\Ability.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\Buff.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CampaignModel.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CampaignStageModel.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CursorModel.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\MapDetail.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PickupModel.cs" />
@@ -128,7 +132,8 @@
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PrefabPlacement.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\ResourceStateModel.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\UnitModel.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignPresenter.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignSelectPresenter.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignStageSelectPresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CommanderPresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\EndGamePresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\PlayerFactionPresenter.cs" />
@@ -139,6 +144,7 @@
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\UnitCommandPresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\AbilityRepository.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\BuffRepository.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\CampaignRepository.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\CursorRepository.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\PickupRepository.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\UnitRepository.cs" />
@@ -149,6 +155,7 @@
      <None Include="Assets\Resources\Data\Abilities.txt" />
      <None Include="Assets\Resources\Data\Units.txt" />
      <None Include="Assets\Resources\Data\MapDetails.txt" />
+     <None Include="Assets\Resources\Data\Campaigns.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

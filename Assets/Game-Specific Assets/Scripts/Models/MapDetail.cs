@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SimpleJSON;
 
 [Serializable]
-public class MapDetail : IJsonSavable
+public class MapDetail : IJsonSavable, ICloneable
 {
     #region Fields
 
@@ -13,7 +13,33 @@ public class MapDetail : IJsonSavable
 
     #endregion Fields
 
+    #region Constructors
+
+    public MapDetail()
+    {
+        // Stub.
+    }
+
+    public MapDetail(JSONClass state)
+    {
+        ImportState(state);
+    }
+
+    #endregion Constructors
+
     #region Methods
+
+    public object Clone()
+    {
+        MapDetail clone = new MapDetail
+        {
+            Name = Name,
+            UnitAbilities = UnitAbilities.DeepCopyList(),
+            Placements = Placements.DeepCopyList()
+        };
+
+        return clone;
+    }
 
     public JSONClass ExportState()
     {

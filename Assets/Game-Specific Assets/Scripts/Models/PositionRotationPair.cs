@@ -3,7 +3,7 @@ using UnityEngine;
 using SimpleJSON;
 
 [Serializable]
-public class PositionRotationPair : IJsonSavable
+public class PositionRotationPair : IJsonSavable, ICloneable
 {
     #region Fields
 
@@ -14,6 +14,18 @@ public class PositionRotationPair : IJsonSavable
     #endregion Fields
 
     #region Methods
+
+    public object Clone()
+    {
+        PositionRotationPair clone = new PositionRotationPair
+        {
+            Position = Position,
+            Rotation = Rotation,
+            Scale = Scale
+        };
+
+        return clone;
+    }
 
     public JSONClass ExportState()
     {

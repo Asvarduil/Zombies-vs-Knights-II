@@ -10,7 +10,7 @@ public enum MapObjectType
 }
 
 [Serializable]
-public class PrefabPlacement : IJsonSavable
+public class PrefabPlacement : IJsonSavable, ICloneable
 {
     #region Fields
 
@@ -22,6 +22,19 @@ public class PrefabPlacement : IJsonSavable
     #endregion Fields
 
     #region Methods
+
+    public object Clone()
+    {
+        PrefabPlacement clone = new PrefabPlacement
+        {
+            Path = Path,
+            Name = Name,
+            ObjectType = ObjectType,
+            Placements = Placements.DeepCopyList()
+        };
+
+        return clone;
+    }
 
     public JSONClass ExportState()
     {

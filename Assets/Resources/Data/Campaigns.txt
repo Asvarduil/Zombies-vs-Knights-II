@@ -1,0 +1,23 @@
+{
+    "Campaigns":[
+        {
+            "Name":"The Knights of Lumian",
+            "Description":"The Knights of the Kingdom of Lumian are fighting against a nightmarish threat.",
+            "FactionBannerPath":"",
+            "Stages":[
+                {
+                    "Name":"The New Commander",
+                    "Description":"You are a new commander, sent to oversee a remote outpost.  Everything seems quiet, until the alert sounds...",
+                    "PlayerFaction":"Knights",
+                    "UsesCustomMap":false,
+                    "MapName":"Test Map",
+                    "MapDetail":{
+                        "Name":"Uses Official Map",
+                        "UnitAbilities":[],
+                        "Placements":[]
+                    }
+                }
+            ]
+        }
+    ]
+}
