@@ -107,6 +107,7 @@
      <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\GameUIMasterController.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MapController.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MatchController.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\TitleUIMasterController.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\AbilityCommandTrigger.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\AbilityTriggerCondition.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\Faction.cs" />
@@ -127,8 +128,13 @@
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PrefabPlacement.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\ResourceStateModel.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Models\UnitModel.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignPresenter.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CommanderPresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\EndGamePresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\PlayerFactionPresenter.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\SettingsPresenter.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\SkirmishPresenter.cs" />
+     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\TitleCommandPresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\TooltipPresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\UnitCommandPresenter.cs" />
      <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\AbilityRepository.cs" />
@@ -143,17 +149,11 @@
      <None Include="Assets\Resources\Data\Abilities.txt" />
      <None Include="Assets\Resources\Data\Units.txt" />
      <None Include="Assets\Resources\Data\MapDetails.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
