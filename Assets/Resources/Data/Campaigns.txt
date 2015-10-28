@@ -1,8 +1,8 @@
 {
     "Campaigns":[
         {
-            "Name":"The Knights of Lumian",
-            "Description":"The Knights of the Kingdom of Lumian are fighting against a nightmarish threat.",
+            "Name":"The Knights of Saleria",
+            "Description":"After decades of peace, the Duchy of Saleria is facing a nightmarish threat from beyond the grave - a seemingly endless army of undead.  The survival of the people of Saleria is at stake.",
             "FactionBannerPath":"",
             "Stages":[
                 {
@@ -10,12 +10,21 @@
                     "Description":"You are a new commander, sent to oversee a remote outpost.  Everything seems quiet, until the alert sounds...",
                     "PlayerFaction":"Knights",
                     "UsesCustomMap":false,
-                    "MapName":"Test Map",
-                    "MapDetail":{
-                        "Name":"Uses Official Map",
-                        "UnitAbilities":[],
-                        "Placements":[]
-                    }
+                    "MapName":"Test Map"
+                }
+            ]
+        },
+        {
+            "Name":"The Arisen",
+            "Description":"After the Reliquary of Phineas was destroyed, some among the Zombies have regained their free will.  They will have to fight for their newfound freedom.",
+            "FactionBannerPath":"",
+            "Stages":[
+                {
+                    "Name":"The Dead of Knight",
+                    "Description":"You awaken to find you control the Zombie forces.  You seek a cure for your condition, but first you and your minions must survive.",
+                    "PlayerFaction":"Zombies",
+                    "UsesCustomMap":false,
+                    "MapName":"Test Map"
                 }
             ]
         }

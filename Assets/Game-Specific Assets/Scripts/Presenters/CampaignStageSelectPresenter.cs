@@ -7,6 +7,10 @@ class CampaignStageSelectPresenter : UGUIPresenterBase
 
     #region Hooks
 
+    public void LoadCampaign(CampaignModel model)
+    {
+    }
+
     #endregion Hooks
 
     #region Methods

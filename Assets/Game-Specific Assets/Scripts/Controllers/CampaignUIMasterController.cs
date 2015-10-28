@@ -63,16 +63,21 @@ public class CampaignUIMasterController : ManagerBase<CampaignUIMasterController
 
     #region Hooks
 
+    public void Start()
+    {
+        ViewCampaignSelect();
+    }
+
     public void ViewCampaignSelect()
     {
         CampaignStageSelect.PresentGUI(false);
         CampaignSelect.PresentGUI(true);
     }
 
-    public void ViewCampaign()
+    public void ViewCampaign(CampaignModel model)
     {
         CampaignSelect.PresentGUI(false);
-        //CampaignStageSelect.PresentGUI(true);
+        CampaignStageSelect.LoadCampaign(model);
     }
 
     public void ReturnToTitle()

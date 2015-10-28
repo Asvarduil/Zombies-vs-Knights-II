@@ -11,7 +11,6 @@ public class CampaignStageModel : IJsonSavable, ICloneable, INamed
     public Faction PlayerFaction;
     public bool UsesCustomMap;
     public string MapName;
-    public MapDetail MapDetail;
 
     public string EntityName { get { return Name; } }
 
@@ -27,8 +26,7 @@ public class CampaignStageModel : IJsonSavable, ICloneable, INamed
             Description = Description,
             PlayerFaction = PlayerFaction,
             UsesCustomMap = UsesCustomMap,
-            MapName = MapName,
-            MapDetail = MapDetail.DeepCopy()
+            MapName = MapName
         };
 
         return clone;
@@ -43,7 +41,6 @@ public class CampaignStageModel : IJsonSavable, ICloneable, INamed
         state["PlayerFaction"] = new JSONData(PlayerFaction.ToString());
         state["UsesCustomMap"] = new JSONData(UsesCustomMap);
         state["MapName"] = new JSONData(MapName);
-        state["MapDetail"] = MapDetail.ExportState();
 
         return state;
     }
@@ -55,7 +52,6 @@ public class CampaignStageModel : IJsonSavable, ICloneable, INamed
         PlayerFaction = node["PlayerFaction"].ToEnum<Faction>();
         UsesCustomMap = node["UsesCustomMap"].AsBool;
         MapName = node["MapName"];
-        MapDetail = new MapDetail(node["MapDetail"].AsObject);
     }
 
     #endregion Methods
