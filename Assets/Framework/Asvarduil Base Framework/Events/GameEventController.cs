@@ -21,6 +21,11 @@ public class GameEventController : ManagerBase<GameEventController>
         RegisterEvents();
     }
 
+    public void OnDestroy()
+    {
+        DebugMessage("Game Event Controller has been destroyed!", LogLevel.Warn);
+    }
+
     #endregion Hooks
 
     #region Events
@@ -91,8 +96,6 @@ public class GameEventController : ManagerBase<GameEventController>
     // Immediately runs all game events simultaneously; the first and second events run at the same time.
     public void RunGameEventGroup(List<GameEvent> gameEvents)
     {
-        DebugMessage("Controller is executing a game event group with " + gameEvents.Count + " members...");
-
         for (int i = 0; i < gameEvents.Count; i++)
         {
             GameEvent gameEvent = gameEvents[i];
@@ -103,8 +106,6 @@ public class GameEventController : ManagerBase<GameEventController>
     // Runs each game event sequentially; the second event doesn't run until the first is done.
     public IEnumerator RunGameEventSequence(List<GameEvent> gameEvents)
     {
-        DebugMessage("Controller is executing a game event group with " + gameEvents.Count + " members...");
-
         for (int i = 0; i < gameEvents.Count; i++)
         {
             GameEvent gameEvent = gameEvents[i];
@@ -114,8 +115,6 @@ public class GameEventController : ManagerBase<GameEventController>
 
     public IEnumerator RunGameEvent(GameEvent gameEvent)
     {
-        DebugMessage("Controller is executing game event: " + gameEvent.Event + "...");
-
         string eventName = gameEvent.Event;
         List<string> eventArgs = gameEvent.EventArgs;
 
@@ -127,7 +126,6 @@ public class GameEventController : ManagerBase<GameEventController>
             yield break;
         }
 
-        DebugMessage(eventName + " is registered!  Doing it.");
         yield return StartCoroutine(coroutine.Function(eventArgs));
     }
 

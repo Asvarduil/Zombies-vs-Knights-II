@@ -30,7 +30,18 @@ public class MapController : ManagerBase<MapController>
     }
 
     private GameUIMasterController _gui;
+
     private GameEventController _events;
+    private GameEventController Events
+    {
+        get
+        {
+            if (_events == null)
+                _events = GameEventController.Instance;
+
+            return _events;
+        }
+    }
 
     private UnitRepository _unit;
 
@@ -42,7 +53,7 @@ public class MapController : ManagerBase<MapController>
     {
         _player = PlayerManager.Instance;
         _gui = GameUIMasterController.Instance;
-        _events = GameEventController.Instance;
+        _events = Events;
 
         _unit = UnitRepository.Instance;
 
@@ -61,12 +72,12 @@ public class MapController : ManagerBase<MapController>
 
     private void RegisterEvents()
     {
-        _events.RegisterEventHook("SpawnUnitAtSpawnSphere", SpawnUnitAtSpawnSphereEvent);
+        Events.RegisterEventHook("SpawnUnitAtSpawnSphere", SpawnUnitAtSpawnSphereEvent);
     }
 
     private void UnregisterEvents()
     {
-        _events.UnregisterEventHook(
+        Events.UnregisterEventHook(
             "SpawnUnitAtSpawnSphere"
         );
     }

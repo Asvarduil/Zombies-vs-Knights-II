@@ -6,6 +6,7 @@ public class CampaignUIMasterController : ManagerBase<CampaignUIMasterController
     #region Constants
 
     private const string TitleScene = "Title";
+    private const string MatchScene = "Match";
 
     #endregion Constants
 
@@ -83,6 +84,12 @@ public class CampaignUIMasterController : ManagerBase<CampaignUIMasterController
     public void ReturnToTitle()
     {
         StartCoroutine(FadeAndLoadScene(TitleScene));
+    }
+
+    public void OpenStage(CampaignStageModel model)
+    {
+        // TODO: Load information into the Ambassador.
+        StartCoroutine(FadeAndLoadScene(MatchScene));
     }
 
     #endregion Hooks

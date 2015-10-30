@@ -23,6 +23,7 @@ public class UGUIPresenterBase : DebuggableBehavior
     protected List<Button> _buttons = new List<Button>();
     protected List<Toggle> _toggles = new List<Toggle>();
     protected List<Slider> _sliders = new List<Slider>();
+    protected List<Scrollbar> _scrollbars = new List<Scrollbar>();
 
     protected CanvasGroup Group
     {
@@ -56,6 +57,7 @@ public class UGUIPresenterBase : DebuggableBehavior
             Button button = current.GetComponent<Button>();
             Toggle toggle = current.GetComponent<Toggle>();
             Slider slider = current.GetComponent<Slider>();
+            Scrollbar scrollbar = current.GetComponent<Scrollbar>();
 
             _children.Add(current.gameObject);
 
@@ -73,6 +75,9 @@ public class UGUIPresenterBase : DebuggableBehavior
 
             if (slider != null)
                 _sliders.Add(slider);
+
+            if (scrollbar != null)
+                _scrollbars.Add(scrollbar);
         }
 
         DebugMessage("Presenter " + gameObject.name + " has a total of " + _children.Count + " child objects.");
@@ -191,6 +196,14 @@ public class UGUIPresenterBase : DebuggableBehavior
         toggle.enabled = isActive;
 
         HideChildText(toggle, isActive);
+    }
+
+    public void ActivateScrollbar(Scrollbar scrollbar, bool isActive)
+    {
+        scrollbar.interactable = isActive;
+        scrollbar.enabled = isActive;
+
+        HideChildText(scrollbar, isActive);
     }
 
     protected void HideChildText(Selectable component, bool isActive)

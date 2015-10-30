@@ -36,7 +36,18 @@ public class UnitCommandPresenter : UGUIPresenterBase
     }
 
     private MatchController _match;
+
     private GameEventController _gameEvent;
+    private GameEventController GameEvent
+    {
+        get
+        {
+            if (_gameEvent == null)
+                _gameEvent = GameEventController.Instance;
+
+            return _gameEvent;
+        }
+    }
 
     private GameUIMasterController _controller;
     private GameUIMasterController Controller
@@ -61,7 +72,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
         _controller = GameUIMasterController.Instance;
         _map = MapController.Instance;
         _match = MatchController.Instance;
-        _gameEvent = GameEventController.Instance;
+        _gameEvent = GameEvent;
 
         base.Start();
     }
@@ -87,7 +98,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
             abilityIndex, 
             _player.Faction);
 
-        _gameEvent.RunGameEventGroup(ability.GameEvents);
+        GameEvent.RunGameEventGroup(ability.GameEvents);
     }
 
     public void PresentTooltip(int abilityIndex)
