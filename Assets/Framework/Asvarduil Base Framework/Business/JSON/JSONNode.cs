@@ -1,7 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Globalization;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SimpleJSON
 {
@@ -135,7 +135,7 @@ namespace SimpleJSON
         {
             if (b == null && a is JSONLazyCreator)
                 return true;
-            return System.Object.ReferenceEquals(a, b);
+            return object.ReferenceEquals(a, b);
         }
 
         public static bool operator !=(JSONNode a, object b)
@@ -144,7 +144,7 @@ namespace SimpleJSON
         }
         public override bool Equals(object obj)
         {
-            return System.Object.ReferenceEquals(this, obj);
+            return object.ReferenceEquals(this, obj);
         }
         public override int GetHashCode()
         {
@@ -308,7 +308,7 @@ namespace SimpleJSON
                                 case 'u':
                                     {
                                         string s = aJSON.Substring(i + 1, 4);
-                                        Token += (char)int.Parse(s, System.Globalization.NumberStyles.AllowHexSpecifier);
+                                        Token += (char)int.Parse(s, NumberStyles.AllowHexSpecifier);
                                         i += 4;
                                         break;
                                     }
@@ -330,16 +330,16 @@ namespace SimpleJSON
             return ctx;
         }
 
-        public virtual void Serialize(System.IO.BinaryWriter aWriter) { }
+        public virtual void Serialize(BinaryWriter aWriter) { }
 
-        public void SaveToStream(System.IO.Stream aData)
+        public void SaveToStream(Stream aData)
         {
-            var W = new System.IO.BinaryWriter(aData);
+            var W = new BinaryWriter(aData);
             Serialize(W);
         }
 
 #if USE_SharpZipLib
-        public void SaveToCompressedStream(System.IO.Stream aData)
+        public void SaveToCompressedStream(Stream aData)
         {
             using (var gzipOut = new ICSharpCode.SharpZipLib.BZip2.BZip2OutputStream(aData))
             {
@@ -352,8 +352,8 @@ namespace SimpleJSON
         public void SaveToCompressedFile(string aFileName)
         {
 #if USE_FileIO
-            System.IO.Directory.CreateDirectory((new System.IO.FileInfo(aFileName)).Directory.FullName);
-            using(var F = System.IO.File.OpenWrite(aFileName))
+            Directory.CreateDirectory((new FileInfo(aFileName)).Directory.FullName);
+            using(var F = File.OpenWrite(aFileName))
             {
                 SaveToCompressedStream(F);
             }
@@ -363,16 +363,16 @@ namespace SimpleJSON
         }
         public string SaveToCompressedBase64()
         {
-            using (var stream = new System.IO.MemoryStream())
+            using (var stream = new MemoryStream())
             {
                 SaveToCompressedStream(stream);
                 stream.Position = 0;
-                return System.Convert.ToBase64String(stream.ToArray());
+                return Convert.ToBase64String(stream.ToArray());
             }
         }
  
 #else
-        public void SaveToCompressedStream(System.IO.Stream aData)
+        public void SaveToCompressedStream(Stream aData)
         {
             throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
         }
@@ -389,8 +389,8 @@ namespace SimpleJSON
         public void SaveToFile(string aFileName)
         {
 #if USE_FileIO
-            System.IO.Directory.CreateDirectory((new System.IO.FileInfo(aFileName)).Directory.FullName);
-            using(var F = System.IO.File.OpenWrite(aFileName))
+            Directory.CreateDirectory((new FileInfo(aFileName)).Directory.FullName);
+            using(var F = File.OpenWrite(aFileName))
             {
                 SaveToStream(F);
             }
@@ -400,14 +400,14 @@ namespace SimpleJSON
         }
         public string SaveToBase64()
         {
-            using (var stream = new System.IO.MemoryStream())
+            using (var stream = new MemoryStream())
             {
                 SaveToStream(stream);
                 stream.Position = 0;
-                return System.Convert.ToBase64String(stream.ToArray());
+                return Convert.ToBase64String(stream.ToArray());
             }
         }
-        public static JSONNode Deserialize(System.IO.BinaryReader aReader)
+        public static JSONNode Deserialize(BinaryReader aReader)
         {
             JSONBinaryTag type = (JSONBinaryTag)aReader.ReadByte();
             switch (type)
@@ -461,7 +461,7 @@ namespace SimpleJSON
         }
 
 #if USE_SharpZipLib
-        public static JSONNode LoadFromCompressedStream(System.IO.Stream aData)
+        public static JSONNode LoadFromCompressedStream(Stream aData)
         {
             var zin = new ICSharpCode.SharpZipLib.BZip2.BZip2InputStream(aData);
             return LoadFromStream(zin);
@@ -469,7 +469,7 @@ namespace SimpleJSON
         public static JSONNode LoadFromCompressedFile(string aFileName)
         {
 #if USE_FileIO
-            using(var F = System.IO.File.OpenRead(aFileName))
+            using(var F = File.OpenRead(aFileName))
             {
                 return LoadFromCompressedStream(F);
             }
@@ -479,8 +479,8 @@ namespace SimpleJSON
         }
         public static JSONNode LoadFromCompressedBase64(string aBase64)
         {
-            var tmp = System.Convert.FromBase64String(aBase64);
-            var stream = new System.IO.MemoryStream(tmp);
+            var tmp = Convert.FromBase64String(aBase64);
+            var stream = new MemoryStream(tmp);
             stream.Position = 0;
             return LoadFromCompressedStream(stream);
         }
@@ -489,7 +489,7 @@ namespace SimpleJSON
         {
             throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
         }
-        public static JSONNode LoadFromCompressedStream(System.IO.Stream aData)
+        public static JSONNode LoadFromCompressedStream(Stream aData)
         {
             throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
         }
@@ -499,9 +499,9 @@ namespace SimpleJSON
         }
 #endif
 
-        public static JSONNode LoadFromStream(System.IO.Stream aData)
+        public static JSONNode LoadFromStream(Stream aData)
         {
-            using (var R = new System.IO.BinaryReader(aData))
+            using (var R = new BinaryReader(aData))
             {
                 return Deserialize(R);
             }
@@ -509,7 +509,7 @@ namespace SimpleJSON
         public static JSONNode LoadFromFile(string aFileName)
         {
 #if USE_FileIO
-            using(var F = System.IO.File.OpenRead(aFileName))
+            using(var F = File.OpenRead(aFileName))
             {
                 return LoadFromStream(F);
             }
@@ -519,8 +519,8 @@ namespace SimpleJSON
         }
         public static JSONNode LoadFromBase64(string aBase64)
         {
-            var tmp = System.Convert.FromBase64String(aBase64);
-            var stream = new System.IO.MemoryStream(tmp);
+            var tmp = Convert.FromBase64String(aBase64);
+            var stream = new MemoryStream(tmp);
             stream.Position = 0;
             return LoadFromStream(stream);
         }

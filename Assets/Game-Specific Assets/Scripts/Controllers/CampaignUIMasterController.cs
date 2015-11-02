@@ -36,6 +36,18 @@ public class CampaignUIMasterController : ManagerBase<CampaignUIMasterController
         }
     }
 
+    private PlayerManager _player;
+    private PlayerManager Player
+    {
+        get
+        {
+            if (_player == null)
+                _player = PlayerManager.Instance;
+
+            return _player;
+        }
+    }
+
     private CampaignSelectPresenter _campaignSelect;
     private CampaignSelectPresenter CampaignSelect
     {
@@ -60,6 +72,18 @@ public class CampaignUIMasterController : ManagerBase<CampaignUIMasterController
         }
     }
 
+    private AnalyticsRepository _analytics;
+    private AnalyticsRepository Analytics
+    {
+        get
+        {
+            if (_analytics == null)
+                _analytics = AnalyticsRepository.Instance;
+
+            return _analytics;
+        }
+    }
+
     #endregion Variables / Properties
 
     #region Hooks
@@ -77,6 +101,7 @@ public class CampaignUIMasterController : ManagerBase<CampaignUIMasterController
 
     public void ViewCampaign(CampaignModel model)
     {
+        Player.RecordCampaignName(model.Name);
         CampaignSelect.PresentGUI(false);
         CampaignStageSelect.LoadCampaign(model);
     }
@@ -88,7 +113,8 @@ public class CampaignUIMasterController : ManagerBase<CampaignUIMasterController
 
     public void OpenStage(CampaignStageModel model)
     {
-        // TODO: Load information into the Ambassador.
+        Analytics.LogEvent("PlayedLevel", model.Name);
+        Player.Setup("Progress", model.MapName, model.PlayerFaction);
         StartCoroutine(FadeAndLoadScene(MatchScene));
     }
 

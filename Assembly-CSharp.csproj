@@ -1,173 +1,183 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-	<ProductVersion>10.0.20506</ProductVersion>
-	<SchemaVersion>2.0</SchemaVersion>
-	<RootNamespace></RootNamespace>
-	<ProjectGuid>{89145514-1ADA-A851-A117-264CA2F98C29}</ProjectGuid>
-	<OutputType>Library</OutputType>
-	<AppDesignerFolder>Properties</AppDesignerFolder>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
-	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-	<FileAlignment>512</FileAlignment>
-	<BaseDirectory>Assets</BaseDirectory>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectGuid>{89145514-1ADA-A851-A117-264CA2F98C29}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	<DebugSymbols>true</DebugSymbols>
-	<DebugType>full</DebugType>
-	<Optimize>false</Optimize>
-	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_5_2_1;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_WEBPLAYER;ENABLE_SUBSTANCE;WEBPLUG;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
-	<NoWarn>0169</NoWarn>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_2_1;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_WEBPLAYER;ENABLE_SUBSTANCE;WEBPLUG;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	<DebugType>pdbonly</DebugType>
-	<Optimize>true</Optimize>
-	<OutputPath>Temp\bin\Release\</OutputPath>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
-	<NoWarn>0169</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-	<Reference Include="System" />
+    <Reference Include="System" />
     <Reference Include="System.XML" />
-	<Reference Include="System.Core" />
-	<Reference Include="System.Xml.Linq" />
-	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-	</Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Framework\Asvarduil 3D Tiles\Room Generator\RoomGenerator.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Audio\AudioManager.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Audio\Maestro.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Audio\SoundEvents.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Base Behaviors\DebuggableBehavior.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Base Behaviors\JsonBlobLoaderBase.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Base Behaviors\ManagerBase.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Base Behaviors\UGUIPresenterBase.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\DataException.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\Extensions\GameObjectExtensions.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\Extensions\ICloneableExtensions.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\Extensions\IEnumerableExtensions.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSON.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONArray.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONBinaryTag.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONClass.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONData.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONExtensions.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONLazyCreator.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONNode.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Camera\CameraFreezeTrigger.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Camera\CameraTrigger.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Camera\Fader.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Camera\RPGCamera.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Events\GameEvent.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Events\GameEventController.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Events\GameEventHook.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\GUI\Gauge.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IEntityStat.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IHealthStat.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IJsonSavable.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IMapper.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\INamed.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IResourceStat.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IScarceModel.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\ISuspendable.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\LevelupSystem.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\ModifiableStat.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\QuestState.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\SequenceManager.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\SequenceRange.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\SequenceState.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\System\Lockout.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\System\ObjectPauser.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\System\PersistentSingularObject.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\System\SceneState.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\System\TransitionManager.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Visual\MeshCombiner.cs" />
-     <Compile Include="Assets\Framework\Asvarduil Base Framework\Visual\ScrollTexture.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\DayNightLighting.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\InitializationScenePass.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\MapLoader.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\ResourcePickupActuator.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\ResourceSpawnSphere.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\SelectionReticule.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\SpawnSphere.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\TerrainCursor.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\UnitActuator.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\UnitMotion.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\CampaignUIMasterController.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\GameUIMasterController.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MapController.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MatchController.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\TitleUIMasterController.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\AbilityCommandTrigger.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\AbilityTriggerCondition.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\Faction.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Managers\PlayerManager.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Managers\UnitSelectionManager.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\AbilityMap.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\BuffMap.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\CampaignMap.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\CursorMap.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\MapDetailMap.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\PickupMap.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\UnitMap.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\Ability.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\Buff.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CampaignModel.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CampaignStageModel.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CursorModel.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\MapDetail.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PickupModel.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PositionRotationPair.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PrefabPlacement.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\ResourceStateModel.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Models\UnitModel.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignSelectPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignStageSelectPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CommanderPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\EndGamePresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\PlayerFactionPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\SettingsPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\SkirmishPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\TitleCommandPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\TooltipPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\UnitCommandPresenter.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\AbilityRepository.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\BuffRepository.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\CampaignRepository.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\CursorRepository.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\PickupRepository.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\UnitRepository.cs" />
-     <Compile Include="Assets\Game-Specific Assets\Scripts\System\SaveFileAccess.cs" />
-     <None Include="Assets\Resources\Data\Buffs.txt" />
-     <None Include="Assets\Resources\Data\Pickups.txt" />
-     <None Include="Assets\Resources\Data\Cursors.txt" />
-     <None Include="Assets\Resources\Data\Abilities.txt" />
-     <None Include="Assets\Resources\Data\Units.txt" />
-     <None Include="Assets\Resources\Data\MapDetails.txt" />
-     <None Include="Assets\Resources\Data\Campaigns.txt" />
- <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="Mono.Cecil">
- <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.iOS.Extensions.Xcode">
- <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\Framework\Asvarduil 3D Tiles\Room Generator\RoomGenerator.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Audio\Maestro.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Audio\SoundEvents.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Base Behaviors\DebuggableBehavior.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Base Behaviors\JsonBlobLoaderBase.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Base Behaviors\ManagerBase.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Base Behaviors\UGUIPresenterBase.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\DataException.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\Extensions\GameObjectExtensions.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\Extensions\ICloneableExtensions.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSON.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONArray.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONBinaryTag.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONClass.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONData.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONExtensions.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONLazyCreator.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Business\JSON\JSONNode.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Camera\CameraFreezeTrigger.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Camera\CameraTrigger.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Camera\Fader.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Camera\RPGCamera.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Events\GameEvent.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Events\GameEventController.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Events\GameEventHook.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\GUI\Gauge.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IEntityStat.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IHealthStat.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IJsonSavable.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IMapper.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\INamed.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IResourceStat.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\IScarceModel.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Interfaces\ISuspendable.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\LevelupSystem.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\ModifiableStat.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\QuestState.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\SequenceManager.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\SequenceRange.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Mechanics\SequenceState.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\System\Lockout.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\System\ObjectPauser.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\System\PersistentSingularObject.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\System\SceneState.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\System\TransitionManager.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Visual\MeshCombiner.cs" />
+    <Compile Include="Assets\Framework\Asvarduil Base Framework\Visual\ScrollTexture.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\DayNightLighting.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\InitializationScenePass.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\MapLoader.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\ResourcePickupActuator.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\ResourceSpawnSphere.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\SelectionReticule.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\SpawnSphere.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\TerrainCursor.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\UnitActuator.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\UnitMotion.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\CampaignUIMasterController.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\GameUIMasterController.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MapController.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MatchController.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\TitleUIMasterController.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\AbilityCommandTrigger.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\AbilityTriggerCondition.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\Faction.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Managers\PlayerManager.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Managers\UnitSelectionManager.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\AbilityMap.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\AnalyticsEventMap.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\BuffMap.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\CampaignMap.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\CursorMap.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\MapDetailMap.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\PickupMap.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Mapping\UnitMap.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\Ability.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\AnalyticsEventModel.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\Buff.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CampaignModel.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CampaignStageModel.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\CursorModel.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\MapDetail.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PickupModel.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PositionRotationPair.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\PrefabPlacement.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\ResourceStateModel.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Models\UnitModel.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignSelectPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignStageSelectPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CommanderPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\EndGamePresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\PlayerFactionPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\SettingsPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\SkirmishPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\TitleCommandPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\TooltipPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\UnitCommandPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\AbilityRepository.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\AnalyticsRepository.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\BuffRepository.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\CampaignRepository.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\CursorRepository.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\PickupRepository.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Repositories\UnitRepository.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\System\SaveFileAccess.cs" />
+    <None Include="Assets\Resources\Data\Buffs.txt" />
+    <None Include="Assets\Resources\Data\Pickups.txt" />
+    <None Include="Assets\Resources\Data\Cursors.txt" />
+    <None Include="Assets\Resources\Data\Abilities.txt" />
+    <None Include="Assets\Resources\Data\Units.txt" />
+    <None Include="Assets\Resources\Data\MapDetails.txt" />
+    <None Include="Assets\Resources\Data\Campaigns.txt" />
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -177,5 +187,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>

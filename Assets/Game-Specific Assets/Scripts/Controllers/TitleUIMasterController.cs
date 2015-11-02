@@ -37,6 +37,18 @@ public class TitleUIMasterController : ManagerBase<TitleUIMasterController>
         }
     }
 
+    private PlayerManager _player;
+    private PlayerManager Player
+    {
+        get
+        {
+            if (_player == null)
+                _player = PlayerManager.Instance;
+
+            return _player;
+        }
+    }
+
     private TitleCommandPresenter _title;
     private TitleCommandPresenter Title
     {
@@ -75,11 +87,13 @@ public class TitleUIMasterController : ManagerBase<TitleUIMasterController>
 
     public void SwitchToCampaign()
     {
+        Player.RecordGameMode(GameMode.Campaign);
         StartCoroutine(FadeAndLoadScene(CampaignScene));
     }
 
     public void SwitchToSkirmish()
     {
+        Player.RecordGameMode(GameMode.Skirmish);
         StartCoroutine(FadeAndLoadScene(SkirmishScene));
     }
 

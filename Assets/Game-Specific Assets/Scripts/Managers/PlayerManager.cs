@@ -1,5 +1,13 @@
-﻿public enum MatchState
+﻿public enum GameMode
 {
+    None,
+    Campaign,
+    Skirmish
+}
+
+public enum MatchState
+{
+    NotPlaying,
     OnGoing,
     Victory,
     Lost
@@ -7,13 +15,21 @@
 
 public class PlayerManager : ManagerBase<PlayerManager>
 {
+    #region Constants
+
+    private const string CampaignScene = "Campaign";
+    private const string SkirmishScene = "Skirmish";
+
+    #endregion Constants
+
     #region Variables / Properties
 
-    public string Name;
-    public Faction Faction;
-    public string MapName;
-    public MatchState MatchState;
-    // TODO: Faction Resources
+    public string Name = string.Empty;
+    public GameMode Mode = GameMode.None;
+    public string CampaignName = string.Empty;
+    public Faction Faction = Faction.None;
+    public string MapName = string.Empty;
+    public MatchState MatchState = MatchState.OnGoing;
 
     // TODO: Analytics for player and developer.
 
@@ -24,6 +40,25 @@ public class PlayerManager : ManagerBase<PlayerManager>
     #endregion Hooks
 
     #region Methods
+
+    public void ClearState()
+    {
+        Mode = GameMode.None;
+        CampaignName = string.Empty;
+        MatchState = MatchState.NotPlaying;
+        Faction = Faction.None;
+        MapName = string.Empty;
+    }
+
+    public void RecordGameMode(GameMode mode)
+    {
+        Mode = mode;
+    }
+
+    public void RecordCampaignName(string campaignName)
+    {
+        CampaignName = campaignName;
+    }
 
     public void Setup(string name, string mapName, Faction faction)
     {
