@@ -1,6 +1,39 @@
-﻿public class GameUIMasterController : ManagerBase<GameUIMasterController>
+﻿using System.Collections;
+using UnityEngine;
+
+public class GameUIMasterController : ManagerBase<GameUIMasterController>
 {
+    #region Constants
+
+    private const string ResultsScene = "Results";
+
+    #endregion Constants
+
     #region Variables / Properties
+
+    private Fader _fader;
+    private Fader Fader
+    {
+        get
+        {
+            if (_fader == null)
+                _fader = FindObjectOfType<Fader>();
+
+            return _fader;
+        }
+    }
+
+    private Maestro _maestro;
+    private Maestro Maestro
+    {
+        get
+        {
+            if (_maestro == null)
+                _maestro = Maestro.Instance;
+
+            return _maestro;
+        }
+    }
 
     private UnitSelectionManager _selection;
 
@@ -46,10 +79,6 @@
         _endGame = GetComponentInChildren<EndGamePresenter>();
     }
 
-    #endregion Hooks
-
-    #region Methods
-
     public void PresentUnitCommands()
     {
         UnitToolbox.PresentCommands();
@@ -87,6 +116,28 @@
 
         _selection.ClearSelection();
         _endGame.UpdateOutcome(state);
+    }
+
+    public void ProceedToResultsScreen()
+    {
+        StartCoroutine(FadeAndLoadScene(ResultsScene));
+    }
+
+    #endregion Hooks
+
+    #region Methods
+
+    private IEnumerator FadeAndLoadScene(string sceneName)
+    {
+        //Maestro.FadeOut();
+        Fader.FadeOut();
+
+        while (!Fader.ScreenHidden)
+        {
+            yield return 0;
+        }
+
+        Application.LoadLevel(sceneName);
     }
 
     #endregion Methods

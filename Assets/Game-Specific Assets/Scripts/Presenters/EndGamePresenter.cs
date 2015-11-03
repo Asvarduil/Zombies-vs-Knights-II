@@ -9,6 +9,18 @@ public class EndGamePresenter : UGUIPresenterBase
     public string LossMessage = "Defeat";
     public Text OutcomeLabel;
 
+    private GameUIMasterController _controller;
+    private GameUIMasterController Controller
+    {
+        get
+        {
+            if (_controller == null)
+                _controller = GameUIMasterController.Instance;
+
+            return _controller;
+        }
+    }
+
     #endregion Variables / Properties
 
     #region Hooks
@@ -27,6 +39,12 @@ public class EndGamePresenter : UGUIPresenterBase
             : LossMessage;
 
         PresentGUI(true);
+    }
+
+    public void ProceedToResults()
+    {
+        PlayButtonSound();
+        Controller.ProceedToResultsScreen();
     }
 
     #endregion Methods

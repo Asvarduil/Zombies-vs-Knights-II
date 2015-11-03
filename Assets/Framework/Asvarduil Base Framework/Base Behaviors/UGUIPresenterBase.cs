@@ -133,6 +133,7 @@ public class UGUIPresenterBase : DebuggableBehavior
 
             _isFading = false;
             group.alpha = 1.0f;
+            group.interactable = true;
             DebugMessage(gameObject + " has been faded in.");
         }
         else
@@ -145,6 +146,7 @@ public class UGUIPresenterBase : DebuggableBehavior
 
             _isFading = false;
             group.alpha = 0.0f;
+            group.interactable = false;
             ActivateControls(isActive);
             DebugMessage(gameObject + " has been faded out.");
         }

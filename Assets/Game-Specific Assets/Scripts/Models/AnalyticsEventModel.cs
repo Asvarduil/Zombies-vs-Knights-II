@@ -6,6 +6,7 @@ public class AnalyticsEventModel : IJsonSavable
 {
     #region Fields
 
+    public string SessionID;
     public string EventType;
     public string EventDescription;
 
@@ -17,6 +18,7 @@ public class AnalyticsEventModel : IJsonSavable
     {
         JSONClass state = new JSONClass();
 
+        state["SessionID"] = SessionID;
         state["EventType"] = EventType;
         state["EventDescription"] = EventDescription;
 
