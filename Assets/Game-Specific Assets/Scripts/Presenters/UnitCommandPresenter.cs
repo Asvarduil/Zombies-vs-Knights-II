@@ -132,10 +132,12 @@ public class UnitCommandPresenter : UGUIPresenterBase
             Ability unitAbility = factionUnitSpawnAbilities[i];
             _unitSpawnAbilities.Add(unitAbility);
 
-            // TODO: Update the button icon...
             if (!string.IsNullOrEmpty(unitAbility.IconPath))
             {
-                currentButton.image = Resources.Load<Image>(unitAbility.IconPath);
+                Sprite sprite = Resources.Load<Sprite>(unitAbility.IconPath);
+                Image image = currentButton.transform.Find("Icon").GetComponent<Image>();
+
+                image.overrideSprite = sprite;
             }
         }
     }

@@ -3,7 +3,7 @@
         {
             "Name":"Recruit Footman",
             "Description":"<color='yellow'>Cost: 10 Gold</color> Footmen are basic Knight units.",
-            "IconPath":"",
+            "IconPath":"Visual/GUI/icon-footman",
             "Faction":"Knights",
             "AbilityCommandTrigger":"PlayerActivated",
             "AbilityTriggerCondition":"OneShot",

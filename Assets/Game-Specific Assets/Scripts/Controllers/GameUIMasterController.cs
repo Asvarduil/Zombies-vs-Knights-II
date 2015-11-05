@@ -36,8 +36,28 @@ public class GameUIMasterController : ManagerBase<GameUIMasterController>
     }
 
     private UnitSelectionManager _selection;
+    private UnitSelectionManager Selection
+    {
+        get
+        {
+            if (_selection == null)
+                _selection = UnitSelectionManager.Instance;
+
+            return _selection;
+        }
+    }
 
     private TooltipPresenter _tooltip;
+    private TooltipPresenter Tooltip
+    {
+        get
+        {
+            if (_tooltip == null)
+                _tooltip = FindObjectOfType<TooltipPresenter>();
+
+            return _tooltip;
+        }
+    }
 
     private PlayerFactionPresenter _playerFaction;
     public PlayerFactionPresenter PlayerFaction
@@ -64,20 +84,20 @@ public class GameUIMasterController : ManagerBase<GameUIMasterController>
     }
 
     private EndGamePresenter _endGame;
+    private EndGamePresenter EndGame
+    {
+        get
+        {
+            if (_endGame == null)
+                _endGame = FindObjectOfType<EndGamePresenter>();
+
+            return _endGame;
+        }
+    }
 
     #endregion Variables / Properties
 
     #region Hooks
-
-    public void Start()
-    {
-        _selection = UnitSelectionManager.Instance;
-
-        _tooltip = GetComponentInChildren<TooltipPresenter>();
-        _unitToolbox = GetComponentInChildren<UnitCommandPresenter>();
-        _playerFaction = GetComponentInChildren<PlayerFactionPresenter>();
-        _endGame = GetComponentInChildren<EndGamePresenter>();
-    }
 
     public void PresentUnitCommands()
     {
@@ -86,17 +106,17 @@ public class GameUIMasterController : ManagerBase<GameUIMasterController>
 
     public void PresentTooltip(string tooltipText)
     {
-        _tooltip.ShowTooltip(tooltipText);
+        Tooltip.ShowTooltip(tooltipText);
     }
 
     public void HideTooltip()
     {
-        _tooltip.HideTooltip();
+        Tooltip.HideTooltip();
     }
 
     public void SelectTargetForUnit(UnitActuator unit)
     {
-        _selection.SelectTargetForUnit(unit);
+        Selection.SelectTargetForUnit(unit);
     }
 
     public void UpdateKeyStructureHP(int HP, int maxHP)
@@ -114,8 +134,12 @@ public class GameUIMasterController : ManagerBase<GameUIMasterController>
         if (state == MatchState.OnGoing)
             return;
 
-        _selection.ClearSelection();
-        _endGame.UpdateOutcome(state);
+        Selection.ClearSelection();
+        Tooltip.HideTooltip();
+        PlayerFaction.PresentGUI(false);
+        UnitToolbox.PresentGUI(false);
+
+        EndGame.UpdateOutcome(state);
     }
 
     public void ProceedToResultsScreen()
