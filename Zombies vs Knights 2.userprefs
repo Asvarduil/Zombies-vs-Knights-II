@@ -1,18 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\Data\MapDetails.txt">
-    <Files>
-      <File FileName="Assets\Framework\Asvarduil Base Framework\System\PersistentSingularObject.cs" Line="1" Column="1" />
-      <File FileName="Assets\Game-Specific Assets\Scripts\Controllers\MatchController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Resources\Data\Units.txt" Line="1" Column="1" />
-      <File FileName="Assets\Game-Specific Assets\Scripts\Presenters\UnitCommandPresenter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Framework\Asvarduil Base Framework\Events\GameEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets\Resources\Data\MapDetails.txt" Line="1" Column="1" />
-      <File FileName="Assets\Game-Specific Assets\Scripts\Behaviors\MapLoader.cs" Line="1" Column="1" />
-      <File FileName="Assets\Resources\Data\Cursors.txt" Line="1" Column="1" />
-      <File FileName="Assets\Game-Specific Assets\Scripts\Behaviors\InitializationScenePass.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

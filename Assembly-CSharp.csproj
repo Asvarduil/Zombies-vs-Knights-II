@@ -107,10 +107,12 @@
     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\UnitActuator.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Behaviors\UnitMotion.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\CampaignUIMasterController.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\CommanderUIMasterController.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\GameUIMasterController.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MapController.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\MatchController.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\ResultUIMasterController.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\SkirmishUIMasterController.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Controllers\TitleUIMasterController.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\AbilityCommandTrigger.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Enumerations\AbilityTriggerCondition.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignSelectPresenter.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CampaignStageSelectPresenter.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CommanderPresenter.cs" />
+    <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\CommanderSelectPresenter.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\EndGamePresenter.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\PlayerFactionPresenter.cs" />
     <Compile Include="Assets\Game-Specific Assets\Scripts\Presenters\ResultPresenter.cs" />

@@ -1,15 +1,32 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿public class SkirmishPresenter : UGUIPresenterBase
+{
+    #region Variables / Properties
 
-public class SkirmishPresenter : MonoBehaviour {
+    private SkirmishUIMasterController _controller;
+    private SkirmishUIMasterController Controller
+    {
+        get
+        {
+            if (_controller == null)
+                _controller = SkirmishUIMasterController.Instance;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+            return _controller;
+        }
+    }
+
+    #endregion Variables / Properties
+
+    #region Hooks
+
+    public void ReturnToTitle()
+    {
+        PlayButtonSound();
+        Controller.ReturnToTitle();
+    }
+
+    #endregion Hooks
+
+    #region Methods
+
+    #endregion Methods
 }

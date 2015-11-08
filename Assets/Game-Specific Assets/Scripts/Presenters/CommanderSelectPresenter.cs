@@ -1,4 +1,4 @@
-﻿public class CommanderPresenter : UGUIPresenterBase
+﻿public class CommanderSelectPresenter : UGUIPresenterBase
 {
     #region Variables / Properties
 
@@ -17,6 +17,11 @@
     #endregion Variables / Properties
 
     #region Hooks
+
+    public void ReturnToTitle()
+    {
+        Controller.ReturnToTitle();
+    }
 
     #endregion Hooks
 
