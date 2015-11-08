@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class GameUIMasterController : ManagerBase<GameUIMasterController>
+public class GameUIMasterController : UIMasterControllerBase<GameUIMasterController>
 {
     #region Constants
 
@@ -10,30 +10,6 @@ public class GameUIMasterController : ManagerBase<GameUIMasterController>
     #endregion Constants
 
     #region Variables / Properties
-
-    private Fader _fader;
-    private Fader Fader
-    {
-        get
-        {
-            if (_fader == null)
-                _fader = FindObjectOfType<Fader>();
-
-            return _fader;
-        }
-    }
-
-    private Maestro _maestro;
-    private Maestro Maestro
-    {
-        get
-        {
-            if (_maestro == null)
-                _maestro = Maestro.Instance;
-
-            return _maestro;
-        }
-    }
 
     private UnitSelectionManager _selection;
     private UnitSelectionManager Selection
@@ -150,19 +126,6 @@ public class GameUIMasterController : ManagerBase<GameUIMasterController>
     #endregion Hooks
 
     #region Methods
-
-    private IEnumerator FadeAndLoadScene(string sceneName)
-    {
-        //Maestro.FadeOut();
-        Fader.FadeOut();
-
-        while (!Fader.ScreenHidden)
-        {
-            yield return 0;
-        }
-
-        Application.LoadLevel(sceneName);
-    }
 
     #endregion Methods
 }

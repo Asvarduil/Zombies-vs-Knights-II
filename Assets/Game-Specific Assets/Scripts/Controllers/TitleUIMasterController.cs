@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TitleUIMasterController : ManagerBase<TitleUIMasterController>
+public class TitleUIMasterController : UIMasterControllerBase<TitleUIMasterController>
 {
     #region Constants
 
@@ -12,30 +12,6 @@ public class TitleUIMasterController : ManagerBase<TitleUIMasterController>
     #endregion Constants
 
     #region Variables / Properties
-
-    private Maestro _maestro;
-    private Maestro Maestro
-    {
-        get
-        {
-            if (_maestro == null)
-                _maestro = Maestro.Instance;
-
-            return _maestro;
-        }
-    }
-
-    private Fader _fader;
-    private Fader Fader
-    {
-        get
-        {
-            if (_fader == null)
-                _fader = FindObjectOfType<Fader>();
-
-            return _fader;
-        }
-    }
 
     private PlayerManager _player;
     private PlayerManager Player
@@ -116,19 +92,6 @@ public class TitleUIMasterController : ManagerBase<TitleUIMasterController>
     #endregion Hooks
 
     #region Methods
-
-    private IEnumerator FadeAndLoadScene(string sceneName)
-    {
-        //Maestro.FadeOut();
-        Fader.FadeOut();
-
-        while (!Fader.ScreenHidden)
-        {
-            yield return 0;
-        }
-
-        Application.LoadLevel(sceneName);
-    }
 
     private IEnumerator FadeAndQuit()
     {
