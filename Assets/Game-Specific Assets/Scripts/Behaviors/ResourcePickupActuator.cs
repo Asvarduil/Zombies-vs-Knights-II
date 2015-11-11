@@ -103,6 +103,7 @@ public class ResourcePickupActuator : DebuggableBehavior
             PickupMeshObject = (GameObject)Instantiate(unitMesh, transform.position, transform.rotation);
             PickupMeshObject.name = "Mesh";
             PickupMeshObject.transform.parent = gameObject.transform;
+            PickupMeshObject.transform.localScale = model.Scale;
 
             MeshCollider collider = gameObject.AddComponent<MeshCollider>();
             collider.enabled = true;

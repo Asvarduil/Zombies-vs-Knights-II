@@ -1,9 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MapLoader : JsonBlobLoaderBase<MapDetail>
 {
+    #region Constants
+
+    public const string TerrainObjectName = "Terrain";
+
+    #endregion Constants
+
     #region Variables / Properties
 
     public GameObject GameObjectContainer;
@@ -105,9 +112,45 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
 
     private void SetupArena(MapDetail model)
     {
+        SetupTerrain(model);
         PlaceObjects(model.Placements);
 
         // TODO: Combine all meshes.
+    }
+
+    private void SetupTerrain(MapDetail model)
+    {
+        if (model.MaterialPaths.Count != model.TexturePaths.Count)
+            throw new DataException("In a Map Detail, each material requires a texture!");
+
+        GameObject terrainObject = gameObject.transform.FindChild(TerrainObjectName).gameObject;
+
+        // Set up the visible mesh...
+        MeshFilter filter = terrainObject.GetComponent<MeshFilter>();
+        Mesh terrainMesh = Resources.Load<Mesh>(model.MeshPath);
+        filter.mesh = terrainMesh;
+
+        // Set up the collision mesh...
+        MeshCollider collider = terrainObject.GetComponent<MeshCollider>();
+        collider.sharedMesh = terrainMesh;
+
+        // Set up materials and textures on the renderer...
+        MeshRenderer renderer = terrainObject.GetComponent<MeshRenderer>();
+        List<Material> materials = new List<Material>();
+        for(int i = 0; i < model.MaterialPaths.Count; i++)
+        {
+            string materialPath = model.MaterialPaths[i];
+            string texturePath = model.TexturePaths[i];
+            Material material = Resources.Load<Material>(materialPath);
+
+            Texture2D texture = Resources.Load<Texture2D>(texturePath);
+            //material.SetTexture(0, texture);
+            material.mainTexture = texture;
+
+            materials.Add(material);
+        }
+
+        renderer.materials = materials.ToArray();
     }
 
     private void PlaceObjects(List<PrefabPlacement> details)

@@ -80,8 +80,6 @@ public class CampaignSelectPresenter : UGUIPresenterBase
 
             // Instantiate the option...
             GameObject newOption = (GameObject) Instantiate(CampaignOptionPrefab, Vector3.zero, Quaternion.identity);
-
-            // Set newOption to be a child of the Presenter...
             newOption.transform.SetParent(OptionBindPoint.transform);
 
             // Update the click event on the option with the index of this campaign...
@@ -102,6 +100,13 @@ public class CampaignSelectPresenter : UGUIPresenterBase
             Vector2 centerpoint = new Vector2(0.0f, optionTransform.rect.height / 2);
             yOffset += centerpoint.y + yOffset;
             optionTransform.anchoredPosition = new Vector3(centerpoint.x, -yOffset, 0);
+
+            FormattedDebugMessage(
+                LogLevel.Info, 
+                "Created option for campaign '{0}' at y-coord {1}", 
+                optionTitleText.text, 
+                optionTransform.anchoredPosition.y
+            );
         }
     }
 

@@ -2,6 +2,11 @@
     "Pickups":[
         {
             "Name":"Gold Coin",
+            "Scale":{
+                "x": 1.5,
+                "y": 1.5,
+                "z": 4
+            },
             "RotationRate":{
                 "x": 0,
                 "y": 45,
@@ -14,6 +19,11 @@
         },
         {
             "Name":"Treasure Chest",
+            "Scale":{
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
             "RotationRate":{
                 "x": 0,
                 "y": 45,

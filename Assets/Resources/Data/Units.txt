@@ -44,7 +44,7 @@
             "AbilityNames":[
                 "Recruit Footman"
             ]
-            "MeshPath":"Visual/Meshes/Knight Castle",
+            "MeshPath":"Visual/Meshes/Development/Knight Castle",
             "ReticuleScale":4
         },
         {
@@ -91,7 +91,7 @@
             "AbilityNames":[
                 "Raise Ghoul"
             ]
-            "MeshPath":"Visual/Meshes/Knight Castle",
+            "MeshPath":"Visual/Meshes/Development/Knight Castle",
             "ReticuleScale":4
         },
         {
@@ -138,7 +138,7 @@
             "AbilityNames":[
                 "Test Periodic Ability"
             ]
-            "MeshPath":"Visual/Meshes/Knight Cube (Development)",
+            "MeshPath":"Visual/Meshes/Development/Knight Cube (Development)",
             "ReticuleScale":2
         },
         {
@@ -185,7 +185,7 @@
             "AbilityNames":[
                 "Test Periodic Ability"
             ]
-            "MeshPath":"Visual/Meshes/Zombie Cube (Development)",
+            "MeshPath":"Visual/Meshes/Development/Zombie Cube (Development)",
             "ReticuleScale":2
         }
     ]

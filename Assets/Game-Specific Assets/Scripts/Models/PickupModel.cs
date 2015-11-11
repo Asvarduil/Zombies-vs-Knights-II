@@ -10,6 +10,7 @@ public class PickupModel : INamed, ICloneable, IJsonSavable
 
     public string Name;
     public int ResourceYield;
+    public Vector3 Scale;
     public Vector3 RotationRate;
     public string MeshPath;
     public List<GameEvent> GameEvents;
@@ -25,6 +26,7 @@ public class PickupModel : INamed, ICloneable, IJsonSavable
         PickupModel clone = new PickupModel
         {
             Name = Name,
+            Scale = Scale,
             RotationRate = RotationRate,
             ResourceYield = ResourceYield,
             MeshPath = MeshPath,
@@ -46,6 +48,7 @@ public class PickupModel : INamed, ICloneable, IJsonSavable
     public void ImportState(JSONClass node)
     {
         Name = node["Name"];
+        Scale = node["Scale"].ImportVector3();
         RotationRate = node["RotationRate"].ImportVector3();
         ResourceYield = node["ResourceYield"].AsInt;
         MeshPath = node["MeshPath"];
