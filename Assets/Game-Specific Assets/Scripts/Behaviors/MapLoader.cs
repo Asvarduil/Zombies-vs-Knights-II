@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapLoader : JsonBlobLoaderBase<MapDetail>
+public class MapLoader : JsonBlobLoaderBase<MapModel>
 {
     #region Constants
 
@@ -46,7 +46,7 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         }
 
         // Don't allow any other map information to be accessed beyond this point.
-        Contents = new List<MapDetail> { arenaFeatures };
+        Contents = new List<MapModel> { arenaFeatures };
 
         _ui = GameUIMasterController.Instance;
         _map = MapController.Instance;
@@ -62,7 +62,7 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
 
     #region Methods
 
-    private IEnumerator ArenaSetupSequence(MapDetail arenaFeatures)
+    private IEnumerator ArenaSetupSequence(MapModel arenaFeatures)
     {
         DebugMessage("Arena setup initialized.");
         while (!_unitRepository.HasLoaded 
@@ -79,13 +79,13 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         _match.AcquireKeyUnitHPCount();
     }
 
-    private MapDetail FindMapDetailForCurrentMap()
+    private MapModel FindMapDetailForCurrentMap()
     {
-        MapDetail model = null;
+        MapModel model = null;
 
         for(int i = 0; i < Contents.Count; i++)
         {
-            MapDetail current = Contents[i];
+            MapModel current = Contents[i];
             if (current.Name != _player.MapName)
                 continue;
 
@@ -96,7 +96,7 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         return model;
     }
 
-    private void LoadAbilities(MapDetail model)
+    private void LoadAbilities(MapModel model)
     {
         List<string> unitAbilities = model.UnitAbilities;
 
@@ -110,7 +110,7 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         }
     }
 
-    private void SetupArena(MapDetail model)
+    private void SetupArena(MapModel model)
     {
         SetupTerrain(model);
         PlaceObjects(model.Placements);
@@ -118,16 +118,13 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         // TODO: Combine all meshes.
     }
 
-    private void SetupTerrain(MapDetail model)
+    private void SetupTerrain(MapModel model)
     {
-        if (model.MaterialPaths.Count != model.TexturePaths.Count)
-            throw new DataException("In a Map Detail, each material requires a texture!");
-
         GameObject terrainObject = gameObject.transform.FindChild(TerrainObjectName).gameObject;
 
         // Set up the visible mesh...
         MeshFilter filter = terrainObject.GetComponent<MeshFilter>();
-        Mesh terrainMesh = Resources.Load<Mesh>(model.MeshPath);
+        Mesh terrainMesh = Resources.Load<Mesh>(model.Terrain.MeshPath);
         filter.mesh = terrainMesh;
 
         // Set up the collision mesh...
@@ -137,15 +134,32 @@ public class MapLoader : JsonBlobLoaderBase<MapDetail>
         // Set up materials and textures on the renderer...
         MeshRenderer renderer = terrainObject.GetComponent<MeshRenderer>();
         List<Material> materials = new List<Material>();
-        for(int i = 0; i < model.MaterialPaths.Count; i++)
+        for(int i = 0; i < model.Terrain.Materials.Count; i++)
         {
-            string materialPath = model.MaterialPaths[i];
-            string texturePath = model.TexturePaths[i];
-            Material material = Resources.Load<Material>(materialPath);
+            MaterialModel current = model.Terrain.Materials[i];
+            string materialPath = current.MaterialPath;
+            Material storedMaterial = Resources.Load<Material>(materialPath);
+            Material material = Instantiate(storedMaterial);
 
-            Texture2D texture = Resources.Load<Texture2D>(texturePath);
-            //material.SetTexture(0, texture);
-            material.mainTexture = texture;
+            if (!string.IsNullOrEmpty(current.DiffuseTexturePath))
+            {
+                Texture2D diffuseTexture = Resources.Load<Texture2D>(current.DiffuseTexturePath);
+                material.SetTexture("_MainTex", diffuseTexture);
+            }
+
+            if (!string.IsNullOrEmpty(current.BumpTexturePath))
+            {
+                Texture2D bumpTexture = Resources.Load<Texture2D>(current.BumpTexturePath);
+                material.SetTexture("_BumpMap", bumpTexture);
+            }
+
+            if (!string.IsNullOrEmpty(current.LightTexturePath))
+            {
+                Texture2D lightTexture = Resources.Load<Texture2D>(current.LightTexturePath);
+                material.SetTexture("_EmissionMap", lightTexture);
+            }
+
+            material.mainTextureScale = current.Tiling;
 
             materials.Add(material);
         }

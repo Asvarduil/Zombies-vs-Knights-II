@@ -21,7 +21,18 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
 
     private Collider _collider;
     private UnitActuator _unit;
+
     private MapController _map;
+    private MapController Map
+    {
+        get
+        {
+            if (_map == null)
+                _map = MapController.Instance;
+
+            return _map;
+        }
+    }
 
     #endregion Variables / Properties
 
@@ -139,7 +150,7 @@ public class UnitMotion : DebuggableBehavior, ISuspendable
             return;
         }
 
-        GameObject waypoint = _map.FindNearestWaypoint(transform.position, _currentWaypointObject);
+        GameObject waypoint = Map.FindNearestWaypoint(transform.position, _currentWaypointObject);
         if(waypoint == null)
         {
             _currentWaypoint = Target.transform.position;
