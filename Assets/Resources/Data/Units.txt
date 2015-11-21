@@ -91,7 +91,7 @@
             "AbilityNames":[
                 "Raise Ghoul"
             ]
-            "MeshPath":"Visual/Meshes/Development/Knight Castle",
+            "MeshPath":"Visual/Meshes/Development/Zombie Necropolis",
             "ReticuleScale":4
         },
         {
