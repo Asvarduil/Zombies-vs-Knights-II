@@ -105,7 +105,7 @@
                     ]
                 },
                 {
-                    "Path":"Prefabs/GameObjects/Spawn Sphere (Zombies)",
+                    "Path":"Prefabs/GameObjects/Zombie Spawn Point",
                     "Name":"Zombie Spawn Sphere",
                     "ObjectType":"GameObject",
                     "Placements":[
