@@ -51,6 +51,10 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
     public string Name;
     public bool IsKeyUnit;
     public Faction Faction;
+
+    public GameObject WhooshEffect;
+    public Lockout WhooshLockout;
+
     public List<ModifiableStat> Stats;
     public List<Ability> Abilities;
     public List<Buff> Buffs;
@@ -69,6 +73,18 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
 
     private BuffRepository _buffRepository;
     private AbilityRepository _abilityRepository;
+
+    private WhooshRepository _whoosh;
+    private WhooshRepository Whoosh
+    {
+        get
+        {
+            if (_whoosh == null)
+                _whoosh = WhooshRepository.Instance;
+
+            return _whoosh;
+        }
+    }
 
     private UnitMotion _motion;
     private UnitMotion Motion
@@ -216,6 +232,7 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
         Name = model.Name;
         IsKeyUnit = model.IsKeyUnit;
         Faction = model.Faction;
+        WhooshEffect = Whoosh.GetWhooshByFaction(Faction);
         Stats = model.Stats.DeepCopyList();
 
         Abilities = new List<Ability>();
@@ -300,7 +317,8 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
                     _motion.Halt();
                     break;
                 }
-                
+
+                CreateTargetingWhoosh(target);
                 _motion.SetTarget(target);
                 break;
 
@@ -414,6 +432,24 @@ public class UnitActuator : DebuggableBehavior, IHealthStat
         ModifiableStat stat = Stats.FindItemByName(buff.AffectedStat);
         // TODO: When I figure out how to do this in a non-glitchy way.
         //stat.AddTemporaryBonus(buff.EffectValue);
+    }
+
+    private void CreateTargetingWhoosh(GameObject target)
+    {
+        if (!WhooshLockout.CanAttempt())
+            return;
+
+        // Make sure the whoosh is aiming upwards....
+        Quaternion rotation = transform.rotation;
+        Vector3 eulers = rotation.eulerAngles;
+        eulers.x = -90.0f;
+        Quaternion newRotation = Quaternion.Euler(eulers);
+
+        GameObject instance = (GameObject)Instantiate(WhooshEffect, transform.position, newRotation);
+        TargetingWhoosh whoosher = instance.GetComponent<TargetingWhoosh>();
+        whoosher.ReadyWhoosh(target);
+
+        WhooshLockout.NoteLastOccurrence();
     }
 
     #endregion Methods
