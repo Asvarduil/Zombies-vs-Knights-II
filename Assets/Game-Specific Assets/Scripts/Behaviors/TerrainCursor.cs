@@ -5,6 +5,8 @@ public class TerrainCursor : DebuggableBehavior
 {
     #region Variables / Properties
 
+    public string CursorState = "Disabled";
+
     private UnitSelectionManager _selection;
     private UnitSelectionManager Selection
     {
@@ -23,7 +25,7 @@ public class TerrainCursor : DebuggableBehavior
 
     public void OnMouseEnter()
     {
-        Selection.SetCursor("Default");
+        Selection.SetCursor(CursorState);
     }
 
     #endregion Hooks

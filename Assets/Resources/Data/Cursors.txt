@@ -1,6 +1,14 @@
 ﻿{
     "Cursors":[
         {
+            "Name":"Disabled",
+            "Texture":"Visual/GUI/cursor-disabled",
+            "Point":{
+                "x": 0,
+                "y": 0
+            }
+        },
+        {
             "Name":"Default",
             "Texture":"Visual/GUI/cursor-standard",
             "Point":{
