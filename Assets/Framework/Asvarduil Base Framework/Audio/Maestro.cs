@@ -1,94 +1,106 @@
 ﻿using UnityEngine;
-using System;
-using System.Linq;
 using System.Collections;
-using System.Collections.Generic;
 
-public class Maestro : MonoBehaviour 
+public class Maestro : DebuggableBehavior
 {
-	#region Variables / Properties
-	
-	private AudioSource _soundSource;
-	private AudioManager _audioManager;
+    #region Variables / Properties
 
-	public static Maestro Instance
-	{
-		get { return FindObjectOfType<Maestro>(); }
-	}
+    private AudioSource _soundSource;
 
-	#endregion Variables / Properties
+    private AudioManager _audioManager;
+    private AudioManager AudioManager
+    {
+        get
+        {
+            if (_audioManager == null)
+                _audioManager = AudioManager.Instance;
 
-	#region Engine Hooks
+            if (_audioManager == null)
+                _audioManager = FindObjectOfType<AudioManager>();
 
-	public void Start()
-	{
-		_audioManager = AudioManager.Instance;
-		_soundSource = gameObject.GetComponentInChildren<AudioSource>();
-	}
+            return _audioManager;
+        }
+    }
 
-	public void Update()
-	{
-		AudioListener.volume = _audioManager.EffectiveMasterVolume;
-		_soundSource.volume = _audioManager.MusicVolume;
-	}
+    public static Maestro Instance
+    {
+        get { return FindObjectOfType<Maestro>(); }
+    }
 
-	#endregion Engine Hooks
+    #endregion Variables / Properties
 
-	#region Methods
+    #region Engine Hooks
 
-	public void StopBGM()
-	{
-		_soundSource.Stop();
-	}
+    public void Start()
+    {
+        _soundSource = gameObject.GetComponentInChildren<AudioSource>();
+    }
 
-	public void ResumeBGM()
-	{
-		_soundSource.time = 0.0f;
-		_soundSource.Play();
-	}
+    public void Update()
+    {
+        //FormattedDebugMessage(LogLevel.Info, "Is AudioManager null?  Answer: {0}", AudioManager == null);
 
-	public void PlayOneShot(AudioClip oneShot, float? effectVolume = null)
-	{
-		if(oneShot == null)
-			return;
+        AudioListener.volume = AudioManager.EffectiveMasterVolume;
+        _soundSource.volume = AudioManager.MusicVolume;
+    }
 
-		if(effectVolume == null)
-			effectVolume = _audioManager.EffectVolume;
+    #endregion Engine Hooks
 
-		_soundSource.PlayOneShot(oneShot, (float) effectVolume);
-	}
+    #region Methods
 
-	public void ChangeTunes(AudioClip newTune)
-	{
-		if(newTune == null)
-			return;
+    public void StopBGM()
+    {
+        _soundSource.Stop();
+    }
 
-		_soundSource.clip = newTune;
-		_soundSource.time = 0.0f;
-	}
+    public void ResumeBGM()
+    {
+        _soundSource.time = 0.0f;
+        _soundSource.Play();
+    }
 
-	public void InterjectTune(AudioClip tempTune, float switchTime = 0.1f)
-	{
-		PlayOneShotTune(tempTune, switchTime);
-	}
+    public void PlayOneShot(AudioClip oneShot, float? effectVolume = null)
+    {
+        if (oneShot == null)
+            return;
 
-	private IEnumerator PlayOneShotTune(AudioClip tempTune, float switchTime = 0.1f)
-	{
-		if(tempTune == null)
-			yield break;
+        if (effectVolume == null)
+            effectVolume = AudioManager.EffectVolume;
 
-		// Halt Audio
-		GetComponent<AudioSource>().Stop();
-		yield return 0;
+        _soundSource.PlayOneShot(oneShot, (float)effectVolume);
+    }
 
-		// Play the one-shot in its entirety
-		float resumeTime = Time.time + tempTune.length + switchTime;
-		_soundSource.PlayOneShot(tempTune, _audioManager.EffectVolume);
-		yield return new WaitForSeconds(resumeTime);
+    public void ChangeTunes(AudioClip newTune)
+    {
+        if (newTune == null)
+            return;
 
-		// Restart the old tune.
-		GetComponent<AudioSource>().Play();
-	}
+        _soundSource.clip = newTune;
+        _soundSource.time = 0.0f;
+    }
 
-	#endregion Methods
+    public void InterjectTune(AudioClip tempTune, float switchTime = 0.1f)
+    {
+        PlayOneShotTune(tempTune, switchTime);
+    }
+
+    private IEnumerator PlayOneShotTune(AudioClip tempTune, float switchTime = 0.1f)
+    {
+        if (tempTune == null)
+            yield break;
+
+        // Halt Audio
+        GetComponent<AudioSource>().Stop();
+        yield return 0;
+
+        // Play the one-shot in its entirety
+        float resumeTime = Time.time + tempTune.length + switchTime;
+        _soundSource.PlayOneShot(tempTune, AudioManager.EffectVolume);
+        yield return new WaitForSeconds(resumeTime);
+
+        // Restart the old tune.
+        GetComponent<AudioSource>().Play();
+    }
+
+    #endregion Methods
 }

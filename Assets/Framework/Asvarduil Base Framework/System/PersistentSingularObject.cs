@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 
 public class PersistentSingularObject : DebuggableBehavior
@@ -32,6 +30,7 @@ public class PersistentSingularObject : DebuggableBehavior
 
         DebugMessage("Setting self as the original, and becoming persistent.");
         OriginalObject = true;
+
         DontDestroyOnLoad(gameObject);
     }
 
