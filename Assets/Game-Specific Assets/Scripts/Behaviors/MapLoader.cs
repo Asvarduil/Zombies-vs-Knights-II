@@ -22,6 +22,7 @@ public class MapLoader : JsonBlobLoaderBase<MapModel>
     private MapController _map;
     private MatchController _match;
     private GameUIMasterController _ui;
+    private MapAIActuator _mapAI;
 
     private UnitRepository _unitRepository;
     private AbilityRepository _abilityRepository;
@@ -51,6 +52,7 @@ public class MapLoader : JsonBlobLoaderBase<MapModel>
         _ui = GameUIMasterController.Instance;
         _map = MapController.Instance;
         _match = MatchController.Instance;
+        _mapAI = MapAIActuator.Instance;
 
         _unitRepository = UnitRepository.Instance;
         _abilityRepository = AbilityRepository.Instance;
@@ -74,6 +76,7 @@ public class MapLoader : JsonBlobLoaderBase<MapModel>
         DebugMessage("Setting up the Arena...");
         LoadAbilities(arenaFeatures);
         SetupArena(arenaFeatures);
+        LoadAI(arenaFeatures.AIScriptName);
 
         _ui.PresentUnitCommands();
         _match.AcquireKeyUnitHPCount();
@@ -207,6 +210,11 @@ public class MapLoader : JsonBlobLoaderBase<MapModel>
                 AssociateNewThingToParent(newInstance, current.ObjectType);
             }
         }
+    }
+
+    private void LoadAI(string aiScriptName)
+    {
+        _mapAI.LoadAI(aiScriptName);
     }
 
     private void AssociateNewThingToParent(GameObject newThing, MapObjectType objectType)

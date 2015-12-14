@@ -2,6 +2,7 @@
     "MapDetail":[
         {
             "Name":"Test Map",
+            "AIScriptName":"Ghoul Rush",
             "Terrain":{
                 "MeshPath":"Visual/Meshes/Development/Test Terrain 01",
                 "Materials":[

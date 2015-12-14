@@ -7,19 +7,14 @@ public class TargetingWhoosh : DebuggableBehavior
     public float Speed;
     public float TurnSpeed;
     public float PathingError;
+    public float TargetTouchDistance;
     public GameObject Target;
 
     private bool _touchedTarget = false;
-    private TrailRenderer _trailRenderer;
 
     #endregion Variables / Properties
 
     #region Hooks
-
-    public void Start()
-    {
-        _trailRenderer = GetComponent<TrailRenderer>();
-    }
 
     public void Update()
     {
@@ -41,9 +36,9 @@ public class TargetingWhoosh : DebuggableBehavior
             return;
 
         RotateTowards(Target.transform.position);
-        MoveTowards(Target.transform.position);
+        MoveTowards(Target.transform.position);  
 
-        _touchedTarget = Vector3.Distance(transform.position, Target.transform.position) < 1.0f;
+        _touchedTarget = Vector3.Distance(transform.position, Target.transform.position) < TargetTouchDistance;
     }
 
     private void RotateTowards(Vector3 point)

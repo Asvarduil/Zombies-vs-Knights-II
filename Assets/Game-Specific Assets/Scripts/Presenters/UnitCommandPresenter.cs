@@ -36,16 +36,14 @@ public class UnitCommandPresenter : UGUIPresenterBase
     }
 
     private MatchController _match;
-
-    private GameEventController _gameEvent;
-    private GameEventController GameEvent
+    private MatchController Match
     {
         get
         {
-            if (_gameEvent == null)
-                _gameEvent = GameEventController.Instance;
+            if (_match == null)
+                _match = MatchController.Instance;
 
-            return _gameEvent;
+            return _match;
         }
     }
 
@@ -65,18 +63,6 @@ public class UnitCommandPresenter : UGUIPresenterBase
 
     #region Hooks
 
-    public override void Start()
-    {
-        _player = PlayerManager.Instance;
-
-        _controller = GameUIMasterController.Instance;
-        _map = MapController.Instance;
-        _match = MatchController.Instance;
-        _gameEvent = GameEvent;
-
-        base.Start();
-    }
-
     #endregion Hooks
 
     #region Methods
@@ -86,19 +72,7 @@ public class UnitCommandPresenter : UGUIPresenterBase
         PlayButtonSound();
         Ability ability = _unitSpawnAbilities[abilityIndex];
 
-        if (! _match.IsPurchaseSuccessful(_player.Faction, ability))
-        {
-            DebugMessage("Cannot afford unit...");
-            Controller.PresentTooltip("Cannot afford unit...");
-            return;
-        }
-
-        FormattedDebugMessage(LogLevel.Info, 
-            "Presenter - using Create Unit Ability #{0} for faction {1}", 
-            abilityIndex, 
-            _player.Faction);
-
-        GameEvent.RunGameEventGroup(ability.GameEvents);
+        Match.UseUnitSpawnAbility(ability);
     }
 
     public void PresentTooltip(int abilityIndex)

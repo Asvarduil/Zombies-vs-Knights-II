@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public enum ActivityType
@@ -26,6 +27,50 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
     public ResourceStateModel KnightResources;
     public ResourceStateModel ZombieResources;
 
+    public List<UnitActuator> AllUnits
+    {
+        get
+        {
+            return FindObjectsOfType<UnitActuator>().ToList();
+        }
+    }
+
+    public List<UnitActuator> AllAIUnits
+    {
+        get
+        {
+            List<UnitActuator> allAIUnits = new List<UnitActuator>();
+            for (int i = 0; i < AllUnits.Count; i++)
+            {
+                UnitActuator current = AllUnits[i];
+                if (current.Faction == Player.Faction)
+                    continue;
+
+                allAIUnits.Add(current);
+            }
+
+            return allAIUnits;
+        }
+    }
+
+    public List<UnitActuator> AllPlayerUnits
+    {
+        get
+        {
+            List<UnitActuator> allPlayerUnits = new List<UnitActuator>();
+            for (int i = 0; i < AllUnits.Count; i++)
+            {
+                UnitActuator current = AllUnits[i];
+                if (current.Faction != Player.Faction)
+                    continue;
+
+                allPlayerUnits.Add(current);
+            }
+
+            return allPlayerUnits;
+        }
+    }
+
     private PlayerManager _player;
     private PlayerManager Player
     {
@@ -35,6 +80,30 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
                 _player = PlayerManager.Instance;
 
             return _player;
+        }
+    }
+
+    private MapController _map;
+    private MapController Map
+    {
+        get
+        {
+            if (_map == null)
+                _map = MapController.Instance;
+
+            return _map;
+        }
+    }
+
+    private GameEventController _gameEvent;
+    private GameEventController GameEvent
+    {
+        get
+        {
+            if (_gameEvent == null)
+                _gameEvent = GameEventController.Instance;
+
+            return _gameEvent;
         }
     }
 
@@ -84,6 +153,39 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
         AutoGenerateResources = true;
     }
 
+    public void SpawnUnitByUnitName(string unitName, Faction faction = Faction.None)
+    {
+        Ability ability = Map.GetUnitSpawnAbilityByUnitName(unitName);
+        if(ability == null)
+        {
+            FormattedDebugMessage(LogLevel.Error, "No unit spawn ability exists for unit {0}", unitName);
+            return;
+        }
+
+        UseUnitSpawnAbility(ability, faction);
+    }
+
+    public void UseUnitSpawnAbility(Ability ability, Faction faction = Faction.None)
+    {
+        if (faction == Faction.None)
+            faction = Player.Faction;
+
+        if (! IsPurchaseSuccessful(faction, ability))
+        {
+            if(faction == Player.Faction)
+                GameUI.PresentTooltip("Cannot afford unit...");
+
+            return;
+        }
+
+        FormattedDebugMessage(LogLevel.Info,
+            "Presenter - using Create Unit Ability {0} for faction {1}",
+            ability.Name,
+            faction);
+
+        GameEvent.RunGameEventGroup(ability.GameEvents);
+    }
+
     public void AcquireKeyUnitHPCount()
     {
         var keyUnits = GetKeyUnits();
@@ -116,9 +218,8 @@ public class MatchController : ManagerBase<MatchController>, ISuspendable
     private List<UnitActuator> GetKeyUnits()
     {
         var result = new List<UnitActuator>();
-
-        var allUnits = FindObjectsOfType<UnitActuator>();
-        for(int i = 0; i < allUnits.Length; i++)
+        List<UnitActuator> allUnits = AllUnits;
+        for (int i = 0; i < allUnits.Count; i++)
         {
             UnitActuator current = allUnits[i];
             if (!current.IsKeyUnit)

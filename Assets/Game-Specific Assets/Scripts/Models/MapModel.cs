@@ -8,6 +8,7 @@ public class MapModel : IJsonSavable, ICloneable
     #region Fields
 
     public string Name;
+    public string AIScriptName;
     public TerrainModel Terrain;
     public List<string> UnitAbilities;
     public List<PrefabPlacement> Placements;
@@ -35,6 +36,7 @@ public class MapModel : IJsonSavable, ICloneable
         MapModel clone = new MapModel
         {
             Name = Name,
+            AIScriptName = AIScriptName,
             Terrain = Terrain.DeepCopy(),
             UnitAbilities = UnitAbilities.DeepCopyList(),
             Placements = Placements.DeepCopyList()
@@ -51,6 +53,7 @@ public class MapModel : IJsonSavable, ICloneable
     public void ImportState(JSONClass node)
     {
         Name = node["Name"];
+        AIScriptName = node["AIScriptName"];
         Terrain = new TerrainModel(node["Terrain"].AsObject);
         UnitAbilities = node["UnitAbilities"].AsArray.UnfoldStringJsonArray();
         Placements = node["Placements"].AsArray.UnfoldJsonArray<PrefabPlacement>();

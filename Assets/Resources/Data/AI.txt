@@ -1,0 +1,21 @@
+﻿{
+    "AI":[
+        {
+            "Name":"Ghoul Rush",
+            "SpawnConditions":[
+                {
+                    "Name":"Spawn Ghoul If Footman",
+                    "EvaluationPool": "All",
+                    "CompositionCondition":[
+                        "Footman"
+                    ],
+                    "TargetComposition":[
+                        "Ghoul"
+                    ]
+                }
+            ],
+            "TargetingConditions":[
+            ]
+        }
+    ]
+}

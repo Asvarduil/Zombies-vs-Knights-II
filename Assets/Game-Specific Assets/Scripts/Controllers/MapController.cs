@@ -142,6 +142,23 @@ public class MapController : ManagerBase<MapController>
         return abilities.DeepCopyList();
     }
 
+    public Ability GetUnitSpawnAbilityByUnitName(string unitName)
+    {
+        Ability ability = null;
+
+        for(int i = 0; i < UnitSpawnAbilities.Count; i++)
+        {
+            Ability current = UnitSpawnAbilities[i];
+            if (!current.Name.Contains(unitName))
+                continue;
+
+            ability = current;
+            break;
+        }
+
+        return ability;
+    }
+
     public void RegisterSpawnSphere(SpawnSphere sphere)
     {
         SpawnSpheres.Add(sphere);
@@ -171,6 +188,9 @@ public class MapController : ManagerBase<MapController>
             // TODO: Audio cue that the player can't do this right now...
             DebugMessage("Cannot spawn unit; there are no open Spawn Spheres...");
             _gui.PresentTooltip("Not enough places to spawn a unit at...");
+
+            // Refund the player's resources, since they couldn't spawn in a unit...
+
             return;
         }
 
